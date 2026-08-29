@@ -18,6 +18,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
     eyebrow="Article queue · Shaped by the group"
     title="What should we read next?"
     intro="Add a paper when it feels worth the group’s time. Coordinators can turn a short list into an approval ballot for a future meeting."
+    compact
   />
 
   <section class="queue-actions shell">
@@ -28,44 +29,42 @@ const base = import.meta.env.BASE_URL.endsWith("/")
       </p>
     </div>
     <div class="queue-action-buttons">
+      <details class="member-access" data-member-panel>
+        <summary class="button button-secondary">
+          Member access <span aria-hidden="true">＋</span>
+        </summary>
+        <div class="member-access-panel">
+          <div class="member-access-copy">
+            <strong>Sign in with your Emory email.</strong>
+            <p>Suggest articles or vote using a secure email link—no password needed.</p>
+          </div>
+          <form class="inline-auth" data-auth-form>
+            <label for="member-email">Emory email</label>
+            <div>
+              <input
+                id="member-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="name@emory.edu"
+                required
+              />
+              <button class="button button-primary" type="submit">Email me a link</button>
+            </div>
+            <p class="form-status" data-auth-status aria-live="polite"></p>
+          </form>
+          <div class="signed-in-state" data-signed-in hidden>
+            <p>Signed in as <strong data-member-email></strong></p>
+            <button class="text-button" type="button" data-sign-out>Sign out</button>
+          </div>
+        </div>
+      </details>
       <a class="button button-secondary" href={`${base}admin/`}>
         Coordinator console <span aria-hidden="true">→</span>
       </a>
       <button class="button button-primary" type="button" data-open-proposal>
         Suggest an article <span aria-hidden="true">＋</span>
       </button>
-    </div>
-  </section>
-
-  <section class="member-panel shell" data-member-panel>
-    <div class="member-panel-copy">
-      <p class="eyebrow">Member access</p>
-      <h2>One email, no new password.</h2>
-      <p>
-        Emory members receive a secure sign-in link by email. Sign in to submit an article
-        or cast up to three approvals in an open poll.
-      </p>
-    </div>
-    <form class="inline-auth" data-auth-form>
-      <label for="member-email">Emory email</label>
-      <div>
-        <input
-          id="member-email"
-          name="email"
-          type="email"
-          autocomplete="email"
-          placeholder="name@emory.edu"
-          required
-        />
-        <button class="button button-primary" type="submit"
-          >Email me a sign-in link</button
-        >
-      </div>
-      <p class="form-status" data-auth-status aria-live="polite"></p>
-    </form>
-    <div class="signed-in-state" data-signed-in hidden>
-      <p>Signed in as <strong data-member-email></strong></p>
-      <button class="text-button" type="button" data-sign-out>Sign out</button>
     </div>
   </section>
 

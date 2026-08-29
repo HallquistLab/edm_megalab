@@ -3,12 +3,13 @@ interface Props {
   eyebrow: string;
   title: string;
   intro: string;
+  compact?: boolean;
 }
 
-const { eyebrow, title, intro } = Astro.props;
+const { eyebrow, title, intro, compact = false } = Astro.props;
 ---
 
-<header class="page-intro shell">
+<header class:list={["page-intro", "shell", { "page-intro-compact": compact }]}>
   <p class="eyebrow">{eyebrow}</p>
   <div>
     <h1>{title}</h1>

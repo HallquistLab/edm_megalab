@@ -586,6 +586,18 @@ h1 em {
   font-size: clamp(19px, 2vw, 25px);
   line-height: 1.48;
 }
+.page-intro-compact {
+  padding-block: clamp(48px, 6vw, 76px) 42px;
+}
+.page-intro-compact .eyebrow {
+  margin-bottom: 16px;
+}
+.page-intro-compact h1 {
+  font-size: clamp(48px, 6vw, 82px);
+}
+.page-intro-compact > div > p {
+  font-size: clamp(17px, 1.7vw, 22px);
+}
 .page-intro-single h1 {
   max-width: none;
   margin: 0;
@@ -1279,11 +1291,13 @@ h1 em {
 }
 
 .queue-actions {
+  position: relative;
+  z-index: 9;
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
-  padding-block: 26px;
+  padding-block: 18px;
 }
 .queue-actions > div {
   display: flex;
@@ -1304,6 +1318,60 @@ h1 em {
   justify-content: flex-end;
   gap: 10px;
 }
+.member-access {
+  position: relative;
+}
+.member-access summary {
+  cursor: pointer;
+  list-style: none;
+  white-space: nowrap;
+}
+.member-access summary::-webkit-details-marker {
+  display: none;
+}
+.member-access summary span {
+  margin-left: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: transform 160ms ease;
+}
+.member-access[open] summary span {
+  transform: rotate(45deg);
+}
+.member-access-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  width: min(520px, calc(100vw - 48px));
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper);
+  box-shadow: 0 24px 60px rgba(23, 34, 29, 0.18);
+}
+.member-access-copy {
+  margin-bottom: 16px;
+}
+.member-access-copy strong {
+  display: block;
+  margin-bottom: 5px;
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 500;
+}
+.member-access-copy p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+}
+.member-access-panel input,
+.member-access-panel .button {
+  min-height: 46px;
+}
+.member-access-panel .signed-in-state {
+  padding: 14px 16px;
+}
 .live-dot {
   width: 8px;
   height: 8px;
@@ -1312,7 +1380,7 @@ h1 em {
   box-shadow: 0 0 0 5px rgba(230, 107, 60, 0.12);
 }
 .ballot-section {
-  padding-block: 90px 48px;
+  padding-block: 62px 38px;
   background: var(--green);
   color: white;
 }
@@ -1321,7 +1389,7 @@ h1 em {
   grid-template-columns: 1.4fr 0.6fr;
   gap: clamp(50px, 10vw, 150px);
   align-items: end;
-  margin-bottom: 52px;
+  margin-bottom: 36px;
 }
 .ballot-heading .eyebrow {
   color: var(--mint);
@@ -1367,11 +1435,11 @@ h1 em {
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .ballot-card {
-  min-height: 480px;
+  min-height: 390px;
   display: grid;
   grid-template-rows: auto 1fr auto auto;
-  gap: 28px;
-  padding: 26px;
+  gap: 20px;
+  padding: 22px;
   background: var(--green);
 }
 .ballot-card-top {
@@ -1404,7 +1472,7 @@ h1 em {
 .ballot-card h3 {
   margin-bottom: 15px;
   font-family: var(--serif);
-  font-size: clamp(28px, 2.8vw, 39px);
+  font-size: clamp(25px, 2.4vw, 34px);
   line-height: 1.03;
   font-weight: 400;
   letter-spacing: -0.03em;
@@ -1448,7 +1516,10 @@ h1 em {
   text-align: right;
 }
 .article-queue {
-  padding-block: 110px 135px;
+  padding-block: 72px 82px;
+}
+.article-queue .compact-heading {
+  margin-bottom: 38px;
 }
 .queue-list {
   border-top: 2px solid var(--ink);
@@ -1458,7 +1529,7 @@ h1 em {
   grid-template-columns: 60px minmax(280px, 1.1fr) minmax(260px, 0.8fr) 40px;
   gap: 28px;
   align-items: center;
-  padding: 28px 0;
+  padding: 22px 0;
   border-bottom: 1px solid var(--line);
 }
 .queue-rank {
@@ -1505,7 +1576,6 @@ button {
 [hidden] {
   display: none !important;
 }
-.member-panel,
 .admin-access {
   display: grid;
   grid-template-columns: minmax(260px, 0.75fr) minmax(380px, 1.25fr);
@@ -1516,7 +1586,6 @@ button {
   border: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.22);
 }
-.member-panel h2,
 .admin-access h2,
 .form-heading h2,
 .admin-panel h2,
@@ -1528,7 +1597,6 @@ button {
   font-weight: 400;
   letter-spacing: -0.035em;
 }
-.member-panel-copy > p:last-child,
 .admin-access > div > p:last-child,
 .admin-demo > p {
   margin: 0;
@@ -1662,6 +1730,56 @@ textarea:focus {
   color: var(--muted);
   font-family: var(--serif);
   font-size: 16px;
+}
+
+.voting-guide {
+  padding-block: 52px 70px;
+  border-top: 1px solid var(--line);
+  background: var(--paper-deep);
+}
+.voting-guide .shell {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+.voting-guide .eyebrow {
+  margin: 8px 0 0;
+}
+.voting-guide ol {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--line);
+  list-style: none;
+}
+.voting-guide li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 12px;
+  padding: 20px;
+}
+.voting-guide li + li {
+  border-left: 1px solid var(--line);
+}
+.voting-guide li > span {
+  color: var(--orange);
+  font-family: var(--serif);
+  font-size: 13px;
+}
+.voting-guide h2 {
+  margin-bottom: 7px;
+  font-family: var(--serif);
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 500;
+}
+.voting-guide li p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
 }
 
 .admin-access {
@@ -2024,7 +2142,7 @@ footer > div {
     grid-template-columns: 1fr;
   }
   .ballot-card {
-    min-height: 400px;
+    min-height: 330px;
   }
   .queue-list article {
     grid-template-columns: 45px 1fr 40px;
@@ -2036,10 +2154,22 @@ footer > div {
     grid-column: 3;
     grid-row: 1;
   }
-  .member-panel,
   .admin-access,
   .admin-grid {
     grid-template-columns: 1fr;
+  }
+  .voting-guide .shell {
+    grid-template-columns: 1fr;
+  }
+  .voting-guide ol {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .voting-guide li:nth-child(3) {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .voting-guide li:nth-child(4) {
+    border-top: 1px solid var(--line);
   }
   .admin-grid {
     gap: 18px;
@@ -2167,12 +2297,19 @@ footer > div {
   .queue-action-buttons .button {
     width: 100%;
   }
-  .member-panel,
   .admin-access {
     width: 100%;
     margin-block: 0 50px;
     padding: 28px 16px;
     border-inline: 0;
+  }
+  .member-access {
+    width: 100%;
+  }
+  .member-access-panel {
+    right: auto;
+    left: 0;
+    width: min(520px, calc(100vw - 32px));
   }
   .inline-auth > div,
   .proposal-form,
@@ -2206,7 +2343,7 @@ footer > div {
     gap: 12px;
   }
   .ballot-section {
-    padding-top: 70px;
+    padding-top: 52px;
   }
   .queue-list article {
     grid-template-columns: 34px 1fr;
@@ -2217,6 +2354,17 @@ footer > div {
   .queue-list article > a {
     grid-column: 1;
     grid-row: 2;
+  }
+  .voting-guide {
+    padding-block: 42px 50px;
+  }
+  .voting-guide ol {
+    grid-template-columns: 1fr;
+  }
+  .voting-guide li + li,
+  .voting-guide li:nth-child(3) {
+    border-top: 1px solid var(--line);
+    border-left: 0;
   }
   footer {
     align-items: flex-start;
