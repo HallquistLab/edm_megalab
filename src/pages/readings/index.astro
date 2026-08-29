@@ -31,23 +31,39 @@ const groups = [
         data-search
       />
     </label>
-    <div class="filter-bar" role="group" aria-label="Filter readings by collection">
-      {
-        groups.map(([value, label], index) => (
-          <button
-            class:list={{ active: index === 0 }}
-            type="button"
-            data-reading-filter={value}
-            aria-pressed={index === 0 ? "true" : "false"}
-          >
-            {label}
+    <div class="reading-control-panel">
+      <div class="filter-bar" role="group" aria-label="Filter readings by collection">
+        {
+          groups.map(([value, label], index) => (
+            <button
+              class:list={{ active: index === 0 }}
+              type="button"
+              data-reading-filter={value}
+              aria-pressed={index === 0 ? "true" : "false"}
+            >
+              {label}
+            </button>
+          ))
+        }
+      </div>
+      <div class="reading-view-options">
+        <p class="reading-count" data-reading-count aria-live="polite">
+          {readings.length} articles
+        </p>
+        <div class="view-toggle" role="group" aria-label="Choose reading display">
+          <span>View</span>
+          <button type="button" data-reading-view="cards" aria-pressed="true">
+            Cards
           </button>
-        ))
-      }
+          <button type="button" data-reading-view="list" aria-pressed="false">
+            List
+          </button>
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="reading-grid shell" data-reading-grid>
+  <section class="reading-grid shell" data-reading-grid data-view="cards">
     {
       readings.map((reading, index) => (
         <article
@@ -59,17 +75,19 @@ const groups = [
             <span>{String(index + 1).padStart(2, "0")}</span>
             <span class={`collection collection-${reading.group}`}>{reading.topic}</span>
           </div>
-          <div>
+          <div class="reading-card-main">
             <p class="citation">
               {reading.authors} · {reading.year}
             </p>
-            <h2>{reading.title}</h2>
+            <h2>
+              <a href={reading.doi}>{reading.title}</a>
+            </h2>
             <p class="journal">
               {reading.journal}
               {reading.citation && `, ${reading.citation}`}
             </p>
-            <p class="why">{reading.why}</p>
           </div>
+          <p class="why">{reading.why}</p>
           <a href={reading.doi} aria-label={`Open ${reading.title}`}>
             Read paper <span aria-hidden="true">↗</span>
           </a>
@@ -86,17 +104,44 @@ const groups = [
     );
     const cards = Array.from(document.querySelectorAll<HTMLElement>(".reading-card"));
     const empty = document.querySelector<HTMLElement>(".reading-empty");
+    const grid = document.querySelector<HTMLElement>("[data-reading-grid]");
+    const count = document.querySelector<HTMLElement>("[data-reading-count]");
+    const viewButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-reading-view]"),
+    );
     let group = "all";
 
     const update = () => {
       const query = search?.value.trim().toLowerCase() ?? "";
+      let visibleCount = 0;
       cards.forEach((card) => {
         const matchesGroup = group === "all" || card.dataset.group === group;
         const matchesSearch = card.dataset.searchable?.includes(query) ?? false;
         card.hidden = !(matchesGroup && matchesSearch);
+        if (!card.hidden) visibleCount += 1;
       });
-      if (empty) empty.hidden = cards.some((card) => !card.hidden);
+      if (empty) empty.hidden = visibleCount > 0;
+      if (count)
+        count.textContent = `${visibleCount} article${visibleCount === 1 ? "" : "s"}`;
     };
+
+    const setView = (view: "cards" | "list") => {
+      if (grid) grid.dataset.view = view;
+      viewButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.readingView === view));
+      });
+      try {
+        localStorage.setItem("edm-reading-view", view);
+      } catch {
+        // The view still works when browser storage is unavailable.
+      }
+    };
+
+    try {
+      if (localStorage.getItem("edm-reading-view") === "list") setView("list");
+    } catch {
+      // Keep the default card view when browser storage is unavailable.
+    }
 
     search?.addEventListener("input", update);
     buttons.forEach((button) => {
@@ -108,6 +153,11 @@ const groups = [
           item.setAttribute("aria-pressed", String(active));
         });
         update();
+      });
+    });
+    viewButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        setView(button.dataset.readingView === "list" ? "list" : "cards");
       });
     });
   </script>
