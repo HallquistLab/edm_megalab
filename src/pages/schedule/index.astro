@@ -2,7 +2,6 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CalendarSubscription from "../../components/CalendarSubscription.astro";
 import { formatDate, schedule, weekday } from "../../lib/content";
-import site from "../../data/site.json";
 
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -20,8 +19,8 @@ const filters = [
   title="Schedule"
   description="The 2026–2027 schedule for Emory Decision-Making Megalab meetings."
 >
-  <header class="page-intro page-intro-single shell">
-    <h1>Schedule</h1>
+  <header class="page-intro page-intro-single schedule-page-intro shell">
+    <h1>Schedule 2026-2027</h1>
   </header>
 
   <section class="schedule-tools shell" aria-label="Schedule tools">
@@ -41,11 +40,6 @@ const filters = [
     </div>
     <CalendarSubscription />
   </section>
-
-  <aside class="calendar-note shell">
-    <strong>Calendar note</strong>
-    <p>{site.calendarNote}</p>
-  </aside>
 
   <div class="agenda shell" data-agenda>
     {

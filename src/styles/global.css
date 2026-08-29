@@ -604,6 +604,9 @@ h1 em {
   font-size: clamp(30px, 6.6vw, 96px);
   white-space: nowrap;
 }
+.schedule-page-intro {
+  padding-block: clamp(48px, 6vw, 76px) 34px;
+}
 .schedule-tools,
 .reading-tools {
   display: flex;
@@ -611,6 +614,9 @@ h1 em {
   gap: 28px;
   align-items: center;
   padding-block: 28px;
+}
+.schedule-tools {
+  padding-block: 20px;
 }
 .filter-bar {
   display: flex;
@@ -634,27 +640,8 @@ h1 em {
   background: var(--green);
   color: white;
 }
-.calendar-note {
-  display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 24px;
-  padding: 15px 18px;
-  background: var(--paper-deep);
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.5;
-}
-.calendar-note strong {
-  color: var(--ink);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 9px;
-}
-.calendar-note p {
-  margin: 0;
-}
 .agenda {
-  padding-block: 60px 120px;
+  padding-block: 32px 120px;
 }
 .semester + .semester {
   margin-top: 90px;
@@ -2221,12 +2208,8 @@ footer > div {
     right: auto;
     left: 0;
   }
-  .calendar-note {
-    grid-template-columns: 1fr;
-    gap: 7px;
-  }
   .agenda {
-    padding-top: 42px;
+    padding-top: 26px;
   }
   .agenda-item {
     grid-template-columns: 76px 1fr;
