@@ -10,11 +10,11 @@ const meetingsNewestFirst = [...schedule].reverse();
 
 <BaseLayout
   title="Materials"
-  description="Workshop, discussion, and meeting materials from the Emory Decision-Making Megalab."
+  description="Workshop, discussion, and meeting materials from EDM Megalab."
 >
   <PageIntro
     eyebrow="Materials · Meeting archive"
-    title="Pick up where the room left off."
+    title="Materials archive"
     intro="Completed meetings live here with their original context, readings, and any public slides, notes, code, or recordings."
   />
 
@@ -22,11 +22,11 @@ const meetingsNewestFirst = [...schedule].reverse();
     <div class="meeting-section-heading">
       <div>
         <p class="eyebrow">Completed meetings</p>
-        <h2 id="meeting-archive-title">The record grows meeting by meeting.</h2>
+        <h2 id="meeting-archive-title">Completed meetings and resources.</h2>
       </div>
       <p>
-        Open a meeting to recover what it was about and find every resource shared with
-        the group. Meetings are ordered newest first.
+        Open a meeting to review its focus and find every resource shared with EDM
+        Megalab. Meetings are ordered newest first.
       </p>
     </div>
 
@@ -113,23 +113,6 @@ const meetingsNewestFirst = [...schedule].reverse();
       </p>
       <a href={`${base}wip-guide/`}>Read the guide →</a>
     </article>
-  </section>
-
-  <section class="archive-principle shell">
-    <div>
-      <p class="eyebrow">A deliberate boundary</p>
-      <h2>Share finished resources.<br /><em>Keep working files private.</em></h2>
-    </div>
-    <div>
-      <p>
-        Finished workshop resources and reusable examples may be added to the public
-        archive when they are ready to share.
-      </p>
-      <p>
-        Planning documents, unpublished results, sensitive data, and preliminary WIP
-        material remain in local or restricted Emory locations.
-      </p>
-    </div>
   </section>
 
   <script>

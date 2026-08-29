@@ -1,6 +1,7 @@
 import { isSupabaseConfigured, supabase } from "../lib/supabase";
 import type { User } from "@supabase/supabase-js";
 import { formatSessionDate } from "../lib/dates";
+import { keywordTone } from "../lib/keywords";
 import { showActionFeedback } from "./feedback";
 
 type Suggestion = {
@@ -83,7 +84,11 @@ function queueCard(article: Suggestion, index: number) {
   card.append(node("span", "queue-rank", String(index + 1).padStart(2, "0")));
   const content = node("div");
   content.append(
-    node("span", "collection collection-priority", article.topic),
+    node(
+      "span",
+      `keyword-badge keyword-static ${keywordTone(article.topic)}`,
+      article.topic,
+    ),
     node("h3", "", article.title),
     node("p", "", `${article.citation} · Suggested by ${article.submitter_name}`),
   );

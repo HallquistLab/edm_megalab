@@ -1,5 +1,5 @@
 name: Propose a session
-description: Suggest a work in progress, paper discussion, methods workshop, or current topic.
+description: Suggest a work in progress, methods workshop, or current topic.
 title: "Session proposal: "
 labels: [programming]
 body:
@@ -9,7 +9,6 @@ body:
       label: Session format
       options:
         - Works in progress
-        - Article discussion
         - Methods workshop
         - Current-topic discussion
         - Other
@@ -27,7 +26,7 @@ body:
   - type: textarea
     id: value
     attributes:
-      label: What should the group work through?
+      label: What should EDM Megalab work through?
       description: Describe the scientific question, project stage, or practical skill—and why a cross-lab discussion would help.
     validations:
       required: true

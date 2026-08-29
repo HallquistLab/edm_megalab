@@ -8,12 +8,12 @@ const base = import.meta.env.BASE_URL.endsWith("/")
 
 <BaseLayout
   title="Coordinator console"
-  description="A lightweight coordinator console for the Emory Decision-Making Megalab article queue and polls."
+  description="A lightweight coordinator console for EDM Megalab proposals, the article queue, and polls."
 >
   <PageIntro
     eyebrow="Coordinator console · Restricted"
     title="Keep the queue moving."
-    intro="Review suggestions, shape a short ballot, and close voting when the next discussion is set."
+    intro="Review session proposals and article suggestions, shape a short ballot, and close voting when the next discussion is set."
   />
 
   <section class="admin-access shell" data-admin-access>
@@ -50,10 +50,26 @@ const base = import.meta.env.BASE_URL.endsWith("/")
 
   <section class="admin-workspace shell" data-admin-workspace hidden>
     <div class="admin-summary">
+      <article>
+        <span>Session proposals</span><strong data-proposal-count>0</strong>
+      </article>
       <article><span>Awaiting review</span><strong data-pending-count>0</strong></article>
       <article><span>In the queue</span><strong data-queued-count>0</strong></article>
       <article><span>Open polls</span><strong data-open-count>0</strong></article>
     </div>
+
+    <section class="admin-panel proposal-register">
+      <div class="admin-panel-heading">
+        <div><p class="eyebrow">Program</p><h2>Session proposals</h2></div>
+        <label class="archive-toggle">
+          <input type="checkbox" data-show-archived-proposals />
+          <span>Show archived proposals</span>
+        </label>
+      </div>
+      <div class="session-proposal-list" data-session-proposal-list>
+        <p class="empty-state">Loading session proposals…</p>
+      </div>
+    </section>
 
     <div class="admin-grid">
       <section class="admin-panel">
@@ -71,13 +87,9 @@ const base = import.meta.env.BASE_URL.endsWith("/")
           <div><p class="eyebrow">Publish</p><h2>Open an article poll</h2></div>
         </div>
         <form data-poll-form>
-          <label
-            >Poll title<input
-              name="title"
-              placeholder="Choose our October article"
-              required
-            /></label
-          >
+          <p class="poll-title-note">
+            The poll title will use the session date automatically.
+          </p>
           <label>Session date<input name="meeting_slot" type="date" required /></label>
           <div class="form-split">
             <label
@@ -128,6 +140,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
       moderation, and live poll publishing. No secret key is shipped to the browser.
     </p>
     <div class="admin-summary">
+      <article><span>Session proposals</span><strong>3</strong></article>
       <article><span>Awaiting review</span><strong>4</strong></article>
       <article><span>In the queue</span><strong>7</strong></article>
       <article><span>Open polls</span><strong>1</strong></article>

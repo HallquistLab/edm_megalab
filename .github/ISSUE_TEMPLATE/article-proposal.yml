@@ -1,12 +1,12 @@
 name: Post an article
-description: Add a paper to the queue for a future Emory Decision-Making Megalab discussion.
+description: Add a paper to the queue for a future EDM Megalab discussion.
 title: "Article proposal: "
 labels: [article-queue]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for adding to the group’s reading queue. This issue is public, so include only material that can be shared openly.
+        Thanks for adding to the EDM Megalab reading queue. This issue is public, so include only material that can be shared openly.
 
   - type: input
     id: article-link
@@ -42,7 +42,7 @@ body:
   - type: textarea
     id: rationale
     attributes:
-      label: Why should this group discuss it?
+      label: Why should EDM Megalab discuss it?
       description: In two or three sentences, explain what makes the paper useful across labs.
     validations:
       required: true

@@ -2,23 +2,21 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageIntro from "../../components/PageIntro.astro";
 import { readings } from "../../lib/content";
+import { keywordTone } from "../../lib/keywords";
 
-const groups = [
-  ["all", "All readings"],
-  ["priority", "Priority discussions"],
-  ["methods", "Methods"],
-  ["reserve", "Reserve list"],
-];
+const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].sort(
+  (left, right) => left.localeCompare(right),
+);
 ---
 
 <BaseLayout
   title="Reading room"
-  description="Curated recent readings for Emory Decision-Making Megalab discussions and workshops."
+  description="Curated recent readings for EDM Megalab discussions and workshops."
 >
   <PageIntro
-    eyebrow="Reading room · Curated, not exhaustive"
+    eyebrow="EDM Megalab · Curated, not exhaustive"
     title="Reading room"
-    intro="Articles of interest selected by the EDM community. Search the collection."
+    intro="Search the collection or select a research keyword to find related articles."
   />
 
   <section class="reading-tools shell" aria-label="Reading filters">
@@ -32,19 +30,51 @@ const groups = [
       />
     </label>
     <div class="reading-control-panel">
-      <div class="filter-bar" role="group" aria-label="Filter readings by collection">
-        {
-          groups.map(([value, label], index) => (
-            <button
-              class:list={{ active: index === 0 }}
-              type="button"
-              data-reading-filter={value}
-              aria-pressed={index === 0 ? "true" : "false"}
-            >
-              {label}
-            </button>
-          ))
-        }
+      <div class="reading-filter-group">
+        <span>Keywords</span>
+        <div class="keyword-filter-bar" role="group" aria-label="Filter by keyword">
+          <button
+            class="keyword-badge keyword-all active"
+            type="button"
+            data-reading-keyword="all"
+            aria-pressed="true"
+          >
+            All topics
+          </button>
+          {
+            keywords.map((keyword) => (
+              <button
+                class={`keyword-badge ${keywordTone(keyword)}`}
+                type="button"
+                data-reading-keyword={keyword.toLowerCase()}
+                aria-pressed="false"
+              >
+                {keyword}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+      <div class="reading-filter-group reading-status-controls">
+        <span>Discussion status</span>
+        <div class="filter-bar" role="group" aria-label="Filter by discussion status">
+          {
+            [
+              ["all", "All readings"],
+              ["active", "Not yet presented"],
+              ["presented", "Presented"],
+            ].map(([value, label], index) => (
+              <button
+                class:list={{ active: index === 0 }}
+                type="button"
+                data-reading-status={value}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                {label}
+              </button>
+            ))
+          }
+        </div>
       </div>
       <div class="reading-view-options">
         <p class="reading-count" data-reading-count aria-live="polite">
@@ -68,12 +98,22 @@ const groups = [
       readings.map((reading, index) => (
         <article
           class="reading-card"
-          data-group={reading.group}
-          data-searchable={`${reading.title} ${reading.authors} ${reading.journal} ${reading.topic}`.toLowerCase()}
+          data-presented={String(reading.presented)}
+          data-keywords={reading.keywords
+            .map((keyword) => keyword.toLowerCase())
+            .join("|")}
+          data-searchable={`${reading.title} ${reading.authors} ${reading.journal} ${reading.keywords.join(" ")}`.toLowerCase()}
         >
           <div class="reading-card-top">
             <span>{String(index + 1).padStart(2, "0")}</span>
-            <span class={`collection collection-${reading.group}`}>{reading.topic}</span>
+            <span
+              class:list={[
+                "reading-status",
+                reading.presented ? "reading-status-presented" : "reading-status-active",
+              ]}
+            >
+              {reading.presented ? "Presented" : "Not yet presented"}
+            </span>
           </div>
           <div class="reading-card-main">
             <p class="citation">
@@ -87,6 +127,18 @@ const groups = [
               {reading.citation && `, ${reading.citation}`}
             </p>
           </div>
+          <div class="reading-keywords" aria-label={`Keywords for ${reading.title}`}>
+            {reading.keywords.map((keyword) => (
+              <button
+                class={`keyword-badge ${keywordTone(keyword)}`}
+                type="button"
+                data-reading-keyword={keyword.toLowerCase()}
+                aria-pressed="false"
+              >
+                {keyword}
+              </button>
+            ))}
+          </div>
           <p class="why">{reading.why}</p>
           <a href={reading.doi} aria-label={`Open ${reading.title}`}>
             Read paper <span aria-hidden="true">↗</span>
@@ -99,8 +151,11 @@ const groups = [
 
   <script>
     const search = document.querySelector<HTMLInputElement>("[data-search]");
-    const buttons = Array.from(
-      document.querySelectorAll<HTMLButtonElement>("[data-reading-filter]"),
+    const keywordButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-reading-keyword]"),
+    );
+    const statusButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-reading-status]"),
     );
     const cards = Array.from(document.querySelectorAll<HTMLElement>(".reading-card"));
     const empty = document.querySelector<HTMLElement>(".reading-empty");
@@ -109,15 +164,21 @@ const groups = [
     const viewButtons = Array.from(
       document.querySelectorAll<HTMLButtonElement>("[data-reading-view]"),
     );
-    let group = "all";
+    let keyword = "all";
+    let discussionStatus = "all";
 
     const update = () => {
       const query = search?.value.trim().toLowerCase() ?? "";
       let visibleCount = 0;
       cards.forEach((card) => {
-        const matchesGroup = group === "all" || card.dataset.group === group;
+        const cardKeywords = (card.dataset.keywords ?? "").split("|");
+        const matchesKeyword = keyword === "all" || cardKeywords.includes(keyword);
+        const isPresented = card.dataset.presented === "true";
+        const matchesStatus =
+          discussionStatus === "all" ||
+          (discussionStatus === "presented" ? isPresented : !isPresented);
         const matchesSearch = card.dataset.searchable?.includes(query) ?? false;
-        card.hidden = !(matchesGroup && matchesSearch);
+        card.hidden = !(matchesKeyword && matchesStatus && matchesSearch);
         if (!card.hidden) visibleCount += 1;
       });
       if (empty) empty.hidden = visibleCount > 0;
@@ -144,10 +205,21 @@ const groups = [
     }
 
     search?.addEventListener("input", update);
-    buttons.forEach((button) => {
+    keywordButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        group = button.dataset.readingFilter ?? "all";
-        buttons.forEach((item) => {
+        keyword = button.dataset.readingKeyword ?? "all";
+        keywordButtons.forEach((item) => {
+          const active = item.dataset.readingKeyword === keyword;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+        update();
+      });
+    });
+    statusButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        discussionStatus = button.dataset.readingStatus ?? "all";
+        statusButtons.forEach((item) => {
           const active = item === button;
           item.classList.toggle("active", active);
           item.setAttribute("aria-pressed", String(active));

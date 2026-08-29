@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageIntro from "../../components/PageIntro.astro";
 import { readings } from "../../lib/content";
+import { keywordTone } from "../../lib/keywords";
 
 const queue = readings.slice(3, 7);
 const base = import.meta.env.BASE_URL.endsWith("/")
@@ -11,12 +12,12 @@ const base = import.meta.env.BASE_URL.endsWith("/")
 
 <BaseLayout
   title="Article queue"
-  description="Propose articles and help choose future Emory Decision-Making Megalab discussions."
+  description="Propose articles and help choose future EDM Megalab discussions."
 >
   <PageIntro
-    eyebrow="Article queue · Shaped by the group"
+    eyebrow="EDM Megalab · Article queue"
     title="What should we read next?"
-    intro="Add a paper when it feels worth the group’s time. Coordinators can turn a short list into a poll for a future meeting."
+    intro="Suggest a paper for a future discussion. Coordinators can turn a short list into a poll for an upcoming meeting."
     compact
   />
 
@@ -71,7 +72,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
     <div class="form-heading">
       <div>
         <p class="eyebrow">New suggestion</p>
-        <h2>Put a paper on the group’s radar.</h2>
+        <h2>Put a paper on the EDM Megalab radar.</h2>
       </div>
       <button class="text-button" type="button" data-close-proposal>Close</button>
     </div>
@@ -108,7 +109,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
         />
       </label>
       <label class="form-wide">
-        Why should the group discuss it?
+        Why should EDM Megalab discuss it?
         <textarea name="rationale" rows="4" required minlength="10" maxlength="3000"
         ></textarea>
       </label>
@@ -140,7 +141,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
     <div class="section-heading compact-heading">
       <div>
         <p class="eyebrow">The queue</p>
-        <h2>On the group’s radar.</h2>
+        <h2>On the EDM Megalab radar.</h2>
       </div>
       <p>
         Articles proposed for discussion appear here. We will add queued papers to a poll
@@ -153,7 +154,11 @@ const base = import.meta.env.BASE_URL.endsWith("/")
           <article>
             <span class="queue-rank">{String(index + 1).padStart(2, "0")}</span>
             <div>
-              <span class="collection collection-priority">{article.topic}</span>
+              <span
+                class={`keyword-badge keyword-static ${keywordTone(article.keywords[0])}`}
+              >
+                {article.keywords[0]}
+              </span>
               <h3>{article.title}</h3>
               <p>
                 {article.authors} · {article.journal} · {article.year}

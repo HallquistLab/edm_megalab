@@ -3,7 +3,7 @@ VERSION:2.0
 PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:What should an Emory decision-making community be?
+X-WR-CALNAME:What should EDM Megalab be?
 X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
@@ -12,12 +12,11 @@ UID:2026-09-11-community-kickoff@edm-megalab.emory.edu
 DTSTAMP:20260829T120000Z
 DTSTART;VALUE=DATE:20260911
 DTEND;VALUE=DATE:20260912
-SUMMARY:What should an Emory decision-making community be? — Emory Decisi
- on-Making Megalab
-DESCRIPTION:Community kickoff. Brief introductions from the four core lab
- s\; map shared interests\, methods\, datasets\, and opportunities\; and 
- choose priorities for the series.  Lead: Four core labs. Time and locati
- on to be announced.
+SUMMARY:What should EDM Megalab be? — Emory Decision-Making Megalab
+DESCRIPTION:EDM Megalab kickoff. Brief introductions from the four core l
+ abs\; map shared interests\, methods\, datasets\, and opportunities\; an
+ d choose priorities for the series.  Lead: Four core labs. Time and loca
+ tion to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-09-11-commu
  nity-kickoff

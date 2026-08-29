@@ -80,9 +80,10 @@ const resources = [
 
   <div class="meeting-record shell">
     <section class="meeting-overview" aria-labelledby="meeting-overview-title">
-      <p class="eyebrow">Meeting overview</p>
-      <h2 id="meeting-overview-title">What we’re gathering to discuss.</h2>
-      <p>{session.description}</p>
+      <div class="meeting-overview-copy">
+        <p class="eyebrow" id="meeting-overview-title">Meeting overview</p>
+        <p class="meeting-abstract">{session.description}</p>
+      </div>
       <a class="calendar-link" href={`${base}calendar/${session.id}.ics`}>
         Add to calendar
       </a>

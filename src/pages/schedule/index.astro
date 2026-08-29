@@ -17,7 +17,7 @@ const filters = [
 
 <BaseLayout
   title="Schedule"
-  description="The 2026–2027 schedule for Emory Decision-Making Megalab meetings."
+  description="The 2026–2027 schedule for EDM Megalab meetings."
 >
   <header class="page-intro page-intro-single schedule-page-intro shell">
     <h1>Schedule 2026-2027</h1>
@@ -75,6 +75,7 @@ const filters = [
                 session.type === "article"
                   ? session.readings.find((reading) => reading.title)
                   : undefined;
+              const materialCount = session.materials?.length ?? 0;
               return (
                 <article
                   class:list={["agenda-item", { "agenda-item-article": featuredReading }]}
@@ -123,21 +124,14 @@ const filters = [
                           <a href={reading.url}>{reading.label} ↗</a>
                         ))}
                       </p>
-                    ) : (
+                    ) : materialCount > 0 ? (
                       <p>
-                        <span>Meeting record</span>
-                        <a href={`${base}meetings/${session.id}/`}>
-                          {session.readings.length + (session.materials?.length ?? 0) > 0
-                            ? `${session.readings.length + (session.materials?.length ?? 0)} linked ${session.readings.length + (session.materials?.length ?? 0) === 1 ? "resource" : "resources"}`
-                            : "View meeting"}
-                        </a>
+                        <span>Materials</span>
+                        {`${materialCount} linked ${materialCount === 1 ? "resource" : "resources"}`}
                       </p>
-                    )}
+                    ) : null}
                   </div>
                   <div class="agenda-actions">
-                    <a class="meeting-link" href={`${base}meetings/${session.id}/`}>
-                      View meeting
-                    </a>
                     <a
                       class="calendar-link"
                       href={`${base}calendar/${session.id}.ics`}
@@ -163,11 +157,8 @@ const filters = [
       <p class="eyebrow">The schedule is a draft</p>
       <h2>Have work that needs a room?</h2>
       <p>Bring a project, nominate a paper, or request a practical workshop.</p>
-      <a
-        class="button button-light"
-        href="https://github.com/HallquistLab/edm_megalab/issues/new/choose"
-      >
-        Propose a session <span aria-hidden="true">↗</span>
+      <a class="button button-light" href={`${base}propose/`}>
+        Propose a Session <span aria-hidden="true">→</span>
       </a>
     </div>
   </section>

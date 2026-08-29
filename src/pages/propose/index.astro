@@ -1,0 +1,209 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout
+  title="Propose a session"
+  description="Propose a work in progress, current-topic discussion, or workshop for EDM Megalab."
+>
+  <PageIntro
+    eyebrow="EDM Megalab · Session proposals"
+    title="Bring the group a question worth working through."
+    intro="Share the essentials now. A coordinator can follow up about timing, format, and private materials."
+    compact
+  />
+
+  <section class="session-proposal shell">
+    <form class="proposal-form session-proposal-form" data-session-proposal-form>
+      <fieldset class="proposal-type-picker form-wide">
+        <legend>What would you like to propose?</legend>
+        <div class="proposal-type-options">
+          <label class="proposal-type-option">
+            <input type="radio" name="proposal_type" value="work_in_progress" checked />
+            <span>
+              <strong>Work in progress</strong>
+              <small>Bring a live project decision, design, analysis, or result.</small>
+            </span>
+          </label>
+          <label class="proposal-type-option">
+            <input type="radio" name="proposal_type" value="current_topic_or_workshop" />
+            <span>
+              <strong>Current topic or workshop</strong>
+              <small>Explore a scientific issue, method, tool, or practical skill.</small>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <label>
+        Your name
+        <input
+          name="submitter_name"
+          autocomplete="name"
+          required
+          minlength="2"
+          maxlength="120"
+        />
+      </label>
+      <label>
+        Email
+        <input
+          name="contact_email"
+          type="email"
+          autocomplete="email"
+          required
+          maxlength="254"
+        />
+      </label>
+      <label class="form-wide">
+        Working title
+        <input name="working_title" required minlength="3" maxlength="200" />
+      </label>
+
+      <fieldset
+        class="proposal-section form-wide"
+        data-proposal-section="work_in_progress"
+      >
+        <legend>Work-in-progress essentials</legend>
+        <p>
+          Tell us where feedback can still change the work. Rough figures and unfinished
+          thinking are welcome.
+        </p>
+        <div class="proposal-section-fields">
+          <label>
+            Project stage
+            <input
+              name="wip_project_stage"
+              placeholder="e.g. study design, early analysis, interpretation"
+              required
+              minlength="2"
+              maxlength="300"
+            />
+          </label>
+          <label class="form-wide">
+            One-sentence scientific question
+            <textarea
+              name="wip_scientific_question"
+              rows="2"
+              required
+              minlength="10"
+              maxlength="1000"></textarea>
+          </label>
+          <label class="form-wide">
+            What do you want from the session?
+            <span>Give one to three focal questions or goals.</span>
+            <textarea
+              name="wip_session_goals"
+              rows="3"
+              required
+              minlength="10"
+              maxlength="2000"></textarea>
+          </label>
+          <label>
+            Discussion preference
+            <select name="wip_discussion_preference" required>
+              <option value="">Choose one</option>
+              <option value="interruptions_welcome">Interruptions welcome</option>
+              <option value="clarifications_only"
+                >Clarifications during; discussion later</option
+              >
+              <option value="hold_questions">Hold questions to a stopping point</option>
+            </select>
+          </label>
+          <label>
+            What might you show? <span>Optional</span>
+            <input
+              name="wip_material_to_share"
+              placeholder="A figure, design, live analysis, competing options…"
+              maxlength="1500"
+            />
+          </label>
+          <label>
+            Useful expertise in the room <span>Optional</span>
+            <input name="wip_useful_expertise" maxlength="1000" />
+          </label>
+          <label>
+            Confidentiality or sharing constraints <span>Optional</span>
+            <input name="wip_sharing_constraints" maxlength="1000" />
+          </label>
+        </div>
+        <a class="text-link" href={`${base}wip-guide/`}>Read the full WIP guide →</a>
+      </fieldset>
+
+      <fieldset
+        class="proposal-section form-wide"
+        data-proposal-section="current_topic_or_workshop"
+        hidden
+      >
+        <legend>Current-topic or workshop essentials</legend>
+        <p>
+          Frame a focused scientific question, method, or skill that would benefit people
+          across labs.
+        </p>
+        <div class="proposal-section-fields">
+          <label class="form-wide">
+            What should the group explore?
+            <span>Name the central question, method, tool, or practical skill.</span>
+            <textarea
+              name="topic_summary"
+              rows="3"
+              required
+              minlength="10"
+              maxlength="1500"></textarea>
+          </label>
+          <label class="form-wide">
+            Why is this useful to the group now?
+            <textarea name="relevance" rows="2" required minlength="10" maxlength="1500"
+            ></textarea>
+          </label>
+          <label class="form-wide">
+            What should people leave understanding or able to do?
+            <textarea
+              name="desired_outcomes"
+              rows="2"
+              required
+              minlength="10"
+              maxlength="1500"></textarea>
+          </label>
+          <label>
+            Best session format
+            <select name="suggested_format" required>
+              <option value="">Choose one</option>
+              <option value="discussion">Current-topic discussion</option>
+              <option value="workshop">Hands-on workshop or demonstration</option>
+              <option value="mixed">Short framing talk plus interactive work</option>
+            </select>
+          </label>
+          <label>
+            Proposed lead or facilitator <span>Optional</span>
+            <input name="proposed_lead" maxlength="300" />
+          </label>
+          <label class="form-wide">
+            Preparation, software, data, or access needs <span>Optional</span>
+            <textarea name="preparation_notes" rows="2" maxlength="1000"></textarea>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="form-submit form-wide">
+        <p>
+          Proposals are visible only to coordinators. Keep sensitive project details out
+          of this form; they can be shared privately later.
+        </p>
+        <div>
+          <p class="form-status" data-session-proposal-status aria-live="polite"></p>
+          <button class="button button-primary" type="submit">Send to coordinators</button
+          >
+        </div>
+      </div>
+    </form>
+  </section>
+
+  <script>
+    import "../../scripts/proposals";
+  </script>
+</BaseLayout>

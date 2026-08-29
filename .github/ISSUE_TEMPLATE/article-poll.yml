@@ -6,15 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        **For meeting coordinators.** First confirm that each candidate is already in the article queue, then list the corresponding proposal issue numbers below. The newest open coordinator poll appears on the website.
-
-  - type: input
-    id: poll-title
-    attributes:
-      label: Poll title
-      placeholder: Choose the paper for our October 9 discussion
-    validations:
-      required: true
+        **For meeting coordinators.** First confirm that each candidate is already in the article queue, then list the corresponding proposal issue numbers below. The website uses the session date as the poll title automatically.
 
   - type: input
     id: meeting-slot

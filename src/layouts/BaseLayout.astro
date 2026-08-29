@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = "Emory Decision-Making Megalab",
-  description = "A joint forum for unfinished science, practical methods, and conversation across Emory decision-making labs.",
+  description = "A biweekly Emory Psychology forum for works in progress, practical methods, and decision-making research.",
   socialImage = "https://hallquistlab.github.io/edm_megalab/og.png",
   pageType = "website",
 } = Astro.props;
@@ -41,7 +41,7 @@ const isCurrent = (matches: string[]) =>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#f5f0e7" />
+    <meta name="theme-color" content="#012169" />
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:type" content={pageType} />
     <meta property="og:title" content={pageTitle} />
@@ -53,7 +53,7 @@ const isCurrent = (matches: string[]) =>
           <meta property="og:image" content={socialImage} />
           <meta
             property="og:image:alt"
-            content="Emory Decision-Making Megalab — Better science, while it’s still in motion."
+            content="EDM Megalab — Emory Decision-Making Megalab"
           />
         </>
       )
@@ -69,7 +69,7 @@ const isCurrent = (matches: string[]) =>
     <header class="site-header">
       <a class="wordmark" href={base} aria-label="Emory Decision-Making Megalab home">
         <span class="wordmark-mark" aria-hidden="true">EDM</span>
-        <span>Decision-Making<br />Megalab</span>
+        <span>Emory Decision-Making<br />Megalab</span>
       </a>
       <nav class="desktop-nav" aria-label="Main navigation">
         {
@@ -83,11 +83,8 @@ const isCurrent = (matches: string[]) =>
           ))
         }
       </nav>
-      <a
-        class="header-action"
-        href="https://github.com/HallquistLab/edm_megalab/issues/new/choose"
-      >
-        Propose a session <span aria-hidden="true">↗</span>
+      <a class="header-action" href={`${base}propose/`}>
+        Propose a Session <span aria-hidden="true">→</span>
       </a>
       <details class="mobile-menu">
         <summary>Menu</summary>
@@ -102,8 +99,8 @@ const isCurrent = (matches: string[]) =>
               </a>
             ))
           }
-          <a href="https://github.com/HallquistLab/edm_megalab/issues/new/choose">
-            Propose a session <span aria-hidden="true">↗</span>
+          <a href={`${base}propose/`}>
+            Propose a Session <span aria-hidden="true">→</span>
           </a>
         </nav>
       </details>
@@ -122,7 +119,6 @@ const isCurrent = (matches: string[]) =>
     <footer>
       <div>
         <p>Emory University · Department of Psychology</p>
-        <p>Built for open, useful scientific exchange.</p>
       </div>
       <nav class="footer-nav" aria-label="Footer navigation">
         {navItems.map((item) => <a href={`${base}${item.path}`}>{item.label}</a>)}

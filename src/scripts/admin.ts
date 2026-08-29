@@ -1,6 +1,7 @@
 import { isSupabaseConfigured, supabase } from "../lib/supabase";
 import type { User } from "@supabase/supabase-js";
 import { formatSessionDate } from "../lib/dates";
+import { keywordTone } from "../lib/keywords";
 import { showActionFeedback } from "./feedback";
 
 type Suggestion = {
@@ -25,6 +26,29 @@ type Poll = {
   max_approvals: number;
 };
 
+type SessionProposal = {
+  id: string;
+  proposal_type: "work_in_progress" | "current_topic_or_workshop";
+  submitter_name: string;
+  contact_email: string;
+  working_title: string;
+  project_stage: string;
+  scientific_question: string;
+  session_goals: string;
+  material_to_share: string;
+  discussion_preference: string;
+  useful_expertise: string;
+  sharing_constraints: string;
+  topic_summary: string;
+  relevance: string;
+  desired_outcomes: string;
+  suggested_format: string;
+  proposed_lead: string;
+  preparation_notes: string;
+  status: "active" | "archived";
+  created_at: string;
+};
+
 const select = <T extends Element>(selector: string) =>
   document.querySelector<T>(selector);
 const authForm = select<HTMLFormElement>("[data-admin-auth-form]");
@@ -38,8 +62,11 @@ const pollChoices = select<HTMLElement>("[data-poll-choices]");
 const pollRegister = select<HTMLElement>("[data-poll-register]");
 const pollForm = select<HTMLFormElement>("[data-poll-form]");
 const pollStatus = select<HTMLElement>("[data-poll-status]");
+const sessionProposalList = select<HTMLElement>("[data-session-proposal-list]");
+const showArchivedProposals = select<HTMLInputElement>("[data-show-archived-proposals]");
 let user: User | null = null;
 let suggestions: Suggestion[] = [];
+let sessionProposals: SessionProposal[] = [];
 
 function node<K extends keyof HTMLElementTagNameMap>(tag: K, className = "", text = "") {
   const item = document.createElement(tag);
@@ -61,6 +88,138 @@ function formatDate(value: string) {
     hour: "numeric",
     minute: "2-digit",
   }).format(new Date(value));
+}
+
+const discussionPreferenceLabels: Record<string, string> = {
+  interruptions_welcome: "Interruptions welcome",
+  clarifications_only: "Clarifications during; discussion later",
+  hold_questions: "Hold questions to a stopping point",
+};
+
+const formatLabels: Record<string, string> = {
+  discussion: "Current-topic discussion",
+  workshop: "Hands-on workshop or demonstration",
+  mixed: "Short framing talk plus interactive work",
+};
+
+function proposalDetail(label: string, value: string) {
+  const wrapper = node("div");
+  wrapper.append(node("dt", "", label), node("dd", "", value));
+  return wrapper;
+}
+
+async function setProposalStatus(id: string, status: SessionProposal["status"]) {
+  if (!supabase) return false;
+  const { error } = await supabase
+    .from("session_proposals")
+    .update({ status })
+    .eq("id", id);
+  if (error) {
+    if (authStatus) authStatus.textContent = error.message;
+    showActionFeedback("We couldn’t update that proposal. Please try again.", "error");
+    return false;
+  }
+  showActionFeedback(
+    status === "archived" ? "Session proposal archived." : "Session proposal restored.",
+  );
+  await loadWorkspace();
+  return true;
+}
+
+function sessionProposalCard(proposal: SessionProposal) {
+  const card = node(
+    "article",
+    `session-proposal-card${proposal.status === "archived" ? " is-archived" : ""}`,
+  );
+  const body = node("div");
+  const typeLabel =
+    proposal.proposal_type === "work_in_progress"
+      ? "Work in progress"
+      : "Current topic / workshop";
+  body.append(
+    node("span", "poll-status", typeLabel),
+    node("h3", "", proposal.working_title),
+    node(
+      "p",
+      "moderation-meta",
+      `Submitted ${formatDate(proposal.created_at)} by ${proposal.submitter_name}`,
+    ),
+  );
+  const email = node("a", "text-link", proposal.contact_email);
+  email.href = `mailto:${proposal.contact_email}`;
+  body.append(email);
+
+  const details = node("dl", "session-proposal-details");
+  const fields =
+    proposal.proposal_type === "work_in_progress"
+      ? [
+          ["Project stage", proposal.project_stage],
+          ["Scientific question", proposal.scientific_question],
+          ["What they want from the session", proposal.session_goals],
+          ["What they may show", proposal.material_to_share],
+          [
+            "Discussion preference",
+            discussionPreferenceLabels[proposal.discussion_preference] ??
+              proposal.discussion_preference,
+          ],
+          ["Useful expertise", proposal.useful_expertise],
+          ["Sharing constraints", proposal.sharing_constraints],
+        ]
+      : [
+          ["Topic, method, or skill", proposal.topic_summary],
+          ["Why it is useful now", proposal.relevance],
+          ["Desired outcomes", proposal.desired_outcomes],
+          [
+            "Suggested format",
+            formatLabels[proposal.suggested_format] ?? proposal.suggested_format,
+          ],
+          ["Proposed lead", proposal.proposed_lead],
+          ["Preparation or access needs", proposal.preparation_notes],
+        ];
+  fields.forEach(([label, value]) => {
+    if (value) details.append(proposalDetail(label, value));
+  });
+  body.append(details);
+
+  const actions = node("div", "moderation-actions");
+  const action = node(
+    "button",
+    proposal.status === "archived" ? "text-button" : "button button-secondary",
+    proposal.status === "archived" ? "Restore" : "Archive",
+  );
+  action.type = "button";
+  action.addEventListener("click", async () => {
+    action.disabled = true;
+    const updated = await setProposalStatus(
+      proposal.id,
+      proposal.status === "archived" ? "active" : "archived",
+    );
+    if (!updated) action.disabled = false;
+  });
+  actions.append(action);
+  card.append(body, actions);
+  return card;
+}
+
+function renderSessionProposals() {
+  if (!sessionProposalList) return;
+  const showArchived = Boolean(showArchivedProposals?.checked);
+  const visible = showArchived
+    ? sessionProposals
+    : sessionProposals.filter((proposal) => proposal.status === "active");
+  sessionProposalList.replaceChildren(
+    ...(visible.length
+      ? visible.map(sessionProposalCard)
+      : [
+          node(
+            "p",
+            "empty-state",
+            showArchived
+              ? "No session proposals have been submitted yet."
+              : "No active session proposals are waiting.",
+          ),
+        ]),
+  );
 }
 
 async function setSuggestionStatus(id: string, status: Suggestion["status"]) {
@@ -85,7 +244,11 @@ function moderationCard(article: Suggestion) {
   const card = node("article", "moderation-card");
   const body = node("div");
   body.append(
-    node("span", "collection collection-priority", article.topic),
+    node(
+      "span",
+      `keyword-badge keyword-static ${keywordTone(article.topic)}`,
+      article.topic,
+    ),
     node("h3", "", article.title),
     node(
       "p",
@@ -201,6 +364,7 @@ async function loadWorkspace() {
   const [
     { data: articleData, error: articleError },
     { data: pollData, error: pollError },
+    { data: proposalData, error: proposalError },
   ] = await Promise.all([
     supabase
       .from("article_suggestions")
@@ -210,11 +374,21 @@ async function loadWorkspace() {
       .from("polls")
       .select("id,title,meeting_slot,closes_at,status,max_approvals")
       .order("created_at", { ascending: false }),
+    supabase
+      .from("session_proposals")
+      .select("*")
+      .order("created_at", { ascending: false }),
   ]);
-  if (articleError || pollError) throw articleError ?? pollError;
+  if (articleError || pollError || proposalError)
+    throw articleError ?? pollError ?? proposalError;
   suggestions = (articleData ?? []) as Suggestion[];
   const polls = (pollData ?? []) as Poll[];
+  sessionProposals = (proposalData ?? []) as SessionProposal[];
   const pending = suggestions.filter((article) => article.status === "pending");
+  setText(
+    "[data-proposal-count]",
+    String(sessionProposals.filter((proposal) => proposal.status === "active").length),
+  );
   setText("[data-pending-count]", String(pending.length));
   setText(
     "[data-queued-count]",
@@ -229,6 +403,7 @@ async function loadWorkspace() {
       ? pending.map(moderationCard)
       : [node("p", "empty-state", "Nothing is waiting for review.")]),
   );
+  renderSessionProposals();
   renderChoices();
   pollRegister?.replaceChildren(
     ...(polls.length
@@ -236,6 +411,8 @@ async function loadWorkspace() {
       : [node("p", "empty-state", "No polls have been created yet.")]),
   );
 }
+
+showArchivedProposals?.addEventListener("change", renderSessionProposals);
 
 async function updateSession(nextUser: User | null) {
   user = nextUser;
@@ -324,9 +501,10 @@ pollForm?.addEventListener("submit", async (event) => {
   }
   if (pollStatus) pollStatus.textContent = "Publishing the ballot…";
   const closesAt = new Date(String(data.get("closes_at"))).toISOString();
+  const meetingSlot = String(data.get("meeting_slot"));
   const { error } = await supabase.rpc("create_poll", {
-    p_title: String(data.get("title")),
-    p_meeting_slot: String(data.get("meeting_slot")),
+    p_title: formatSessionDate(meetingSlot),
+    p_meeting_slot: meetingSlot,
     p_closes_at: closesAt,
     p_max_approvals: Number(data.get("max_approvals")),
     p_article_ids: articleIds,

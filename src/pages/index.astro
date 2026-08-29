@@ -12,7 +12,7 @@ const today = new Date().toISOString().slice(0, 10);
 const futureIndex = schedule.findIndex((session) => session.date >= today);
 const nextIndex = futureIndex === -1 ? schedule.length - 1 : futureIndex;
 const nextSession = schedule[nextIndex];
-const previewSessions = schedule.slice(nextIndex + 1, nextIndex + 3);
+const previewSessions = schedule.slice(nextIndex, nextIndex + 3);
 const nextFeaturedReading =
   nextSession.type === "article"
     ? nextSession.readings.find((reading) => reading.title)
@@ -28,23 +28,21 @@ const locationLabel = site.location ?? "Location to be confirmed";
   <section class="hero shell">
     <div class="hero-copy">
       <p class="eyebrow">Emory Psychology · 2026–2027</p>
-      <h1>Emory Decision-Making<br /><em>Group.</em></h1>
+      <h1>Emory Decision-Making<br /><em>Megalab.</em></h1>
       <p class="lede">
         A biweekly meeting for presenting works in progress, reviewing practical methods,
         considering ideas that travel across labs, and discussing scientific articles.
       </p>
       <div class="button-row">
-        <a class="button button-primary" href={`${base}schedule/`}>Explore the schedule</a
-        >
+        <a class="button button-primary" href={`${base}propose/`}>Propose a Session</a>
+        <a class="button button-secondary" href={`${base}schedule/`}>View the schedule</a>
         <CalendarSubscription />
       </div>
       <p class="open-note"><span aria-hidden="true"></span> Open to Emory Psychology</p>
     </div>
     <aside class="next-card" aria-labelledby="next-session-title">
       <div class="card-kicker">
-        <span>Next session</span><span
-          >{String(nextIndex + 1).padStart(2, "0")} / {schedule.length}</span
-        >
+        <span>Next session</span><span>Meeting {nextIndex + 1} of {schedule.length}</span>
       </div>
       <div class="date-block">
         <strong>{nextDay}</strong><span
@@ -96,24 +94,22 @@ const locationLabel = site.location ?? "Location to be confirmed";
   <section class="schedule-preview shell">
     <div class="section-heading">
       <div>
-        <p class="eyebrow">Upcoming meetings</p>
-        <h2>A room for work<br />at every stage.</h2>
+        <h2>Upcoming meetings</h2>
       </div>
-      <p>
-        Six to seven meetings each semester, balanced across works in progress, article
-        discussions, methods, and emerging questions.
-      </p>
+      <a class="text-link" href={`${base}schedule/`}>View the full schedule →</a>
     </div>
     {
       previewSessions.map((session) => {
+        const isNextMeeting = session.id === nextSession.id;
         const featuredReading =
           session.type === "article"
             ? session.readings.find((reading) => reading.title)
             : undefined;
         return (
-          <div class="meeting-row">
+          <div class:list={["meeting-row", { "meeting-row-next": isNextMeeting }]}>
             <time datetime={session.date}>
               <>
+                {isNextMeeting && <span class="next-meeting-label">Next meeting</span>}
                 <strong>{formatDate(session.date)}</strong>
                 <span>{weekday(session.date)}</span>
               </>

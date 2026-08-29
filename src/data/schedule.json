@@ -4,8 +4,8 @@
     "date": "2026-09-11",
     "semester": "Fall 2026",
     "type": "community",
-    "typeLabel": "Community kickoff",
-    "title": "What should an Emory decision-making community be?",
+    "typeLabel": "EDM Megalab kickoff",
+    "title": "What should EDM Megalab be?",
     "description": "Brief introductions from the four core labs; map shared interests, methods, datasets, and opportunities; and choose priorities for the series.",
     "presenter": "Four core labs",
     "readings": []
@@ -17,7 +17,7 @@
     "type": "wip",
     "typeLabel": "Works in progress",
     "title": "WIP Session 1",
-    "description": "Two shorter presentations, ideally from different core labs, with emphasis on questions where group feedback can still change the work.",
+    "description": "Two shorter presentations, ideally from different core labs, with emphasis on questions where EDM Megalab feedback can still change the work.",
     "presenter": "Presenters to be announced",
     "readings": []
   },
@@ -81,7 +81,7 @@
     "type": "article",
     "typeLabel": "Article + year-end discussion",
     "title": "Sources of decision variability: latent states, noise, and mechanism",
-    "description": "Variability, latent states, and mechanism—plus a springboard for choosing the group’s spring priorities.",
+    "description": "Variability, latent states, and mechanism—plus a springboard for choosing EDM Megalab’s spring priorities.",
     "presenter": "Discussion leader to be announced",
     "readings": [
       {

@@ -41,8 +41,9 @@ export interface Session {
 
 export interface Reading {
   id: string;
-  group: "priority" | "methods" | "reserve";
-  topic: string;
+  keywords: string[];
+  presented: boolean;
+  presentedOn?: string;
   title: string;
   authors: string;
   year: number;
