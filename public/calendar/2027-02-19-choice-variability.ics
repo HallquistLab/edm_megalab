@@ -3,7 +3,8 @@ VERSION:2.0
 PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Decision variability and psychopathology
+X-WR-CALNAME:Compulsivity\, choice variability\, and computational phenot
+ ypes
 X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
@@ -12,8 +13,8 @@ UID:2027-02-19-choice-variability@edm-megalab.emory.edu
 DTSTAMP:20260829T120000Z
 DTSTART;VALUE=DATE:20270219
 DTEND;VALUE=DATE:20270220
-SUMMARY:Decision variability and psychopathology — Emory Decision-Making 
- Megalab
+SUMMARY:Compulsivity\, choice variability\, and computational phenotypes 
+ — Emory Decision-Making Megalab
 DESCRIPTION:Article discussion. Separate variability in learning from var
  iability in choice\, and ask what would make a computational phenotype c
  linically meaningful. Featured article: Compulsivity is linked to subopt

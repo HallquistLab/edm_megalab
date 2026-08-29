@@ -963,42 +963,8 @@ h1 em {
   text-decoration-thickness: 1px;
   text-underline-offset: 5px;
 }
-.pairings {
-  padding-block: 110px 130px;
-}
 .compact-heading {
   margin-bottom: 55px;
-}
-.pairing-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-.pairing-list article {
-  min-height: 240px;
-  padding: 28px;
-  border-right: 1px solid var(--line);
-}
-.pairing-list article:last-child {
-  border-right: 0;
-}
-.pairing-list span {
-  color: var(--orange);
-  font-size: 10px;
-  font-weight: 800;
-}
-.pairing-list h3 {
-  margin: 46px 0 16px;
-  font-family: var(--serif);
-  font-size: 25px;
-  line-height: 1.08;
-  font-weight: 400;
-}
-.pairing-list p {
-  color: var(--muted);
-  font-size: 11px;
-  line-height: 1.5;
 }
 
 .materials-grid {
@@ -1918,20 +1884,6 @@ footer > div {
   }
   .reading-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-  .pairing-list {
-    grid-template-columns: 1fr;
-  }
-  .pairing-list article {
-    min-height: 190px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-  .pairing-list article:last-child {
-    border-bottom: 0;
-  }
-  .pairing-list h3 {
-    margin-top: 30px;
   }
   .feature-material {
     grid-template-columns: 100px 1fr;
