@@ -1,5 +1,6 @@
 import { isSupabaseConfigured, supabase } from "../lib/supabase";
 import type { User } from "@supabase/supabase-js";
+import { formatSessionDate } from "../lib/dates";
 import { showActionFeedback } from "./feedback";
 
 type Suggestion = {
@@ -31,6 +32,7 @@ const select = <T extends Element>(selector: string) =>
   document.querySelector<T>(selector);
 
 const status = select<HTMLElement>("[data-queue-status]");
+const ballotSection = select<HTMLElement>("[data-ballot-section]");
 const ballotGrid = select<HTMLElement>("[data-ballot-grid]");
 const queueList = select<HTMLElement>("[data-queue-list]");
 const ballotNote = select<HTMLElement>("[data-ballot-note]");
@@ -135,7 +137,9 @@ function renderBallot() {
   ballotGrid.replaceChildren(
     ...currentOptions.map((option, index) => ballotCard(option, index)),
   );
-  if (pollEyebrow) pollEyebrow.textContent = `Current poll · ${currentPoll.meeting_slot}`;
+  if (pollEyebrow) {
+    pollEyebrow.textContent = `Session date: ${formatSessionDate(currentPoll.meeting_slot)}`;
+  }
   if (pollTitle) pollTitle.textContent = currentPoll.title;
   if (pollLimit) pollLimit.textContent = `Up to ${currentPoll.max_approvals} votes`;
   if (pollInstructions) {
@@ -146,6 +150,7 @@ function renderBallot() {
       ? `${currentVotes.size} of ${currentPoll.max_approvals} votes selected · Results update immediately`
       : `Poll closes ${friendlyDate(currentPoll.closes_at)} · Sign in to vote`;
   }
+  if (ballotSection) ballotSection.hidden = false;
 }
 
 async function loadQueue() {
@@ -187,9 +192,12 @@ async function loadPoll() {
     .maybeSingle();
   if (pollError) throw pollError;
   if (!poll) {
-    if (ballotNote)
-      ballotNote.textContent =
-        "No live ballot right now · Check back before the next article-discussion meeting.";
+    currentPoll = null;
+    currentOptions = [];
+    currentVotes.clear();
+    tallies.clear();
+    ballotGrid?.replaceChildren();
+    if (ballotSection) ballotSection.hidden = true;
     return;
   }
   currentPoll = poll as Poll;

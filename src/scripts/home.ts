@@ -1,4 +1,5 @@
 import { isSupabaseConfigured, supabase } from "../lib/supabase";
+import { formatSessionDate } from "../lib/dates";
 
 type ActivePoll = {
   title: string;
@@ -37,7 +38,7 @@ async function showActivePoll() {
   const poll = data as ActivePoll;
   if (pollName) pollName.textContent = poll.title;
   if (pollMeta) {
-    pollMeta.textContent = `${poll.meeting_slot} · Choose up to ${poll.max_approvals} · Closes ${friendlyDeadline(poll.closes_at)}`;
+    pollMeta.textContent = `Session date: ${formatSessionDate(poll.meeting_slot)} · Choose up to ${poll.max_approvals} · Closes ${friendlyDeadline(poll.closes_at)}`;
   }
   banner.hidden = false;
 }

@@ -1,5 +1,6 @@
 import { isSupabaseConfigured, supabase } from "../lib/supabase";
 import type { User } from "@supabase/supabase-js";
+import { formatSessionDate } from "../lib/dates";
 import { showActionFeedback } from "./feedback";
 
 type Suggestion = {
@@ -164,7 +165,7 @@ function pollRow(poll: Poll) {
     node(
       "p",
       "",
-      `${poll.meeting_slot} · closes ${formatDate(poll.closes_at)} · up to ${poll.max_approvals} votes`,
+      `Session date: ${formatSessionDate(poll.meeting_slot)} · closes ${formatDate(poll.closes_at)} · up to ${poll.max_approvals} votes`,
     ),
   );
   if (poll.status === "open") {
