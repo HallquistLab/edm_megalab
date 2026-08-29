@@ -148,7 +148,7 @@ function pollRow(poll: Poll) {
     node(
       "p",
       "",
-      `${poll.meeting_slot} · closes ${formatDate(poll.closes_at)} · up to ${poll.max_approvals}`,
+      `${poll.meeting_slot} · closes ${formatDate(poll.closes_at)} · up to ${poll.max_approvals} votes`,
     ),
   );
   if (poll.status === "open") {

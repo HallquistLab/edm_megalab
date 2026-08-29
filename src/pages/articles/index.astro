@@ -17,7 +17,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   <PageIntro
     eyebrow="Article queue · Shaped by the group"
     title="What should we read next?"
-    intro="Add a paper when it feels worth the group’s time. Coordinators can turn a short list into an approval ballot for a future meeting."
+    intro="Add a paper when it feels worth the group’s time. Coordinators can turn a short list into a poll for a future meeting."
     compact
   />
 
@@ -125,13 +125,13 @@ const base = import.meta.env.BASE_URL.endsWith("/")
       <header class="ballot-heading">
         <div>
           <p class="eyebrow" data-poll-eyebrow>Preview poll · Fall 2026</p>
-          <h2 data-poll-title>Approve up to three<br /><em>for the meeting.</em></h2>
+          <h2 data-poll-title>Vote for up to three<br /><em>articles.</em></h2>
         </div>
         <div class="ballot-instructions">
-          <span data-poll-limit>Up to three approvals</span>
+          <span data-poll-limit>Up to three votes</span>
           <p data-poll-instructions>
-            Select every paper you would genuinely like to discuss, up to the ballot’s
-            three-choice limit. You may change your choices until the poll closes.
+            Vote for every paper you would genuinely like to discuss, up to three. You may
+            change your votes until the poll closes.
           </p>
         </div>
       </header>
@@ -142,7 +142,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
               <div class="ballot-card-top">
                 <span>{String(index + 1).padStart(2, "0")}</span>
                 <span class="vote-count">
-                  <strong>{[8, 6, 4][index]}</strong> approvals
+                  <strong>{[8, 6, 4][index]}</strong> votes
                 </span>
               </div>
               <div>
@@ -156,14 +156,14 @@ const base = import.meta.env.BASE_URL.endsWith("/")
                 Read paper <span aria-hidden="true">↗</span>
               </a>
               <button type="button" disabled>
-                Sign in to approve
+                Sign in to vote
               </button>
             </article>
           ))
         }
       </div>
       <p class="demo-note" data-ballot-note>
-        Preview approval ballot · Live results appear when Supabase is connected.
+        Preview poll · Live results appear when Supabase is connected.
       </p>
     </div>
   </section>
@@ -222,9 +222,9 @@ const base = import.meta.env.BASE_URL.endsWith("/")
         </li>
         <li>
           <span>03</span><div>
-            <h2>Approve</h2><p>
-              Members choose up to three papers they would genuinely like to discuss. The
-              database enforces the limit for every ballot.
+            <h2>Vote</h2><p>
+              Members vote for up to three papers they would genuinely like to discuss.
+              The database enforces the limit for every ballot.
             </p>
           </div>
         </li>

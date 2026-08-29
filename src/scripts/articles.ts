@@ -102,7 +102,7 @@ function ballotCard(option: PollOption, index: number) {
   const total = tallies.get(article.id) ?? 0;
   count.append(
     node("strong", "", String(total)),
-    document.createTextNode(` approval${total === 1 ? "" : "s"}`),
+    document.createTextNode(` vote${total === 1 ? "" : "s"}`),
   );
   top.append(node("span", "", String(index + 1).padStart(2, "0")), count);
 
@@ -119,7 +119,7 @@ function ballotCard(option: PollOption, index: number) {
   const vote = node(
     "button",
     "",
-    approved ? "Approved ✓" : currentUser ? "Approve this paper" : "Sign in to approve",
+    approved ? "Voted ✓" : currentUser ? "Vote for this paper" : "Sign in to vote",
   );
   vote.type = "button";
   vote.disabled = !currentUser;
@@ -136,13 +136,13 @@ function renderBallot() {
   );
   if (pollEyebrow) pollEyebrow.textContent = `Current poll · ${currentPoll.meeting_slot}`;
   if (pollTitle) pollTitle.textContent = currentPoll.title;
-  if (pollLimit) pollLimit.textContent = `Up to ${currentPoll.max_approvals} approvals`;
+  if (pollLimit) pollLimit.textContent = `Up to ${currentPoll.max_approvals} votes`;
   if (pollInstructions) {
-    pollInstructions.textContent = `Choose up to ${currentPoll.max_approvals} articles. You may change your ballot until ${friendlyDate(currentPoll.closes_at)}.`;
+    pollInstructions.textContent = `Vote for up to ${currentPoll.max_approvals} articles. You may change your votes until ${friendlyDate(currentPoll.closes_at)}.`;
   }
   if (ballotNote) {
     ballotNote.textContent = currentUser
-      ? `${currentVotes.size} of ${currentPoll.max_approvals} approvals selected · Results update immediately`
+      ? `${currentVotes.size} of ${currentPoll.max_approvals} votes selected · Results update immediately`
       : `Poll closes ${friendlyDate(currentPoll.closes_at)} · Sign in to vote`;
   }
 }
