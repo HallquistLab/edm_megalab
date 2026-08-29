@@ -586,6 +586,12 @@ h1 em {
   font-size: clamp(19px, 2vw, 25px);
   line-height: 1.48;
 }
+.page-intro-single h1 {
+  max-width: none;
+  margin: 0;
+  font-size: clamp(30px, 6.6vw, 96px);
+  white-space: nowrap;
+}
 .schedule-tools,
 .reading-tools {
   display: flex;
