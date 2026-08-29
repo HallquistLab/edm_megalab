@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import PageIntro from "../../components/PageIntro.astro";
+import { formatDate, schedule, weekday } from "../../lib/content";
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+const meetingsNewestFirst = [...schedule].reverse();
 ---
 
 <BaseLayout
@@ -11,32 +13,105 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   description="Workshop, discussion, and meeting materials from the Emory Decision-Making Megalab."
 >
   <PageIntro
-    eyebrow="Materials · A growing archive"
-    title="Useful after the room empties."
-    intro="The presenter guide is available now. Public workshop resources will collect here as they are confirmed and completed."
+    eyebrow="Materials · Meeting archive"
+    title="Pick up where the room left off."
+    intro="Completed meetings live here with their original context, readings, and any public slides, notes, code, or recordings."
   />
 
-  <section class="materials-grid shell">
-    <article class="material-card">
-      <span class="material-number">01</span>
+  <section class="meeting-archive shell" aria-labelledby="meeting-archive-title">
+    <div class="meeting-section-heading">
       <div>
-        <span class="tag tag-wip">Presenter guide</span>
-        <h2>Sharing works in progress</h2>
-        <p>
-          A friendly guide to bringing unfinished work, setting focal questions, and
-          making feedback useful.
-        </p>
+        <p class="eyebrow">Completed meetings</p>
+        <h2 id="meeting-archive-title">The record grows meeting by meeting.</h2>
       </div>
+      <p>
+        Open a meeting to recover what it was about and find every resource shared with
+        the group. Meetings are ordered newest first.
+      </p>
+    </div>
+
+    <div class="archive-list" data-archive-list data-archive-ready="false">
+      {
+        meetingsNewestFirst.map((session) => {
+          const resources = [
+            ...session.readings.map((reading) => ({
+              label: "Reading",
+              title: reading.title ?? reading.label,
+              url: reading.url,
+            })),
+            ...(session.materials ?? []).map((material) => ({
+              label: material.label,
+              title: material.title,
+              url: material.url,
+            })),
+          ];
+          return (
+            <article
+              class="archive-meeting"
+              data-archive-meeting
+              data-date={session.date}
+              hidden
+            >
+              <time datetime={session.date}>
+                <strong>{formatDate(session.date, { year: "numeric" })}</strong>
+                <span>{weekday(session.date)}</span>
+              </time>
+              <div class="archive-meeting-main">
+                <span class={`tag tag-${session.type}`}>{session.typeLabel}</span>
+                <h3>
+                  <a href={`${base}meetings/${session.id}/`}>{session.title}</a>
+                </h3>
+                <p>{session.description}</p>
+                {resources.length > 0 ? (
+                  <ul class="archive-resource-links" aria-label="Linked resources">
+                    {resources.map((resource) => (
+                      <li>
+                        <a href={resource.url}>
+                          <span>{resource.label}</span>
+                          {resource.title} ↗
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p class="archive-no-resources">No public materials posted yet.</p>
+                )}
+              </div>
+              <a class="archive-meeting-link" href={`${base}meetings/${session.id}/`}>
+                View meeting →
+              </a>
+            </article>
+          );
+        })
+      }
+      <div class="archive-empty" data-archive-empty>
+        <span class="material-number">01</span>
+        <div>
+          <p class="eyebrow">The archive is ready</p>
+          <h3>No meetings have happened yet.</h3>
+          <p>
+            After the first session, completed meetings will appear here automatically
+            with their readings and any public materials.
+          </p>
+          <a href={`${base}schedule/`}>See the upcoming schedule →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="standing-resources shell" aria-labelledby="standing-resources-title">
+    <div>
+      <p class="eyebrow">Standing resources</p>
+      <h2 id="standing-resources-title">Useful before the meeting starts.</h2>
+    </div>
+    <article class="standing-resource-card">
+      <span class="tag tag-wip">Presenter guide</span>
+      <h3>Sharing works in progress</h3>
+      <p>
+        A friendly guide to bringing unfinished work, setting focal questions, and making
+        feedback useful.
+      </p>
       <a href={`${base}wip-guide/`}>Read the guide →</a>
-    </article>
-    <article class="material-card material-placeholder">
-      <span class="material-number">02</span>
-      <div>
-        <span class="tag tag-methods">Workshop archive</span>
-        <h2>Methods notebooks and slides</h2>
-        <p>Public materials will appear here as workshops are confirmed and completed.</p>
-      </div>
-      <span>Coming fall 2026</span>
     </article>
   </section>
 
@@ -56,4 +131,22 @@ const base = import.meta.env.BASE_URL.endsWith("/")
       </p>
     </div>
   </section>
+
+  <script>
+    const archive = document.querySelector<HTMLElement>("[data-archive-list]");
+    const meetings = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-archive-meeting]"),
+    );
+    const empty = document.querySelector<HTMLElement>("[data-archive-empty]");
+    const now = new Date();
+    const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+    let completedCount = 0;
+    meetings.forEach((meeting) => {
+      const isPast = (meeting.dataset.date ?? "") < today;
+      meeting.hidden = !isPast;
+      if (isPast) completedCount += 1;
+    });
+    if (empty) empty.hidden = completedCount > 0;
+    if (archive) archive.dataset.archiveReady = "true";
+  </script>
 </BaseLayout>

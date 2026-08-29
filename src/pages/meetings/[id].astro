@@ -1,0 +1,189 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, schedule, weekday } from "../../lib/content";
+import type { Session } from "../../types";
+
+export function getStaticPaths() {
+  return schedule.map((session) => ({
+    params: { id: session.id },
+    props: { session },
+  }));
+}
+
+interface Props {
+  session: Session;
+}
+
+const { session } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const currentIndex = schedule.findIndex((item) => item.id === session.id);
+const previousSession = currentIndex > 0 ? schedule[currentIndex - 1] : undefined;
+const nextSession =
+  currentIndex < schedule.length - 1 ? schedule[currentIndex + 1] : undefined;
+const resources = [
+  ...session.readings.map((reading) => ({
+    type: "Reading",
+    title: reading.title ?? reading.label,
+    label: reading.label,
+    url: reading.url,
+    description:
+      reading.authors && reading.journal
+        ? `${reading.authors} · ${reading.journal}${reading.year ? ` · ${reading.year}` : ""}`
+        : undefined,
+  })),
+  ...(session.materials ?? []).map((material) => ({
+    type: material.label,
+    title: material.title,
+    label: material.label,
+    url: material.url,
+    description: material.description,
+  })),
+];
+---
+
+<BaseLayout
+  title={session.title}
+  description={`${formatDate(session.date, { year: "numeric" })}: ${session.description}`}
+  socialImage={null}
+  pageType="article"
+>
+  <header class="meeting-hero shell">
+    <a class="breadcrumb" href={`${base}schedule/`}>← Schedule</a>
+    <div class="meeting-hero-grid">
+      <div>
+        <div class="meeting-heading-meta">
+          <span class={`tag tag-${session.type}`}>{session.typeLabel}</span>
+          <span class="meeting-status" data-meeting-status data-date={session.date}
+            >Scheduled</span
+          >
+        </div>
+        <h1>{session.title}</h1>
+      </div>
+      <dl class="meeting-facts">
+        <div>
+          <dt>Date</dt>
+          <dd>
+            <time datetime={session.date}>
+              {weekday(session.date)}, {formatDate(session.date, { year: "numeric" })}
+            </time>
+          </dd>
+        </div>
+        <div>
+          <dt>Lead</dt>
+          <dd>{session.presenter}</dd>
+        </div>
+      </dl>
+    </div>
+  </header>
+
+  <div class="meeting-record shell">
+    <section class="meeting-overview" aria-labelledby="meeting-overview-title">
+      <p class="eyebrow">Meeting overview</p>
+      <h2 id="meeting-overview-title">What we’re gathering to discuss.</h2>
+      <p>{session.description}</p>
+      <a class="calendar-link" href={`${base}calendar/${session.id}.ics`}>
+        Add to calendar
+      </a>
+    </section>
+
+    <section class="meeting-resources" aria-labelledby="meeting-resources-title">
+      <div class="meeting-section-heading">
+        <div>
+          <p class="eyebrow">Meeting materials</p>
+          <h2 id="meeting-resources-title">
+            {
+              resources.length > 0
+                ? "Readings and shared resources."
+                : "Materials will live here."
+            }
+          </h2>
+        </div>
+        <p>
+          Public slides, notes, code, recordings, and readings stay attached to this
+          meeting so the context is easy to recover later.
+        </p>
+      </div>
+
+      {
+        resources.length > 0 ? (
+          <div class="resource-grid">
+            {resources.map((resource, index) => (
+              <a class="resource-card" href={resource.url}>
+                <span class="resource-number">{String(index + 1).padStart(2, "0")}</span>
+                <span class="resource-kind">{resource.type}</span>
+                <h3>{resource.title}</h3>
+                {resource.description && <p>{resource.description}</p>}
+                <span class="resource-action">Open resource ↗</span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <div class="resource-empty" data-resource-empty data-date={session.date}>
+            <p class="eyebrow">Nothing public yet</p>
+            <h3 data-resource-empty-title>Materials will be added after the meeting.</h3>
+            <p data-resource-empty-copy>
+              When public resources are ready, they will appear here and in the materials
+              archive.
+            </p>
+          </div>
+        )
+      }
+    </section>
+
+    <nav class="meeting-pagination" aria-label="Adjacent meetings">
+      {
+        previousSession ? (
+          <a href={`${base}meetings/${previousSession.id}/`}>
+            <span>← Previous meeting</span>
+            <strong>{previousSession.title}</strong>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        nextSession ? (
+          <a href={`${base}meetings/${nextSession.id}/`}>
+            <span>Next meeting →</span>
+            <strong>{nextSession.title}</strong>
+          </a>
+        ) : (
+          <a href={`${base}schedule/`}>
+            <span>Back to</span>
+            <strong>Full schedule</strong>
+          </a>
+        )
+      }
+    </nav>
+  </div>
+
+  <script>
+    const localDate = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    };
+    const today = localDate();
+    const status = document.querySelector<HTMLElement>("[data-meeting-status]");
+    if (status) {
+      const isPast = (status.dataset.date ?? "") < today;
+      status.textContent = isPast ? "Completed" : "Scheduled";
+      status.classList.toggle("is-complete", isPast);
+    }
+
+    const empty = document.querySelector<HTMLElement>("[data-resource-empty]");
+    if (empty && (empty.dataset.date ?? "") < today) {
+      const title = empty.querySelector<HTMLElement>("[data-resource-empty-title]");
+      const copy = empty.querySelector<HTMLElement>("[data-resource-empty-copy]");
+      if (title) title.textContent = "No public materials have been posted yet.";
+      if (copy) {
+        copy.textContent =
+          "If resources from this meeting are shared later, they will appear here automatically.";
+      }
+    }
+  </script>
+</BaseLayout>

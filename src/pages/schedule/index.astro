@@ -7,7 +7,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const filters = [
-  ["all", "All sessions"],
+  ["all", "All types"],
   ["wip", "Works in progress"],
   ["article", "Articles"],
   ["methods", "Methods"],
@@ -24,24 +24,40 @@ const filters = [
   </header>
 
   <section class="schedule-tools shell" aria-label="Schedule tools">
-    <div class="filter-bar" role="group" aria-label="Filter meetings by type">
-      {
-        filters.map(([value, label], index) => (
-          <button
-            class:list={{ active: index === 0 }}
-            type="button"
-            data-filter={value}
-            aria-pressed={index === 0 ? "true" : "false"}
-          >
-            {label}
-          </button>
-        ))
-      }
+    <div>
+      <div class="schedule-view-switch" role="group" aria-label="Choose meetings to show">
+        <button class="active" type="button" data-view="upcoming" aria-pressed="true">
+          Upcoming
+        </button>
+        <button type="button" data-view="past" aria-pressed="false">
+          Past meetings
+        </button>
+        <button type="button" data-view="all" aria-pressed="false">
+          Full schedule
+        </button>
+      </div>
+      <div class="filter-bar" role="group" aria-label="Filter meetings by type">
+        {
+          filters.map(([value, label], index) => (
+            <button
+              class:list={{ active: index === 0 }}
+              type="button"
+              data-filter={value}
+              aria-pressed={index === 0 ? "true" : "false"}
+            >
+              {label}
+            </button>
+          ))
+        }
+      </div>
     </div>
     <CalendarSubscription />
   </section>
 
-  <div class="agenda shell" data-agenda>
+  <div class="agenda shell" id="past-meetings" data-agenda>
+    <p class="schedule-view-note" data-view-note aria-live="polite">
+      Showing upcoming meetings.
+    </p>
     {
       (["Fall 2026", "Spring 2027"] as const).map((semester) => (
         <section class="semester" data-semester={semester}>
@@ -64,6 +80,7 @@ const filters = [
                   class:list={["agenda-item", { "agenda-item-article": featuredReading }]}
                   id={session.id}
                   data-type={session.type}
+                  data-date={session.date}
                   aria-labelledby={`${session.id}-title`}
                 >
                   <time datetime={session.date}>
@@ -72,7 +89,9 @@ const filters = [
                   </time>
                   <div class="agenda-main">
                     <span class={`tag tag-${session.type}`}>{session.typeLabel}</span>
-                    <h3 id={`${session.id}-title`}>{session.title}</h3>
+                    <h3 id={`${session.id}-title`}>
+                      <a href={`${base}meetings/${session.id}/`}>{session.title}</a>
+                    </h3>
                     <p>{session.description}</p>
                     {featuredReading && (
                       <a class="featured-reading" href={featuredReading.url}>
@@ -106,24 +125,37 @@ const filters = [
                       </p>
                     ) : (
                       <p>
-                        <span>Materials</span>To be added
+                        <span>Meeting record</span>
+                        <a href={`${base}meetings/${session.id}/`}>
+                          {session.readings.length + (session.materials?.length ?? 0) > 0
+                            ? `${session.readings.length + (session.materials?.length ?? 0)} linked ${session.readings.length + (session.materials?.length ?? 0) === 1 ? "resource" : "resources"}`
+                            : "View meeting"}
+                        </a>
                       </p>
                     )}
                   </div>
-                  <a
-                    class="calendar-link"
-                    href={`${base}calendar/${session.id}.ics`}
-                    aria-label={`Add ${session.title} to your calendar`}
-                  >
-                    Add to calendar
-                  </a>
+                  <div class="agenda-actions">
+                    <a class="meeting-link" href={`${base}meetings/${session.id}/`}>
+                      View meeting
+                    </a>
+                    <a
+                      class="calendar-link"
+                      href={`${base}calendar/${session.id}.ics`}
+                      aria-label={`Add ${session.title} to your calendar`}
+                    >
+                      Add to calendar
+                    </a>
+                  </div>
                 </article>
               );
             })}
         </section>
       ))
     }
-    <p class="empty-state" hidden>No sessions match this filter.</p>
+    <div class="empty-state schedule-empty" hidden data-schedule-empty>
+      <h2 data-empty-title>No upcoming meetings match.</h2>
+      <p data-empty-copy>Try another meeting type or view the full schedule.</p>
+    </div>
   </div>
 
   <section class="cta-band">
@@ -141,34 +173,130 @@ const filters = [
   </section>
 
   <script>
-    const buttons = Array.from(
+    const filterButtons = Array.from(
       document.querySelectorAll<HTMLButtonElement>("[data-filter]"),
+    );
+    const viewButtons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-view]"),
     );
     const items = Array.from(document.querySelectorAll<HTMLElement>(".agenda-item"));
     const semesters = Array.from(
       document.querySelectorAll<HTMLElement>("[data-semester]"),
     );
-    const empty = document.querySelector<HTMLElement>(".empty-state");
+    const agenda = document.querySelector<HTMLElement>("[data-agenda]");
+    const empty = document.querySelector<HTMLElement>("[data-schedule-empty]");
+    const emptyTitle = document.querySelector<HTMLElement>("[data-empty-title]");
+    const emptyCopy = document.querySelector<HTMLElement>("[data-empty-copy]");
+    const viewNote = document.querySelector<HTMLElement>("[data-view-note]");
+    let selectedFilter = "all";
+    let selectedView = window.location.hash === "#past-meetings" ? "past" : "upcoming";
 
-    buttons.forEach((button) => {
+    const localDate = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    };
+
+    const refreshSchedule = () => {
+      const today = localDate();
+      items.forEach((item) => {
+        const isPast = (item.dataset.date ?? "") < today;
+        const matchesView =
+          selectedView === "all" || (selectedView === "past" ? isPast : !isPast);
+        const matchesFilter =
+          selectedFilter === "all" || item.dataset.type === selectedFilter;
+        item.hidden = !matchesView || !matchesFilter;
+      });
+
+      semesters.forEach((semester) => {
+        const semesterItems = Array.from(
+          semester.querySelectorAll<HTMLElement>(".agenda-item"),
+        );
+        semesterItems
+          .sort((a, b) => {
+            const direction = selectedView === "past" ? -1 : 1;
+            return (a.dataset.date ?? "").localeCompare(b.dataset.date ?? "") * direction;
+          })
+          .forEach((item) => semester.append(item));
+        const visibleCount = semesterItems.filter((item) => !item.hidden).length;
+        semester.hidden = visibleCount === 0;
+        const count = semester.querySelector<HTMLElement>(".semester-heading span");
+        if (count)
+          count.textContent = `${visibleCount} ${visibleCount === 1 ? "session" : "sessions"}`;
+      });
+
+      if (agenda) {
+        [...semesters]
+          .sort((a, b) => {
+            const aDates = Array.from(
+              a.querySelectorAll<HTMLElement>(".agenda-item"),
+            ).map((item) => item.dataset.date ?? "");
+            const bDates = Array.from(
+              b.querySelectorAll<HTMLElement>(".agenda-item"),
+            ).map((item) => item.dataset.date ?? "");
+            const aDate = selectedView === "past" ? aDates.at(-1) : aDates[0];
+            const bDate = selectedView === "past" ? bDates.at(-1) : bDates[0];
+            const direction = selectedView === "past" ? -1 : 1;
+            return (aDate ?? "").localeCompare(bDate ?? "") * direction;
+          })
+          .forEach((semester) => agenda.append(semester));
+        if (empty) agenda.append(empty);
+      }
+
+      viewButtons.forEach((button) => {
+        const active = button.dataset.view === selectedView;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+
+      const hasVisibleItems = items.some((item) => !item.hidden);
+      if (empty) empty.hidden = hasVisibleItems;
+      if (viewNote) {
+        viewNote.textContent =
+          selectedView === "past"
+            ? "Past meetings are shown newest first. Each meeting opens to its readings and shared materials."
+            : selectedView === "all"
+              ? "Showing the full 2026–2027 schedule."
+              : "Showing upcoming meetings.";
+      }
+      if (!hasVisibleItems && emptyTitle && emptyCopy) {
+        if (selectedView === "past" && selectedFilter === "all") {
+          emptyTitle.textContent = "No meetings have happened yet.";
+          emptyCopy.textContent =
+            "Completed meetings will collect here automatically, with their readings and public materials attached.";
+        } else {
+          emptyTitle.textContent = `No ${selectedView === "past" ? "past" : "upcoming"} meetings match.`;
+          emptyCopy.textContent = "Try another meeting type or view the full schedule.";
+        }
+      }
+    };
+
+    filterButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        const selected = button.dataset.filter;
-        buttons.forEach((item) => {
+        selectedFilter = button.dataset.filter ?? "all";
+        filterButtons.forEach((item) => {
           const active = item === button;
           item.classList.toggle("active", active);
           item.setAttribute("aria-pressed", String(active));
         });
-        items.forEach((item) => {
-          item.hidden = selected !== "all" && item.dataset.type !== selected;
-        });
-        semesters.forEach((semester) => {
-          const hasVisibleItems = Array.from(
-            semester.querySelectorAll<HTMLElement>(".agenda-item"),
-          ).some((item) => !item.hidden);
-          semester.hidden = !hasVisibleItems;
-        });
-        if (empty) empty.hidden = items.some((item) => !item.hidden);
+        refreshSchedule();
       });
     });
+
+    viewButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        selectedView = button.dataset.view ?? "upcoming";
+        if (selectedView === "past") {
+          window.history.replaceState(null, "", "#past-meetings");
+        } else if (window.location.hash === "#past-meetings") {
+          window.history.replaceState(null, "", window.location.pathname);
+        }
+        refreshSchedule();
+      });
+    });
+
+    refreshSchedule();
   </script>
 </BaseLayout>

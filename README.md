@@ -4,11 +4,27 @@ A content-driven Astro website for coordinating the Emory Decision-Making Joint 
 
 ## Routine updates
 
-- **Meeting dates and details:** edit [`src/data/schedule.json`](src/data/schedule.json).
+- **Meeting dates, details, and public materials:** edit [`src/data/schedule.json`](src/data/schedule.json). Each meeting has a permanent page; after its date passes, it appears automatically under **Past meetings** and in the **Materials** archive.
 - **Default time, location, and calendar behavior:** edit [`src/data/site.json`](src/data/site.json).
 - **Reading room:** edit [`src/data/readings.json`](src/data/readings.json).
 - **Article queue and ballot:** members submit and vote on the site; coordinators moderate at `/admin/`. Supabase stores the live queue and ballots.
-- **Workshop and discussion archive:** add public links in [`src/pages/materials/index.astro`](src/pages/materials/index.astro). Keep sensitive WIP material in a private Emory location.
+- **Standing resources:** edit [`src/pages/materials/index.astro`](src/pages/materials/index.astro). Keep sensitive WIP material in a private Emory location.
+
+To attach a public resource to a meeting, add a `materials` array to that meeting in `schedule.json`:
+
+```json
+"materials": [
+  {
+    "type": "slides",
+    "label": "Slides",
+    "title": "Workshop slides",
+    "url": "https://example.com/slides",
+    "description": "Optional short context for the resource"
+  }
+]
+```
+
+Supported material types are `slides`, `notes`, `code`, `recording`, `handout`, `dataset`, and `other`. Existing meeting `readings` are included on the meeting page and in the archive automatically.
 
 Local planning documents belong in the ignored `documentation/` folder. Do not link to or commit that folder; move only deliberately public material into the site source.
 

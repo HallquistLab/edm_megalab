@@ -9,6 +9,23 @@ export interface ReadingLink {
   year?: number;
 }
 
+export type MaterialType =
+  | "slides"
+  | "notes"
+  | "code"
+  | "recording"
+  | "handout"
+  | "dataset"
+  | "other";
+
+export interface MaterialLink {
+  type: MaterialType;
+  label: string;
+  title: string;
+  url: string;
+  description?: string;
+}
+
 export interface Session {
   id: string;
   date: string;
@@ -19,6 +36,7 @@ export interface Session {
   description: string;
   presenter: string;
   readings: ReadingLink[];
+  materials?: MaterialLink[];
 }
 
 export interface Reading {

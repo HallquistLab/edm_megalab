@@ -4,11 +4,15 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  socialImage?: string | null;
+  pageType?: "website" | "article";
 }
 
 const {
   title = "Emory Decision-Making Megalab",
   description = "A joint forum for unfinished science, practical methods, and conversation across Emory decision-making labs.",
+  socialImage = "https://hallquistlab.github.io/edm_megalab/og.png",
+  pageType = "website",
 } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
@@ -18,17 +22,17 @@ const pageTitle =
     ? title
     : `${title} · Emory Decision-Making Megalab`;
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
-const socialImage = "https://hallquistlab.github.io/edm_megalab/og.png";
 const navItems = [
-  { label: "Schedule", path: "schedule/" },
-  { label: "Article queue", path: "articles/" },
-  { label: "Reading room", path: "readings/" },
-  { label: "Materials", path: "materials/" },
+  { label: "Schedule", path: "schedule/", matches: ["schedule/", "meetings/"] },
+  { label: "Article queue", path: "articles/", matches: ["articles/"] },
+  { label: "Reading room", path: "readings/", matches: ["readings/"] },
+  { label: "Materials", path: "materials/", matches: ["materials/"] },
 ];
-const isCurrent = (path: string) => {
-  const target = `${base}${path}`;
-  return Astro.url.pathname === target || Astro.url.pathname.startsWith(target);
-};
+const isCurrent = (matches: string[]) =>
+  matches.some((path) => {
+    const target = `${base}${path}`;
+    return Astro.url.pathname === target || Astro.url.pathname.startsWith(target);
+  });
 ---
 
 <!doctype html>
@@ -39,19 +43,25 @@ const isCurrent = (path: string) => {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#f5f0e7" />
     <link rel="canonical" href={canonicalUrl} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={socialImage} />
-    <meta
-      property="og:image:alt"
-      content="Emory Decision-Making Megalab — Better science, while it’s still in motion."
-    />
-    <meta name="twitter:card" content="summary_large_image" />
+    {
+      socialImage && (
+        <>
+          <meta property="og:image" content={socialImage} />
+          <meta
+            property="og:image:alt"
+            content="Emory Decision-Making Megalab — Better science, while it’s still in motion."
+          />
+        </>
+      )
+    }
+    <meta name="twitter:card" content={socialImage ? "summary_large_image" : "summary"} />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={socialImage} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
     <title>{pageTitle}</title>
   </head>
   <body>
@@ -66,7 +76,7 @@ const isCurrent = (path: string) => {
           navItems.map((item) => (
             <a
               href={`${base}${item.path}`}
-              aria-current={isCurrent(item.path) ? "page" : undefined}
+              aria-current={isCurrent(item.matches) ? "page" : undefined}
             >
               {item.label}
             </a>
@@ -86,7 +96,7 @@ const isCurrent = (path: string) => {
             navItems.map((item) => (
               <a
                 href={`${base}${item.path}`}
-                aria-current={isCurrent(item.path) ? "page" : undefined}
+                aria-current={isCurrent(item.matches) ? "page" : undefined}
               >
                 {item.label}
               </a>
