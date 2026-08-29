@@ -1643,6 +1643,36 @@ textarea:focus {
   font-size: 10px;
   line-height: 1.5;
 }
+.action-feedback {
+  position: fixed;
+  z-index: 100;
+  right: clamp(16px, 3vw, 42px);
+  bottom: clamp(16px, 3vw, 36px);
+  width: min(420px, calc(100% - 32px));
+  padding: 16px 18px;
+  border-left: 4px solid var(--mint);
+  border-radius: 3px;
+  background: var(--green);
+  color: white;
+  box-shadow: 0 20px 55px rgba(23, 34, 29, 0.24);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.45;
+}
+.action-feedback:empty {
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  box-shadow: none;
+  pointer-events: none;
+}
+.action-feedback[data-tone="error"] {
+  border-left-color: #ffd2c0;
+  background: #7b3425;
+}
+.action-feedback[data-tone="info"] {
+  border-left-color: var(--orange);
+}
 .signed-in-state {
   display: flex;
   justify-content: space-between;

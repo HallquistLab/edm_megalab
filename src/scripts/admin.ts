@@ -1,5 +1,6 @@
 import { isSupabaseConfigured, supabase } from "../lib/supabase";
 import type { User } from "@supabase/supabase-js";
+import { showActionFeedback } from "./feedback";
 
 type Suggestion = {
   id: string;
@@ -62,16 +63,21 @@ function formatDate(value: string) {
 }
 
 async function setSuggestionStatus(id: string, status: Suggestion["status"]) {
-  if (!supabase) return;
+  if (!supabase) return false;
   const { error } = await supabase
     .from("article_suggestions")
     .update({ status })
     .eq("id", id);
   if (error) {
     if (authStatus) authStatus.textContent = error.message;
-    return;
+    showActionFeedback("We couldn’t update that suggestion. Please try again.", "error");
+    return false;
   }
+  showActionFeedback(
+    status === "queued" ? "Article added to the public queue." : "Article archived.",
+  );
   await loadWorkspace();
+  return true;
 }
 
 function moderationCard(article: Suggestion) {
@@ -98,16 +104,26 @@ function moderationCard(article: Suggestion) {
   const actions = node("div", "moderation-actions");
   const queueButton = node("button", "button button-primary", "Add to queue");
   queueButton.type = "button";
-  queueButton.addEventListener(
-    "click",
-    () => void setSuggestionStatus(article.id, "queued"),
-  );
   const archiveButton = node("button", "text-button", "Archive");
   archiveButton.type = "button";
-  archiveButton.addEventListener(
-    "click",
-    () => void setSuggestionStatus(article.id, "archived"),
-  );
+  queueButton.addEventListener("click", async () => {
+    queueButton.disabled = true;
+    archiveButton.disabled = true;
+    const updated = await setSuggestionStatus(article.id, "queued");
+    if (!updated) {
+      queueButton.disabled = false;
+      archiveButton.disabled = false;
+    }
+  });
+  archiveButton.addEventListener("click", async () => {
+    queueButton.disabled = true;
+    archiveButton.disabled = true;
+    const updated = await setSuggestionStatus(article.id, "archived");
+    if (!updated) {
+      queueButton.disabled = false;
+      archiveButton.disabled = false;
+    }
+  });
   actions.append(queueButton, archiveButton);
   card.append(body, actions);
   return card;
@@ -156,12 +172,21 @@ function pollRow(poll: Poll) {
     action.type = "button";
     action.addEventListener("click", async () => {
       if (!supabase) return;
+      action.disabled = true;
+      action.textContent = "Closing…";
       const { error } = await supabase
         .from("polls")
         .update({ status: "closed" })
         .eq("id", poll.id);
-      if (error && authStatus) authStatus.textContent = error.message;
-      if (!error) await loadWorkspace();
+      if (error) {
+        if (authStatus) authStatus.textContent = error.message;
+        action.disabled = false;
+        action.textContent = "Close poll";
+        showActionFeedback("We couldn’t close the poll. Please try again.", "error");
+        return;
+      }
+      showActionFeedback("Poll closed. Voting is no longer available.");
+      await loadWorkspace();
     });
     row.append(copy, action);
   } else {
@@ -238,6 +263,7 @@ authForm?.addEventListener("submit", async (event) => {
   if (!supabase) {
     if (authStatus)
       authStatus.textContent = "Demo mode: connect Supabase to enable sign-in.";
+    showActionFeedback("Email sign-in is not available in demo mode.", "info");
     return;
   }
   const email = String(new FormData(authForm).get("email") ?? "")
@@ -245,6 +271,7 @@ authForm?.addEventListener("submit", async (event) => {
     .toLowerCase();
   if (!email.endsWith("@emory.edu")) {
     if (authStatus) authStatus.textContent = "Please use an @emory.edu email address.";
+    showActionFeedback("Please use an @emory.edu email address.", "error");
     return;
   }
   if (authStatus) authStatus.textContent = "Sending your secure link…";
@@ -256,23 +283,43 @@ authForm?.addEventListener("submit", async (event) => {
     authStatus.textContent = error
       ? error.message
       : "Check your email for the sign-in link.";
+  showActionFeedback(
+    error
+      ? "We couldn’t send the sign-in link. Please try again."
+      : "Sign-in link sent. Check your Emory email.",
+    error ? "error" : "success",
+  );
 });
 
 select<HTMLButtonElement>("[data-admin-sign-out]")?.addEventListener(
   "click",
   async () => {
-    await supabase?.auth.signOut();
+    if (!supabase) return;
+    const { error } = await supabase.auth.signOut();
+    showActionFeedback(
+      error ? "We couldn’t sign you out. Please try again." : "You’re signed out.",
+      error ? "error" : "success",
+    );
   },
 );
 
 pollForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  if (!supabase || !user) return;
+  if (!supabase || !user) {
+    showActionFeedback("Sign in as a coordinator before publishing a poll.", "error");
+    return;
+  }
   const data = new FormData(pollForm);
   const articleIds = data.getAll("article_ids").map(String);
   if (articleIds.length < 2 || articleIds.length > 8) {
     if (pollStatus) pollStatus.textContent = "Choose between two and eight articles.";
+    showActionFeedback("Choose between two and eight articles.", "error");
     return;
+  }
+  const submitButton = pollForm.querySelector<HTMLButtonElement>('button[type="submit"]');
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Publishing…";
   }
   if (pollStatus) pollStatus.textContent = "Publishing the ballot…";
   const closesAt = new Date(String(data.get("closes_at"))).toISOString();
@@ -287,10 +334,17 @@ pollForm?.addEventListener("submit", async (event) => {
     pollStatus.textContent = error
       ? error.message
       : "Poll published. It is now live on the article queue.";
-  if (!error) {
-    pollForm.reset();
-    await loadWorkspace();
+  if (submitButton) {
+    submitButton.disabled = false;
+    submitButton.textContent = "Publish poll";
   }
+  if (error) {
+    showActionFeedback("We couldn’t publish the poll. Please try again.", "error");
+    return;
+  }
+  pollForm.reset();
+  showActionFeedback("Poll published. It is now live on the article queue.");
+  await loadWorkspace();
 });
 
 async function start() {

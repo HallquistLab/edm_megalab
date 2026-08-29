@@ -101,6 +101,14 @@ const isCurrent = (path: string) => {
     <main id="main-content">
       <slot />
     </main>
+    <div
+      class="action-feedback"
+      data-action-feedback
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+    </div>
     <footer>
       <div>
         <p>Emory University · Department of Psychology</p>

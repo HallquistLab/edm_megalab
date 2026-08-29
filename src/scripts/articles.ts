@@ -1,5 +1,6 @@
 import { isSupabaseConfigured, supabase } from "../lib/supabase";
 import type { User } from "@supabase/supabase-js";
+import { showActionFeedback } from "./feedback";
 
 type Suggestion = {
   id: string;
@@ -245,9 +246,11 @@ async function toggleVote(articleId: string, button: HTMLButtonElement) {
   const { error } = await query;
   if (error) {
     if (ballotNote) ballotNote.textContent = error.message;
+    showActionFeedback("We couldn’t update your vote. Please try again.", "error");
     button.disabled = false;
     return;
   }
+  showActionFeedback(approved ? "Your vote was removed." : "Your vote was recorded.");
   await loadPoll();
 }
 
@@ -256,6 +259,7 @@ authForm?.addEventListener("submit", async (event) => {
   if (!supabase) {
     if (authStatus)
       authStatus.textContent = "Demo mode: connect Supabase to enable email sign-in.";
+    showActionFeedback("Email sign-in is not available in demo mode.", "info");
     return;
   }
   const formData = new FormData(authForm);
@@ -264,6 +268,7 @@ authForm?.addEventListener("submit", async (event) => {
     .toLowerCase();
   if (!email.endsWith("@emory.edu")) {
     if (authStatus) authStatus.textContent = "Please use an @emory.edu email address.";
+    showActionFeedback("Please use an @emory.edu email address.", "error");
     return;
   }
   if (authStatus) authStatus.textContent = "Sending your secure link…";
@@ -276,10 +281,21 @@ authForm?.addEventListener("submit", async (event) => {
       ? error.message
       : "Check your email for the sign-in link. You can close this message afterward.";
   }
+  showActionFeedback(
+    error
+      ? "We couldn’t send the sign-in link. Please try again."
+      : "Sign-in link sent. Check your Emory email.",
+    error ? "error" : "success",
+  );
 });
 
 select<HTMLButtonElement>("[data-sign-out]")?.addEventListener("click", async () => {
-  await supabase?.auth.signOut();
+  if (!supabase) return;
+  const { error } = await supabase.auth.signOut();
+  showActionFeedback(
+    error ? "We couldn’t sign you out. Please try again." : "You’re signed out.",
+    error ? "error" : "success",
+  );
 });
 
 select<HTMLButtonElement>("[data-open-proposal]")?.addEventListener("click", () => {
@@ -298,9 +314,17 @@ proposalForm?.addEventListener("submit", async (event) => {
   if (!supabase || !currentUser) {
     if (proposalStatus)
       proposalStatus.textContent = "Sign in with your Emory email before submitting.";
+    showActionFeedback("Sign in with your Emory email before submitting.", "error");
     return;
   }
   const data = Object.fromEntries(new FormData(proposalForm).entries());
+  const submitButton = proposalForm.querySelector<HTMLButtonElement>(
+    'button[type="submit"]',
+  );
+  if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Submitting…";
+  }
   if (proposalStatus) proposalStatus.textContent = "Sending your suggestion…";
   const { error } = await supabase.from("article_suggestions").insert({
     title: String(data.title),
@@ -317,7 +341,19 @@ proposalForm?.addEventListener("submit", async (event) => {
       ? error.message
       : "Submitted. A coordinator will review it before it appears in the public queue.";
   }
-  if (!error) proposalForm.reset();
+  if (submitButton) {
+    submitButton.disabled = false;
+    submitButton.textContent = "Send to coordinators";
+  }
+  if (error) {
+    showActionFeedback("We couldn’t submit the article. Please try again.", "error");
+    return;
+  }
+  proposalForm.reset();
+  if (proposalDrawer) proposalDrawer.hidden = true;
+  showActionFeedback(
+    "Article suggestion submitted. Coordinators will review it before it appears in the queue.",
+  );
 });
 
 async function start() {
