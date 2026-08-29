@@ -1,0 +1,43 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # These browser-safe public credentials are protected by Supabase RLS.
+    # Never place a secret or service-role key here.
+    env:
+      PUBLIC_SUPABASE_URL: https://afcxgmiopugutehkvaye.supabase.co
+      PUBLIC_SUPABASE_PUBLISHABLE_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmY3hnbWlvcHVndXRlaGt2YXllIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgwMTU2MzUsImV4cCI6MjEwMzU5MTYzNX0.icLZOmkB1dxJhNbx3Zj68OxK8_A4hYX4A8_wH5Ctx7U
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Install, build, and upload site
+        uses: withastro/action@v6
+        with:
+          node-version: 24
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

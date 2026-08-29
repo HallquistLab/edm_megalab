@@ -1,0 +1,12 @@
+{
+  "githubOwner": "HallquistLab",
+  "githubRepository": "edm_megalab",
+  "articleTitlePrefix": "Article proposal:",
+  "pollTitlePrefix": "Article poll:",
+  "ballotLabel": "article-poll",
+  "ballotIssueNumbers": [],
+  "maxApprovalsPerMember": 3,
+  "ballotName": "Approve up to three papers",
+  "ballotMeetingSlot": "Fall 2026 article discussion",
+  "ballotCloses": null
+}

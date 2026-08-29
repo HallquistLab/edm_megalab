@@ -1,0 +1,73 @@
+name: Post an article
+description: Add a paper to the queue for a future Emory Decision-Making Megalab discussion.
+title: "Article proposal: "
+labels: [article-queue]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for adding to the group’s reading queue. This issue is public, so include only material that can be shared openly.
+
+  - type: input
+    id: article-link
+    attributes:
+      label: Article link or DOI
+      description: Link to the publisher, DOI, preprint, or other stable public page.
+      placeholder: https://doi.org/10.xxxx/xxxxx
+    validations:
+      required: true
+
+  - type: input
+    id: citation
+    attributes:
+      label: Full citation
+      placeholder: Authors (year). Title. Journal.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: fit
+    attributes:
+      label: Best fit
+      options:
+        - Decision neuroscience
+        - Computational psychiatry
+        - Computational modeling
+        - Affective or clinical neuroscience
+        - Neuroimaging or quantitative methods
+        - Broader current topic
+    validations:
+      required: true
+
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Why should this group discuss it?
+      description: In two or three sentences, explain what makes the paper useful across labs.
+    validations:
+      required: true
+
+  - type: textarea
+    id: questions
+    attributes:
+      label: Questions it could organize
+      description: Suggest one to three questions that would make the meeting more than a paper summary.
+
+  - type: dropdown
+    id: role
+    attributes:
+      label: Would you help frame the discussion?
+      options:
+        - Yes
+        - Maybe / with a co-leader
+        - Not this time
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: public
+    attributes:
+      label: Public submission
+      options:
+        - label: I understand this proposal and its links will be visible in the public repository.
+          required: true

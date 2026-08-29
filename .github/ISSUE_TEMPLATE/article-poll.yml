@@ -1,0 +1,51 @@
+name: Open an article poll
+description: Coordinator form for choosing one queued article for a specific meeting slot.
+title: "Article poll: "
+labels: [article-ballot]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **For meeting coordinators.** First confirm that each candidate is already in the article queue, then list the corresponding proposal issue numbers below. The newest open coordinator poll appears on the website.
+
+  - type: input
+    id: poll-title
+    attributes:
+      label: Poll title
+      placeholder: Choose the paper for our October 9 discussion
+    validations:
+      required: true
+
+  - type: input
+    id: meeting-slot
+    attributes:
+      label: Meeting slot
+      placeholder: October 9, 2026 · Article discussion
+    validations:
+      required: true
+
+  - type: input
+    id: closes
+    attributes:
+      label: Poll closes
+      placeholder: September 25 at 5:00 p.m. Eastern
+    validations:
+      required: true
+
+  - type: textarea
+    id: candidates
+    attributes:
+      label: Candidate proposal issue numbers
+      description: Enter two to five article-proposal issue numbers, one per line. For example, 12, 18, and 21 should be entered as three separate lines.
+      placeholder: |-
+        12
+        18
+        21
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Coordinator note
+      description: Optional context about the slot, theme, or how the result will be used.

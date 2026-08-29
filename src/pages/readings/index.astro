@@ -1,0 +1,139 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import { readings } from "../../lib/content";
+
+const groups = [
+  ["all", "All readings"],
+  ["priority", "Priority discussions"],
+  ["methods", "Methods"],
+  ["reserve", "Reserve list"],
+];
+---
+
+<BaseLayout
+  title="Reading room"
+  description="Curated recent readings for Emory Decision-Making Megalab discussions and workshops."
+>
+  <PageIntro
+    eyebrow="Reading room · Curated, not exhaustive"
+    title="Papers worth a conversation."
+    intro="Recent work selected for its ability to connect labs—not merely summarize a result. Search the collection or filter it by how we might use it."
+  />
+
+  <section class="reading-tools shell" aria-label="Reading filters">
+    <label class="search-box">
+      <span class="sr-only">Search readings</span>
+      <span aria-hidden="true">⌕</span>
+      <input
+        type="search"
+        placeholder="Search by title, author, journal, or topic…"
+        data-search
+      />
+    </label>
+    <div class="filter-bar" role="group" aria-label="Filter readings by collection">
+      {
+        groups.map(([value, label], index) => (
+          <button
+            class:list={{ active: index === 0 }}
+            type="button"
+            data-reading-filter={value}
+            aria-pressed={index === 0 ? "true" : "false"}
+          >
+            {label}
+          </button>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="reading-grid shell" data-reading-grid>
+    {
+      readings.map((reading, index) => (
+        <article
+          class="reading-card"
+          data-group={reading.group}
+          data-searchable={`${reading.title} ${reading.authors} ${reading.journal} ${reading.topic}`.toLowerCase()}
+        >
+          <div class="reading-card-top">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <span class={`collection collection-${reading.group}`}>{reading.topic}</span>
+          </div>
+          <div>
+            <p class="citation">
+              {reading.authors} · {reading.year}
+            </p>
+            <h2>{reading.title}</h2>
+            <p class="journal">
+              {reading.journal}
+              {reading.citation && `, ${reading.citation}`}
+            </p>
+            <p class="why">{reading.why}</p>
+          </div>
+          <a href={reading.doi} aria-label={`Open ${reading.title}`}>
+            Read paper <span aria-hidden="true">↗</span>
+          </a>
+        </article>
+      ))
+    }
+    <p class="empty-state reading-empty" hidden>No readings match that search.</p>
+  </section>
+
+  <section class="pairings shell">
+    <p class="eyebrow">Suggested pairings</p>
+    <div class="section-heading compact-heading">
+      <h2>Two papers,<br />one sharper question.</h2>
+      <p>Use these combinations when a meeting can sustain more than one reading.</p>
+    </div>
+    <div class="pairing-list">
+      <article>
+        <span>01</span><h3>Computational phenotypes and measurement</h3><p>
+          Schurr et al. (2024) + Lee et al. (2025)
+        </p>
+      </article>
+      <article>
+        <span>02</span><h3>Representations underlying learning</h3><p>
+          Bein & Niv (2025) + Sharp & Eldar (2024)
+        </p>
+      </article>
+      <article>
+        <span>03</span><h3>Modern computational-model estimation</h3><p>
+          Rmus et al. (2024) + Tolley et al. (2024)
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <script>
+    const search = document.querySelector<HTMLInputElement>("[data-search]");
+    const buttons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-reading-filter]"),
+    );
+    const cards = Array.from(document.querySelectorAll<HTMLElement>(".reading-card"));
+    const empty = document.querySelector<HTMLElement>(".reading-empty");
+    let group = "all";
+
+    const update = () => {
+      const query = search?.value.trim().toLowerCase() ?? "";
+      cards.forEach((card) => {
+        const matchesGroup = group === "all" || card.dataset.group === group;
+        const matchesSearch = card.dataset.searchable?.includes(query) ?? false;
+        card.hidden = !(matchesGroup && matchesSearch);
+      });
+      if (empty) empty.hidden = cards.some((card) => !card.hidden);
+    };
+
+    search?.addEventListener("input", update);
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        group = button.dataset.readingFilter ?? "all";
+        buttons.forEach((item) => {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+        update();
+      });
+    });
+  </script>
+</BaseLayout>

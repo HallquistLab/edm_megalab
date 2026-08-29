@@ -1,0 +1,146 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout
+  title="Coordinator console"
+  description="A lightweight coordinator console for the Emory Decision-Making Megalab article queue and polls."
+>
+  <PageIntro
+    eyebrow="Coordinator console · Restricted"
+    title="Keep the queue moving."
+    intro="Review suggestions, shape a short ballot, and close voting when the next discussion is set."
+  />
+
+  <section class="admin-access shell" data-admin-access>
+    <div>
+      <p class="eyebrow">Coordinator sign-in</p>
+      <h2>Use your approved Emory email.</h2>
+      <p>
+        No coordinator password is stored by this site. Supabase sends a secure sign-in
+        link to your inbox.
+      </p>
+    </div>
+    <form class="inline-auth" data-admin-auth-form>
+      <label for="admin-email">Emory email</label>
+      <div>
+        <input
+          id="admin-email"
+          name="email"
+          type="email"
+          autocomplete="email"
+          placeholder="name@emory.edu"
+          required
+        />
+        <button class="button button-primary" type="submit"
+          >Email me a sign-in link</button
+        >
+      </div>
+      <p class="form-status" data-admin-auth-status aria-live="polite"></p>
+    </form>
+    <div class="signed-in-state" data-admin-signed-in hidden>
+      <p>Signed in as <strong data-admin-email></strong></p>
+      <button class="text-button" type="button" data-admin-sign-out>Sign out</button>
+    </div>
+  </section>
+
+  <section class="admin-workspace shell" data-admin-workspace hidden>
+    <div class="admin-summary">
+      <article><span>Awaiting review</span><strong data-pending-count>0</strong></article>
+      <article><span>In the queue</span><strong data-queued-count>0</strong></article>
+      <article><span>Open polls</span><strong data-open-count>0</strong></article>
+    </div>
+
+    <div class="admin-grid">
+      <section class="admin-panel">
+        <div class="admin-panel-heading">
+          <div><p class="eyebrow">Moderate</p><h2>New suggestions</h2></div>
+          <a class="text-link" href={`${base}articles/`}>View public queue →</a>
+        </div>
+        <div class="moderation-list" data-moderation-list>
+          <p class="empty-state">Loading suggestions…</p>
+        </div>
+      </section>
+
+      <section class="admin-panel poll-builder">
+        <div class="admin-panel-heading">
+          <div><p class="eyebrow">Publish</p><h2>Open an article poll</h2></div>
+        </div>
+        <form data-poll-form>
+          <label
+            >Poll title<input
+              name="title"
+              placeholder="Choose our October article"
+              required
+            /></label
+          >
+          <label
+            >Meeting slot<input
+              name="meeting_slot"
+              placeholder="October 16 · Article discussion"
+              required
+            /></label
+          >
+          <div class="form-split">
+            <label
+              >Voting closes<input
+                name="closes_at"
+                type="datetime-local"
+                required
+              /></label
+            >
+            <label
+              >Approvals per person<input
+                name="max_approvals"
+                type="number"
+                min="1"
+                max="5"
+                value="3"
+                required
+              /></label
+            >
+          </div>
+          <fieldset>
+            <legend>Choose 2–8 queued articles</legend>
+            <div class="poll-choice-list" data-poll-choices>
+              <p class="empty-state">Queue two or more articles to build a poll.</p>
+            </div>
+          </fieldset>
+          <div class="form-submit">
+            <p class="form-status" data-poll-status aria-live="polite"></p>
+            <button class="button button-primary" type="submit">Publish poll</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <section class="admin-panel poll-register">
+      <div class="admin-panel-heading">
+        <div><p class="eyebrow">Ballots</p><h2>Poll register</h2></div>
+      </div>
+      <div data-poll-register><p class="empty-state">Loading polls…</p></div>
+    </section>
+  </section>
+
+  <section class="admin-demo shell" data-admin-demo>
+    <p class="eyebrow">Demo mode</p>
+    <h2>The console is ready to connect.</h2>
+    <p>
+      Add the Supabase project URL and publishable key to activate magic-link access,
+      moderation, and live poll publishing. No secret key is shipped to the browser.
+    </p>
+    <div class="admin-summary">
+      <article><span>Awaiting review</span><strong>4</strong></article>
+      <article><span>In the queue</span><strong>7</strong></article>
+      <article><span>Open polls</span><strong>1</strong></article>
+    </div>
+  </section>
+
+  <script>
+    import "../../scripts/admin";
+  </script>
+</BaseLayout>

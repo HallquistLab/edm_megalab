@@ -1,0 +1,31 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Computational phenotypes: traits\, states\, or moving target
+ s?
+X-WR-TIMEZONE:America/New_York
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:2026-10-09-computational-phenotypes@edm-megalab.emory.edu
+DTSTAMP:20260829T120000Z
+DTSTART;VALUE=DATE:20261009
+DTEND;VALUE=DATE:20261010
+SUMMARY:Computational phenotypes: traits\, states\, or moving targets? — 
+ Emory Decision-Making Megalab
+DESCRIPTION:Article discussion. A discussion of individual differences\, 
+ repeated measurement\, parameter stability\, and what makes a useful com
+ putational phenotype. Featured article: Dynamic computational phenotypin
+ g of human cognition. Authors: Schurr\, Reznik\, Hillman\, Bhui\, et al.
+ . Journal: Nature Human Behaviour (2024). https://doi.org/10.1038/s41562
+ -024-01814-x Lead: Discussion leader to be announced. Time and location 
+ to be announced.
+LOCATION:To be announced
+URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-10-09-compu
+ tational-phenotypes
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

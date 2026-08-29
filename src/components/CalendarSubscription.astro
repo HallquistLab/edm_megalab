@@ -1,0 +1,66 @@
+---
+import siteData from "../data/site.json";
+import type { SiteConfig } from "../types";
+
+const site = siteData as SiteConfig;
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const subscriptionUrl = `${site.publicUrl}/calendar/edm-megalab.ics`;
+const calendarAppUrl = subscriptionUrl.replace(/^https:/, "webcal:");
+---
+
+<details class="calendar-subscribe">
+  <summary class="button button-primary">
+    Subscribe to schedule <span aria-hidden="true">＋</span>
+  </summary>
+  <div class="calendar-subscribe-panel">
+    <strong>Keep every meeting up to date</strong>
+    <p>
+      Subscribe once and your calendar can refresh when dates, times, or locations change.
+    </p>
+    <div class="calendar-subscribe-actions">
+      <a class="button button-primary" href={calendarAppUrl}>Open calendar app</a>
+      <button
+        class="button button-secondary"
+        type="button"
+        data-copy-calendar
+        data-calendar-url={subscriptionUrl}
+      >
+        Copy subscription URL
+      </button>
+    </div>
+    <p class="calendar-subscribe-help">
+      <strong>Google Calendar:</strong> copy the URL, then choose <em>Other calendars</em>
+      → <em>From URL</em>.
+    </p>
+    <a class="calendar-download-link" href={`${base}calendar/edm-megalab.ics`} download>
+      Download a one-time .ics snapshot
+    </a>
+    <p class="calendar-copy-status" aria-live="polite"></p>
+  </div>
+</details>
+
+<script>
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-copy-calendar]")
+    .forEach((button) => {
+      button.addEventListener("click", async () => {
+        const url = button.dataset.calendarUrl;
+        const status = button
+          .closest(".calendar-subscribe-panel")
+          ?.querySelector<HTMLElement>(".calendar-copy-status");
+
+        if (!url) return;
+
+        try {
+          await navigator.clipboard.writeText(url);
+          if (status) status.textContent = "Subscription URL copied.";
+        } catch {
+          if (status) {
+            status.textContent = `Copy this URL: ${url}`;
+          }
+        }
+      });
+    });
+</script>

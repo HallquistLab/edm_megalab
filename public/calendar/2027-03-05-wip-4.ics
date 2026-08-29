@@ -1,0 +1,24 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:WIP Session 4
+X-WR-TIMEZONE:America/New_York
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:2027-03-05-wip-4@edm-megalab.emory.edu
+DTSTAMP:20260829T120000Z
+DTSTART;VALUE=DATE:20270305
+DTEND;VALUE=DATE:20270306
+SUMMARY:WIP Session 4 — Emory Decision-Making Megalab
+DESCRIPTION:Works in progress. A project crossing clinical and basic deci
+ sion science\, presented early enough for the conversation to matter.  L
+ ead: Presenter to be announced. Time and location to be announced.
+LOCATION:To be announced
+URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-03-05-wip-4
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,183 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CalendarSubscription from "../../components/CalendarSubscription.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import { formatDate, schedule, weekday } from "../../lib/content";
+import site from "../../data/site.json";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const filters = [
+  ["all", "All sessions"],
+  ["wip", "Works in progress"],
+  ["article", "Articles"],
+  ["methods", "Methods"],
+  ["current-topic", "Current topics"],
+];
+---
+
+<BaseLayout
+  title="Schedule"
+  description="The 2026–2027 schedule for Emory Decision-Making Megalab meetings."
+>
+  <PageIntro
+    eyebrow="Schedule · 2026–2027"
+    title="Make room for the unfinished."
+    intro="A biweekly sequence of works in progress, article discussions, practical workshops, and conversations about where the field is moving."
+  />
+
+  <section class="schedule-tools shell" aria-label="Schedule tools">
+    <div class="filter-bar" role="group" aria-label="Filter meetings by type">
+      {
+        filters.map(([value, label], index) => (
+          <button
+            class:list={{ active: index === 0 }}
+            type="button"
+            data-filter={value}
+            aria-pressed={index === 0 ? "true" : "false"}
+          >
+            {label}
+          </button>
+        ))
+      }
+    </div>
+    <CalendarSubscription />
+  </section>
+
+  <aside class="calendar-note shell">
+    <strong>Calendar note</strong>
+    <p>{site.calendarNote}</p>
+  </aside>
+
+  <div class="agenda shell" data-agenda>
+    {
+      (["Fall 2026", "Spring 2027"] as const).map((semester) => (
+        <section class="semester" data-semester={semester}>
+          <div class="semester-heading">
+            <h2>{semester}</h2>
+            <span>
+              {schedule.filter((session) => session.semester === semester).length}{" "}
+              sessions
+            </span>
+          </div>
+          {schedule
+            .filter((session) => session.semester === semester)
+            .map((session) => {
+              const featuredReading =
+                session.type === "article"
+                  ? session.readings.find((reading) => reading.title)
+                  : undefined;
+              return (
+                <article
+                  class:list={["agenda-item", { "agenda-item-article": featuredReading }]}
+                  id={session.id}
+                  data-type={session.type}
+                  aria-labelledby={`${session.id}-title`}
+                >
+                  <time datetime={session.date}>
+                    <strong>{formatDate(session.date)}</strong>
+                    <span>{weekday(session.date)}</span>
+                  </time>
+                  <div class="agenda-main">
+                    <span class={`tag tag-${session.type}`}>{session.typeLabel}</span>
+                    <h3 id={`${session.id}-title`}>{session.title}</h3>
+                    <p>{session.description}</p>
+                    {featuredReading && (
+                      <a class="featured-reading" href={featuredReading.url}>
+                        <span>Featured article</span>
+                        <h4>{featuredReading.title}</h4>
+                        <p class="featured-reading-authors">
+                          {featuredReading.authors} · {featuredReading.year}
+                        </p>
+                        <p class="featured-reading-journal">
+                          {featuredReading.journal} <span aria-hidden="true">↗</span>
+                        </p>
+                      </a>
+                    )}
+                  </div>
+                  <div class="agenda-meta">
+                    <p>
+                      <span>Lead</span>
+                      {session.presenter}
+                    </p>
+                    {featuredReading ? (
+                      <p>
+                        <span>Article</span>
+                        <a href={featuredReading.url}>Open paper ↗</a>
+                      </p>
+                    ) : session.readings.length > 0 ? (
+                      <p>
+                        <span>Reading</span>
+                        {session.readings.map((reading) => (
+                          <a href={reading.url}>{reading.label} ↗</a>
+                        ))}
+                      </p>
+                    ) : (
+                      <p>
+                        <span>Materials</span>To be added
+                      </p>
+                    )}
+                  </div>
+                  <a
+                    class="calendar-link"
+                    href={`${base}calendar/${session.id}.ics`}
+                    aria-label={`Add ${session.title} to your calendar`}
+                  >
+                    Add to calendar
+                  </a>
+                </article>
+              );
+            })}
+        </section>
+      ))
+    }
+    <p class="empty-state" hidden>No sessions match this filter.</p>
+  </div>
+
+  <section class="cta-band">
+    <div class="shell">
+      <p class="eyebrow">The schedule is a draft</p>
+      <h2>Have work that needs a room?</h2>
+      <p>Bring a project, nominate a paper, or request a practical workshop.</p>
+      <a
+        class="button button-light"
+        href="https://github.com/HallquistLab/edm_megalab/issues/new/choose"
+      >
+        Propose a session <span aria-hidden="true">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <script>
+    const buttons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-filter]"),
+    );
+    const items = Array.from(document.querySelectorAll<HTMLElement>(".agenda-item"));
+    const semesters = Array.from(
+      document.querySelectorAll<HTMLElement>("[data-semester]"),
+    );
+    const empty = document.querySelector<HTMLElement>(".empty-state");
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const selected = button.dataset.filter;
+        buttons.forEach((item) => {
+          const active = item === button;
+          item.classList.toggle("active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+        items.forEach((item) => {
+          item.hidden = selected !== "all" && item.dataset.type !== selected;
+        });
+        semesters.forEach((semester) => {
+          const hasVisibleItems = Array.from(
+            semester.querySelectorAll<HTMLElement>(".agenda-item"),
+          ).some((item) => !item.hidden);
+          semester.hidden = !hasVisibleItems;
+        });
+        if (empty) empty.hidden = items.some((item) => !item.hidden);
+      });
+    });
+  </script>
+</BaseLayout>

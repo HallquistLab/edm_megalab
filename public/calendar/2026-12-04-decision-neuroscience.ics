@@ -1,0 +1,30 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Where is decision neuroscience going?
+X-WR-TIMEZONE:America/New_York
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:2026-12-04-decision-neuroscience@edm-megalab.emory.edu
+DTSTAMP:20260829T120000Z
+DTSTART;VALUE=DATE:20261204
+DTEND;VALUE=DATE:20261205
+SUMMARY:Where is decision neuroscience going? — Emory Decision-Making Meg
+ alab
+DESCRIPTION:Article + year-end discussion. Variability\, latent states\, 
+ and mechanism—plus a springboard for choosing the group’s spring priorit
+ ies. Featured article: Disentangling sources of variability in decision-
+ making. Authors: Duffy\, Bellgrove\, Murphy\, et al.. Journal: Nature Re
+ views Neuroscience (2025). https://doi.org/10.1038/s41583-025-00916-3 Le
+ ad: Discussion leader to be announced. Time and location to be announced
+ .
+LOCATION:To be announced
+URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-12-04-decis
+ ion-neuroscience
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

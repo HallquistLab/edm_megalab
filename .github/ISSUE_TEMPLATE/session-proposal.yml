@@ -1,0 +1,56 @@
+name: Propose a session
+description: Suggest a work in progress, paper discussion, methods workshop, or current topic.
+title: "Session proposal: "
+labels: [programming]
+body:
+  - type: dropdown
+    id: format
+    attributes:
+      label: Session format
+      options:
+        - Works in progress
+        - Article discussion
+        - Methods workshop
+        - Current-topic discussion
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: Working title
+      placeholder: A concise title for the schedule
+    validations:
+      required: true
+
+  - type: textarea
+    id: value
+    attributes:
+      label: What should the group work through?
+      description: Describe the scientific question, project stage, or practical skill—and why a cross-lab discussion would help.
+    validations:
+      required: true
+
+  - type: textarea
+    id: questions
+    attributes:
+      label: Two or three useful questions
+      description: For a WIP, focus on questions where feedback can still change the project.
+
+  - type: input
+    id: materials
+    attributes:
+      label: Public reading or material link
+      description: Do not link confidential, unpublished, or sensitive material here.
+
+  - type: input
+    id: lead
+    attributes:
+      label: Proposed lead or presenter
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Timing or confidentiality notes
+      description: Keep sensitive details out of this public issue; indicate only that private coordination is needed.

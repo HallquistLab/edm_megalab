@@ -1,0 +1,201 @@
+[
+  {
+    "id": "2026-09-11-community-kickoff",
+    "date": "2026-09-11",
+    "semester": "Fall 2026",
+    "type": "community",
+    "typeLabel": "Community kickoff",
+    "title": "What should an Emory decision-making community be?",
+    "description": "Brief introductions from the four core labs; map shared interests, methods, datasets, and opportunities; and choose priorities for the series.",
+    "presenter": "Four core labs",
+    "readings": []
+  },
+  {
+    "id": "2026-09-25-wip-1",
+    "date": "2026-09-25",
+    "semester": "Fall 2026",
+    "type": "wip",
+    "typeLabel": "Works in progress",
+    "title": "WIP Session 1",
+    "description": "Two shorter presentations, ideally from different core labs, with emphasis on questions where group feedback can still change the work.",
+    "presenter": "Presenters to be announced",
+    "readings": []
+  },
+  {
+    "id": "2026-10-09-computational-phenotypes",
+    "date": "2026-10-09",
+    "semester": "Fall 2026",
+    "type": "article",
+    "typeLabel": "Article discussion",
+    "title": "Computational phenotypes: traits, states, or moving targets?",
+    "description": "A discussion of individual differences, repeated measurement, parameter stability, and what makes a useful computational phenotype.",
+    "presenter": "Discussion leader to be announced",
+    "readings": [
+      {
+        "label": "Schurr et al. (2024)",
+        "url": "https://doi.org/10.1038/s41562-024-01814-x",
+        "title": "Dynamic computational phenotyping of human cognition",
+        "authors": "Schurr, Reznik, Hillman, Bhui, et al.",
+        "journal": "Nature Human Behaviour",
+        "year": 2024
+      }
+    ]
+  },
+  {
+    "id": "2026-10-23-fmri-preprocessing",
+    "date": "2026-10-23",
+    "semester": "Fall 2026",
+    "type": "methods",
+    "typeLabel": "Methods workshop",
+    "title": "Modern fMRI preprocessing: what choices actually matter?",
+    "description": "Compare pipelines used across Emory labs: distortion and motion correction, nuisance regression, censoring, global signal, surface versus volume, and QC.",
+    "presenter": "Workshop lead to be announced",
+    "readings": []
+  },
+  {
+    "id": "2026-11-06-ai-computational-psychiatry",
+    "date": "2026-11-06",
+    "semester": "Fall 2026",
+    "type": "current-topic",
+    "typeLabel": "Current topic / workshop",
+    "title": "AI in computational psychiatry and decision neuroscience",
+    "description": "Concrete use cases in coding, modeling, literature synthesis, analysis validation, writing, privacy, reproducibility, and emerging failure modes.",
+    "presenter": "Facilitators to be announced",
+    "readings": []
+  },
+  {
+    "id": "2026-11-20-wip-2",
+    "date": "2026-11-20",
+    "semester": "Fall 2026",
+    "type": "wip",
+    "typeLabel": "Works in progress",
+    "title": "WIP Session 2",
+    "description": "An analysis or modeling problem where a larger pool of expertise can materially change the project.",
+    "presenter": "Presenter to be announced",
+    "readings": []
+  },
+  {
+    "id": "2026-12-04-decision-neuroscience",
+    "date": "2026-12-04",
+    "semester": "Fall 2026",
+    "type": "article",
+    "typeLabel": "Article + year-end discussion",
+    "title": "Where is decision neuroscience going?",
+    "description": "Variability, latent states, and mechanism—plus a springboard for choosing the group’s spring priorities.",
+    "presenter": "Discussion leader to be announced",
+    "readings": [
+      {
+        "label": "Duffy et al. (2025)",
+        "url": "https://doi.org/10.1038/s41583-025-00916-3",
+        "title": "Disentangling sources of variability in decision-making",
+        "authors": "Duffy, Bellgrove, Murphy, et al.",
+        "journal": "Nature Reviews Neuroscience",
+        "year": 2025
+      }
+    ]
+  },
+  {
+    "id": "2027-01-22-wip-3",
+    "date": "2027-01-22",
+    "semester": "Spring 2027",
+    "type": "wip",
+    "typeLabel": "Works in progress",
+    "title": "WIP Session 3 / Spring kickoff",
+    "description": "One substantial project or two shorter projects, followed by a brief reset of priorities for the semester.",
+    "presenter": "Presenter to be announced",
+    "readings": []
+  },
+  {
+    "id": "2027-02-05-neural-inference",
+    "date": "2027-02-05",
+    "semester": "Spring 2027",
+    "type": "methods",
+    "typeLabel": "Methods workshop",
+    "title": "Fitting computational models with neural and amortized inference",
+    "description": "Parameter recovery, likelihood approximation, simulation-based inference, diagnostics, and when these methods beat MCMC or optimization.",
+    "presenter": "Workshop lead to be announced",
+    "readings": [
+      {
+        "label": "Rmus et al. (2024)",
+        "url": "https://doi.org/10.1371/journal.pcbi.1012119"
+      },
+      {
+        "label": "Boelts et al. (2022/2023)",
+        "url": "https://doi.org/10.7554/eLife.77220"
+      }
+    ]
+  },
+  {
+    "id": "2027-02-19-choice-variability",
+    "date": "2027-02-19",
+    "semester": "Spring 2027",
+    "type": "article",
+    "typeLabel": "Article discussion",
+    "title": "Decision variability and psychopathology",
+    "description": "Separate variability in learning from variability in choice, and ask what would make a computational phenotype clinically meaningful.",
+    "presenter": "Discussion leader to be announced",
+    "readings": [
+      {
+        "label": "Lee, Rouault & Wyart (2025)",
+        "url": "https://doi.org/10.1038/s44220-024-00364-5",
+        "title": "Compulsivity is linked to suboptimal choice variability but unaltered reinforcement learning under uncertainty",
+        "authors": "Lee, Rouault & Wyart",
+        "journal": "Nature Mental Health",
+        "year": 2025
+      }
+    ]
+  },
+  {
+    "id": "2027-03-05-wip-4",
+    "date": "2027-03-05",
+    "semester": "Spring 2027",
+    "type": "wip",
+    "typeLabel": "Works in progress",
+    "title": "WIP Session 4",
+    "description": "A project crossing clinical and basic decision science, presented early enough for the conversation to matter.",
+    "presenter": "Presenter to be announced",
+    "readings": []
+  },
+  {
+    "id": "2027-03-19-state-representation",
+    "date": "2027-03-19",
+    "semester": "Spring 2027",
+    "type": "article",
+    "typeLabel": "Article discussion",
+    "title": "Representations, schemas, and state inference in reinforcement learning",
+    "description": "Move beyond scalar learning parameters toward the representations over which learning operates.",
+    "presenter": "Discussion leader to be announced",
+    "readings": [
+      {
+        "label": "Bein & Niv (2025)",
+        "url": "https://doi.org/10.1038/s41583-024-00893-z",
+        "title": "Schemas, reinforcement learning and the medial prefrontal cortex",
+        "authors": "Bein & Niv",
+        "journal": "Nature Reviews Neuroscience",
+        "year": 2025
+      }
+    ]
+  },
+  {
+    "id": "2027-04-02-foundation-models",
+    "date": "2027-04-02",
+    "semester": "Spring 2027",
+    "type": "current-topic",
+    "typeLabel": "Methods / current topic",
+    "title": "Computational psychiatry in the era of foundation models",
+    "description": "Mechanistic versus predictive models, construct validity, LLMs as tools or participants, interpretability, evaluation, and data governance.",
+    "presenter": "Facilitators to be announced",
+    "readings": []
+  },
+  {
+    "id": "2027-04-16-wip-5-planning",
+    "date": "2027-04-16",
+    "semester": "Spring 2027",
+    "type": "wip",
+    "typeLabel": "Works in progress + planning",
+    "title": "WIP Session 5 and 2027–28 planning",
+    "description": "One WIP followed by a candid evaluation of the series and a conversation about next year’s priorities.",
+    "presenter": "Presenter to be announced",
+    "readings": []
+  }
+]

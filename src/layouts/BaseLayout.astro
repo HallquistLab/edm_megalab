@@ -1,0 +1,115 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Emory Decision-Making Megalab",
+  description = "A joint forum for unfinished science, practical methods, and conversation across Emory decision-making labs.",
+} = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const pageTitle =
+  title === "Emory Decision-Making Megalab"
+    ? title
+    : `${title} · Emory Decision-Making Megalab`;
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+const socialImage = "https://hallquistlab.github.io/edm_megalab/og.png";
+const navItems = [
+  { label: "Schedule", path: "schedule/" },
+  { label: "Articles & voting", path: "articles/" },
+  { label: "Reading room", path: "readings/" },
+  { label: "Materials", path: "materials/" },
+];
+const isCurrent = (path: string) => {
+  const target = `${base}${path}`;
+  return Astro.url.pathname === target || Astro.url.pathname.startsWith(target);
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f5f0e7" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImage} />
+    <meta
+      property="og:image:alt"
+      content="Emory Decision-Making Megalab — Better science, while it’s still in motion."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <header class="site-header">
+      <a class="wordmark" href={base} aria-label="Emory Decision-Making Megalab home">
+        <span class="wordmark-mark" aria-hidden="true">EDM</span>
+        <span>Decision-Making<br />Megalab</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        {
+          navItems.map((item) => (
+            <a
+              href={`${base}${item.path}`}
+              aria-current={isCurrent(item.path) ? "page" : undefined}
+            >
+              {item.label}
+            </a>
+          ))
+        }
+      </nav>
+      <a
+        class="header-action"
+        href="https://github.com/HallquistLab/edm_megalab/issues/new/choose"
+      >
+        Propose a session <span aria-hidden="true">↗</span>
+      </a>
+      <details class="mobile-menu">
+        <summary>Menu</summary>
+        <nav aria-label="Mobile navigation">
+          {
+            navItems.map((item) => (
+              <a
+                href={`${base}${item.path}`}
+                aria-current={isCurrent(item.path) ? "page" : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+          <a href="https://github.com/HallquistLab/edm_megalab/issues/new/choose">
+            Propose a session <span aria-hidden="true">↗</span>
+          </a>
+        </nav>
+      </details>
+    </header>
+    <main id="main-content">
+      <slot />
+    </main>
+    <footer>
+      <div>
+        <p>Emory University · Department of Psychology</p>
+        <p>Built for open, useful scientific exchange.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        {navItems.map((item) => <a href={`${base}${item.path}`}>{item.label}</a>)}
+        <a href={`${base}admin/`}>Coordinator console</a>
+      </nav>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CalendarSubscription from "../components/CalendarSubscription.astro";
+import { formatDate, schedule, weekday } from "../lib/content";
+import siteData from "../data/site.json";
+import type { SiteConfig } from "../types";
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const site = siteData as SiteConfig;
+const today = new Date().toISOString().slice(0, 10);
+const futureIndex = schedule.findIndex((session) => session.date >= today);
+const nextIndex = futureIndex === -1 ? schedule.length - 1 : futureIndex;
+const nextSession = schedule[nextIndex];
+const previewSessions = schedule.slice(nextIndex + 1, nextIndex + 3);
+const nextFeaturedReading =
+  nextSession.type === "article"
+    ? nextSession.readings.find((reading) => reading.title)
+    : undefined;
+const [nextMonth, nextDay] = formatDate(nextSession.date).toUpperCase().split(" ");
+const timeLabel = site.startTime
+  ? `${site.startTime}–${site.endTime ?? "TBA"}`
+  : "Time to be confirmed";
+const locationLabel = site.location ?? "Location to be confirmed";
+---
+
+<BaseLayout>
+  <section class="hero shell">
+    <div class="hero-copy">
+      <p class="eyebrow">Emory Psychology · 2026–2027</p>
+      <h1>Better science,<br /><em>while it’s still in motion.</em></h1>
+      <p class="lede">
+        A biweekly meeting for unfinished work, sharp questions, practical methods, and
+        ideas that travel across labs.
+      </p>
+      <div class="button-row">
+        <a class="button button-primary" href={`${base}schedule/`}>Explore the schedule</a
+        >
+        <CalendarSubscription />
+      </div>
+      <p class="open-note"><span aria-hidden="true"></span> Open to Emory Psychology</p>
+    </div>
+    <aside class="next-card" aria-labelledby="next-session-title">
+      <div class="card-kicker">
+        <span>Next session</span><span
+          >{String(nextIndex + 1).padStart(2, "0")} / {schedule.length}</span
+        >
+      </div>
+      <div class="date-block">
+        <strong>{nextDay}</strong><span
+          >{nextMonth}<br />{weekday(nextSession.date).slice(0, 3).toUpperCase()}</span
+        >
+      </div>
+      <p class="session-type">{nextSession.typeLabel}</p>
+      <h2 id="next-session-title">{nextSession.title}</h2>
+      <p>{nextSession.description}</p>
+      {
+        nextFeaturedReading && (
+          <a class="next-reading" href={nextFeaturedReading.url}>
+            <span>Featured article</span>
+            <strong>{nextFeaturedReading.title}</strong>
+            <small>
+              {nextFeaturedReading.authors} · {nextFeaturedReading.journal}
+            </small>
+          </a>
+        )
+      }
+      <div class="session-meta">
+        <span>{timeLabel}</span>
+        <span>{locationLabel}</span>
+      </div>
+    </aside>
+  </section>
+
+  <section
+    class="home-poll-banner"
+    data-home-poll
+    hidden
+    aria-labelledby="home-poll-title"
+  >
+    <div class="shell">
+      <div>
+        <p class="eyebrow">Voting is open</p>
+        <h2 id="home-poll-title">Vote for our next article.</h2>
+        <p class="home-poll-detail">
+          <strong data-home-poll-name></strong>
+          <span data-home-poll-meta></span>
+        </p>
+      </div>
+      <a class="button button-light" href={`${base}articles/#ballot`}>
+        Review the ballot <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="schedule-preview shell">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Upcoming meetings</p>
+        <h2>A room for work<br />at every stage.</h2>
+      </div>
+      <p>
+        Six to seven meetings each semester, balanced across works in progress, article
+        discussions, methods, and emerging questions.
+      </p>
+    </div>
+    {
+      previewSessions.map((session) => {
+        const featuredReading =
+          session.type === "article"
+            ? session.readings.find((reading) => reading.title)
+            : undefined;
+        return (
+          <div class="meeting-row">
+            <time datetime={session.date}>
+              <>
+                <strong>{formatDate(session.date)}</strong>
+                <span>{weekday(session.date)}</span>
+              </>
+            </time>
+            <span class={`tag tag-${session.type}`}>{session.typeLabel}</span>
+            <h3>{session.title}</h3>
+            {featuredReading ? (
+              <div class="meeting-featured-paper">
+                <span>Featured article</span>
+                <strong>{featuredReading.title}</strong>
+                <small>
+                  {featuredReading.authors} · {featuredReading.journal}
+                </small>
+              </div>
+            ) : (
+              <p>{session.description}</p>
+            )}
+            <a
+              href={`${base}schedule/#${session.id}`}
+              aria-label={`View ${session.title}`}
+            >
+              ↗
+            </a>
+          </div>
+        );
+      })
+    }
+  </section>
+
+  <script>
+    import "../scripts/home";
+  </script>
+</BaseLayout>

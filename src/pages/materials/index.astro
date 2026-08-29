@@ -1,0 +1,102 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+const repo = "https://github.com/HallquistLab/edm_megalab";
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout
+  title="Materials"
+  description="Workshop, discussion, and meeting materials from the Emory Decision-Making Megalab."
+>
+  <PageIntro
+    eyebrow="Materials · A growing archive"
+    title="Useful after the room empties."
+    intro="Slides, notebooks, discussion prompts, and public workshop materials will collect here. Preliminary or sensitive WIP materials stay in the group’s private shared space."
+  />
+
+  <section class="materials-grid shell">
+    <article class="feature-material">
+      <p class="eyebrow">Start here</p>
+      <span class="material-number">01</span>
+      <div>
+        <span class="tag tag-community">Planning</span>
+        <h2>2026–2027 academic-year plan</h2>
+        <p>
+          The rationale, meeting portfolio, proposed schedule, programming principles, and
+          calendar basis for the first year.
+        </p>
+        <a href={`${repo}/blob/main/documentation/01_academic_year_plan.md`}
+          >Open plan <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </article>
+    <article class="material-card">
+      <span class="material-number">02</span>
+      <div>
+        <span class="tag tag-article">Reading guide</span>
+        <h2>Curated recent readings</h2>
+        <p>
+          Priority discussion papers, methods anchors, reserve readings, and suggested
+          pairings.
+        </p>
+      </div>
+      <a href={`${repo}/blob/main/documentation/02_recent_readings.md`}>Open guide ↗</a>
+    </article>
+    <article class="material-card">
+      <span class="material-number">03</span>
+      <div>
+        <span class="tag tag-current-topic">Organizer toolkit</span>
+        <h2>Communications and email templates</h2>
+        <p>
+          Launch copy, colleague outreach drafts, meeting reminders, and a reusable call
+          for WIPs.
+        </p>
+      </div>
+      <a
+        href={`${repo}/blob/main/documentation/03_communications_plan_and_email_drafts.md`}
+        >Open toolkit ↗</a
+      >
+    </article>
+    <article class="material-card">
+      <span class="material-number">04</span>
+      <div>
+        <span class="tag tag-wip">Presenter guide</span>
+        <h2>Sharing works in progress</h2>
+        <p>
+          A friendly guide to bringing unfinished work, setting focal questions, and
+          making feedback useful.
+        </p>
+      </div>
+      <a href={`${base}wip-guide/`}>Read the guide →</a>
+    </article>
+    <article class="material-card material-placeholder">
+      <span class="material-number">05</span>
+      <div>
+        <span class="tag tag-methods">Workshop archive</span>
+        <h2>Methods notebooks and slides</h2>
+        <p>Public materials will appear here as workshops are confirmed and completed.</p>
+      </div>
+      <span>Coming fall 2026</span>
+    </article>
+  </section>
+
+  <section class="archive-principle shell">
+    <div>
+      <p class="eyebrow">A useful boundary</p>
+      <h2>Public by default.<br /><em>Private when needed.</em></h2>
+    </div>
+    <div>
+      <p>
+        Finished workshop resources, reading notes, and reusable examples belong in the
+        public archive.
+      </p>
+      <p>
+        Unpublished results, sensitive data, and preliminary WIP material should remain in
+        a restricted Emory location linked only in private meeting invitations.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
