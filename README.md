@@ -9,7 +9,8 @@ A content-driven Astro website for coordinating the Emory Decision-Making Joint 
 - **Reading room:** edit [`src/data/readings.json`](src/data/readings.json).
 - **Article queue and ballot:** members submit and vote on the site; coordinators moderate at `/admin/`. Supabase stores the live queue and ballots.
 - **Workshop and discussion archive:** add public links in [`src/pages/materials/index.astro`](src/pages/materials/index.astro). Keep sensitive WIP material in a private Emory location.
-- **Long-form planning documents:** edit the Markdown files in [`documentation/`](documentation/).
+
+Local planning documents belong in the ignored `documentation/` folder. Do not link to or commit that folder; move only deliberately public material into the site source.
 
 Calendar files are regenerated from the schedule automatically before every production build. The stable subscription feed lives at `calendar/edm-megalab.ics`; keep that filename unchanged so existing subscribers continue receiving updates. If time and location are not yet set, events are exported as transparent, all-day tentative placeholders so they reserve the date without falsely implying logistics.
 

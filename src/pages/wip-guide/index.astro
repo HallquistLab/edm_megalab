@@ -1,5 +1,4 @@
 ---
-import { Content } from "../../../documentation/04_presenting_works_in_progress.md";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 ---
 
@@ -9,6 +8,291 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 >
   <article class="guide-copy shell">
     <p class="eyebrow">Presenter guide · Works in progress</p>
-    <Content />
+    <h1>Sharing Work in Progress with the Megalab</h1>
+
+    <h2>The short version</h2>
+    <p>
+      Bring the work <strong>as it is</strong>, not as you think a formal talk ought to
+      look. Preliminary ideas, puzzling results, half-built models, design forks, one
+      troublesome figure, and analyses that did not work are all welcome. You do not need
+      a complete story or beautiful slides.
+    </p>
+    <p>
+      What does help is a clear purpose. A useful WIP is <strong
+        >prepared, not polished</strong
+      >{""}: give the group enough context to think with you, and identify one to three
+      questions or goals that will make the conversation useful.
+    </p>
+
+    <h2>What a WIP is for</h2>
+    <p>
+      A WIP is a working session, not a performance or an exam. Its purpose is to make the
+      science better while there is still time to change it. Presenting early is often
+      especially valuable: advice about a design, analysis, or model can have much more
+      impact before the next step is locked in.
+    </p>
+    <p>Good reasons to present include:</p>
+    <ul>
+      <li>
+        choosing between two task designs, models, measures, or analysis strategies;
+      </li>
+      <li>stress-testing an assumption or interpretation;</li>
+      <li>troubleshooting an unexpected result or failed analysis;</li>
+      <li>
+        deciding which diagnostic, simulation, or follow-up study would be most
+        informative;
+      </li>
+      <li>checking whether a scientific question and design line up;</li>
+      <li>finding relevant expertise, tools, datasets, or collaborators;</li>
+      <li>getting reactions to the emerging story of a paper or grant; or</li>
+      <li>rehearsing a talk, if presentation feedback is the explicit goal.</li>
+    </ul>
+    <p>
+      The work can be at any stage. It only needs to be developed enough that the group
+      has something concrete to discuss.
+    </p>
+
+    <h2>Start with the help you want</h2>
+    <p>Before making slides, finish this sentence:</p>
+    <blockquote>
+      <p>By the end of this session, I would like to have a clearer answer about...</p>
+    </blockquote>
+    <p>
+      Then turn that goal into one to three focal questions. Questions that name a
+      decision, uncertainty, or tradeoff tend to produce more useful feedback than an
+      open-ended request for general thoughts.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Instead of only asking...</th>
+          <th>Give the group a focal question such as...</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>“What do you think?”</td>
+          <td>
+            “Which of these two task designs better separates learning from choice
+            variability, and what would each fail to identify?”
+          </td>
+        </tr>
+        <tr>
+          <td>“Does the model look okay?”</td>
+          <td>
+            “Are the state and trait components identifiable with this sampling schedule?
+            What recovery check would be most informative?”
+          </td>
+        </tr>
+        <tr>
+          <td>“Any ideas about this result?”</td>
+          <td>
+            “What plausible artifact or alternative explanation should we rule out before
+            interpreting this effect?”
+          </td>
+        </tr>
+        <tr>
+          <td>“Is the project ready?”</td>
+          <td>
+            “What is the highest-risk unresolved decision before we preregister and begin
+            data collection?”
+          </td>
+        </tr>
+        <tr>
+          <td>“How are my slides?”</td>
+          <td>
+            “After this short explanation, can you state the main claim in one sentence?
+            Which figure or transition obscured it?”
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      It is also helpful to say what is <strong>open for discussion</strong>, what is
+      already
+      <strong>fixed</strong>, and what is <strong>outside the scope</strong> of this session.
+      That keeps the group from spending twenty minutes redesigning a part of the project that
+      cannot change.
+    </p>
+
+    <h2>Send a short agenda note</h2>
+    <p>
+      When arranging the session, send the coordinator a short note that can be used to
+      build and circulate the meeting agenda. It can be brief and informal:
+    </p>
+    <pre><code>Working title:
+Project stage:
+One-sentence scientific question:
+What I want from the session (1-3 focal questions or goals):
+What I plan to show:
+Discussion preference (interruptions welcome, clarifications only, or hold
+  questions until a stopping point):
+Useful expertise to have in the room:
+Any confidentiality or sharing constraints:</code></pre>
+    <p>
+      This lets the coordinator allocate time, combine WIPs thoughtfully, invite people
+      with relevant expertise, and keep the discussion centered on the presenter's goals.
+      If the session contains more than one WIP, the agenda should state the time
+      available to each presenter and protect a discussion block for each project.
+    </p>
+
+    <h2>Prepare only what the discussion needs</h2>
+    <p>
+      There is no required slide count or deck structure. You can use rough slides, a
+      whiteboard, a notebook, a design diagram, a live analysis, a handout, or a single
+      figure. Aesthetics are optional; legibility is not. Label axes, define unfamiliar
+      terms, and give a cross-lab audience enough orientation to take part.
+    </p>
+    <p>A simple WIP often needs only:</p>
+    <ol>
+      <li>
+        <strong>The question and the ask.</strong> What are you studying, and where do you
+        want the group's help?
+      </li>
+      <li>
+        <strong>Just enough context.</strong> What does the group need to know to reason about
+        the decision? Skip the exhaustive literature review.
+      </li>
+      <li>
+        <strong>The current state of the work.</strong> Show the design, data, code, result,
+        or competing options honestly. Label preliminary results as preliminary.
+      </li>
+      <li>
+        <strong>The decision space.</strong> What alternatives have you considered? What are
+        their tradeoffs or constraints?
+      </li>
+      <li>
+        <strong>The focal questions again.</strong> Put them back on the screen when discussion
+        begins.
+      </li>
+    </ol>
+    <p>
+      For a full 90-minute WIP session, a useful default is roughly 20–30 minutes of
+      framing and 40–50 minutes of discussion, with a little room for introductions,
+      transitions, and a closing summary. If two projects share a meeting, the coordinator
+      and presenters should scale this together. The underlying principle is more
+      important than the exact numbers: <strong
+        >stop presenting while there is still ample time to work on the questions.</strong
+      >
+    </p>
+    <p>
+      If the project is complicated, consider sharing one figure, diagram, abstract, or
+      short note in advance. Pre-reading should be helpful rather than a hidden admission
+      requirement; the session should still make sense to someone who did not read it.
+    </p>
+
+    <h2>Open by making the contract clear</h2>
+    <p>At the beginning, tell the room how to help. For example:</p>
+    <blockquote>
+      <p>
+        This is an early pilot, and the main thing I need today is help deciding whether
+        the next version should use a within- or between-person manipulation. I will give
+        about ten minutes of context, show the tradeoffs I see, and then pause. Clarifying
+        questions are welcome as I go; could we hold broader design alternatives until
+        that pause?
+      </p>
+    </blockquote>
+    <p>
+      You are allowed to redirect the conversation. “That is an important issue, but it is
+      fixed for this dataset; could we return to the model-comparison question?” is good
+      facilitation, not defensiveness.
+    </p>
+    <p>
+      You also do not need an immediate answer to every question or a defense of every
+      preliminary choice. “I do not know,” “that is exactly the uncertainty I wanted help
+      with,” and “let me think about that after the meeting” are all perfectly good WIP
+      responses.
+    </p>
+
+    <h2>Make feedback a group responsibility</h2>
+    <p>
+      A low-polish WIP format works only when the room is constructive. Audience members
+      should:
+    </p>
+    <ul>
+      <li>listen for the presenter's stated goals and address those questions first;</li>
+      <li>ask clarifying questions before prescribing a solution;</li>
+      <li>distinguish a serious concern from an optional idea or personal preference;</li>
+      <li>critique the design, evidence, or claim rather than the presenter;</li>
+      <li>make room for people from different career stages and areas of expertise;</li>
+      <li>keep comments concise enough for a real conversation;</li>
+      <li>avoid turning someone else's WIP into a presentation of their own work; and</li>
+      <li>respect any confidentiality or sharing boundary stated by the presenter.</li>
+    </ul>
+    <p>
+      Critical feedback is welcome and often the point. “Constructive” does not mean
+      avoiding disagreement; it means making disagreement specific, respectful, and
+      useful. When possible, pair a concern with a diagnostic, alternative, or next step.
+    </p>
+    <p>
+      The facilitator or coordinator should briefly restate the presenter's goals, watch
+      the agenda and the clock, bring the group back when it drifts, invite voices that
+      have not yet entered, and reserve a few minutes to summarize. A volunteer note-taker
+      can be extremely helpful: the presenter is then free to listen and think instead of
+      trying to capture every comment.
+    </p>
+
+    <h2>End with a short harvest</h2>
+    <p>Use the last few minutes to ask:</p>
+    <ul>
+      <li>What are the strongest points of agreement?</li>
+      <li>Where does uncertainty or disagreement remain?</li>
+      <li>What are one or two promising next steps?</li>
+      <li>Is there someone the presenter should follow up with?</li>
+    </ul>
+    <p>
+      Afterward, the presenter decides what to use. Feedback is input, not a vote or a
+      list of required revisions. Review the notes while the conversation is fresh, record
+      the suggestions you want to pursue, and keep track of why you set others aside.
+      Follow up individually when a contribution opens a useful technical question or
+      collaboration.
+    </p>
+
+    <h2>A final reassurance</h2>
+    <p>
+      Please do not postpone a WIP because the slides are not attractive, the results are
+      messy, or the story has not come together. Those may be signs that this is exactly
+      the right time to present. The courtesy you owe the group is not visual polish; it
+      is a focused agenda, honest context, and enough time for discussion.
+    </p>
+
+    <h2>Sources and examples from other research communities</h2>
+    <p>This guide adapts several practices used elsewhere:</p>
+    <ul>
+      <li>
+        The <a
+          href="https://www.win.ox.ac.uk/about/communications/wips/a-guide-to-preparing-for-your-wip/wip-guide/"
+          >Oxford Centre for Integrative Neuroimaging</a
+        > describes its WIPs as informal, early-stage opportunities for constructive support
+        rather than tests or box-ticking exercises.
+      </li>
+      <li>
+        The <a href="https://sites.uci.edu/biophysicsseminar/information-for-speakers/"
+          >UC Irvine Biophysics and Systems Biology seminar</a
+        > welcomes work ranging from an unpolished idea to prepublication and protects substantial
+        time for discussion.
+      </li>
+      <li>
+        <a
+          href="https://www.hopkinsmedicine.org/general-internal-medicine/useful-links/rip-tips"
+          >Johns Hopkins General Internal Medicine</a
+        > recommends stating one to three session objectives, focusing on a small number of
+        dilemmas, using a note-taker, and treating feedback as advice rather than a mandate.
+      </li>
+      <li>
+        The <a
+          href="https://www.aera.net/Education-Research/Graduate-Student-Research-in-Progress-Roundtable-Series/RIPRS-Guidance-for-Presenters"
+          >American Educational Research Association's research-in-progress roundtables</a
+        > favor brief framing, a few selected aspects of the project, and questions designed
+        to stimulate interaction.
+      </li>
+      <li>
+        Golden and colleagues' <a
+          href="https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008953"
+          >“Ten simple rules for productive lab meetings”</a
+        > emphasizes participant-defined objectives, clear roles, accessible meetings, and
+        feedback that is open, supportive, respectful, and directed at ideas rather than people.
+      </li>
+    </ul>
   </article>
 </BaseLayout>
