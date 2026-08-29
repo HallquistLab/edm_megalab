@@ -308,7 +308,6 @@ proposalForm?.addEventListener("submit", async (event) => {
     citation: String(data.citation),
     topic: String(data.topic),
     rationale: String(data.rationale),
-    questions: String(data.questions ?? ""),
     submitter_name: String(data.submitter_name),
     submitter_id: currentUser.id,
     status: "pending",
