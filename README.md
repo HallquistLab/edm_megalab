@@ -7,6 +7,7 @@ A content-driven Astro website for coordinating the Emory Decision-Making Joint 
 - **Meeting dates, details, and public materials:** edit [`src/data/schedule.json`](src/data/schedule.json). Each meeting has a permanent page; after its date passes, it appears automatically under **Past meetings** and in the **Materials** archive.
 - **Default time, location, and calendar behavior:** edit [`src/data/site.json`](src/data/site.json).
 - **Reading room:** edit [`src/data/readings.json`](src/data/readings.json).
+- **About us:** edit lab and PI profiles, including their public source links, in [`src/data/labs.json`](src/data/labs.json). The Megalab's mission and goals live in [`src/pages/about/index.astro`](src/pages/about/index.astro).
 - **Session proposals, article queue, and ballot:** visitors propose sessions at `/propose/`; members submit articles and vote; coordinators review everything at `/admin/`. Supabase stores the private proposals, live queue, and ballots.
 - **Standing resources:** edit [`src/pages/materials/index.astro`](src/pages/materials/index.astro). Keep sensitive WIP material in a private Emory location.
 

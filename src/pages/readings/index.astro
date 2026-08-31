@@ -16,7 +16,7 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
   <PageIntro
     eyebrow="EDM Megalab · Curated, not exhaustive"
     title="Reading room"
-    intro="Search the collection or select a research keyword to find related articles."
+    intro="Search the collection or combine research keywords to find related articles."
   />
 
   <section class="reading-tools shell" aria-label="Reading filters">
@@ -31,8 +31,12 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
     </label>
     <div class="reading-control-panel">
       <div class="reading-filter-group">
-        <span>Keywords</span>
-        <div class="keyword-filter-bar" role="group" aria-label="Filter by keyword">
+        <span>Keywords · Match all selected</span>
+        <div
+          class="keyword-filter-bar"
+          role="group"
+          aria-label="Filter by one or more keywords; articles must match every selected keyword"
+        >
           <button
             class="keyword-badge keyword-all active"
             type="button"
@@ -146,7 +150,9 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
         </article>
       ))
     }
-    <p class="empty-state reading-empty" hidden>No readings match that search.</p>
+    <p class="empty-state reading-empty" hidden>
+      No readings match all selected filters.
+    </p>
   </section>
 
   <script>
@@ -164,7 +170,7 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
     const viewButtons = Array.from(
       document.querySelectorAll<HTMLButtonElement>("[data-reading-view]"),
     );
-    let keyword = "all";
+    const selectedKeywords = new Set<string>();
     let discussionStatus = "all";
 
     const update = () => {
@@ -172,7 +178,9 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
       let visibleCount = 0;
       cards.forEach((card) => {
         const cardKeywords = (card.dataset.keywords ?? "").split("|");
-        const matchesKeyword = keyword === "all" || cardKeywords.includes(keyword);
+        const matchesKeyword = [...selectedKeywords].every((keyword) =>
+          cardKeywords.includes(keyword),
+        );
         const isPresented = card.dataset.presented === "true";
         const matchesStatus =
           discussionStatus === "all" ||
@@ -182,8 +190,20 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
         if (!card.hidden) visibleCount += 1;
       });
       if (empty) empty.hidden = visibleCount > 0;
-      if (count)
-        count.textContent = `${visibleCount} article${visibleCount === 1 ? "" : "s"}`;
+      if (count) {
+        const keywordCount = selectedKeywords.size;
+        count.textContent = `${visibleCount} article${visibleCount === 1 ? "" : "s"}${keywordCount > 0 ? ` · ${keywordCount} keyword${keywordCount === 1 ? "" : "s"}` : ""}`;
+      }
+    };
+
+    const syncKeywordButtons = () => {
+      keywordButtons.forEach((button) => {
+        const value = button.dataset.readingKeyword ?? "all";
+        const active =
+          value === "all" ? selectedKeywords.size === 0 : selectedKeywords.has(value);
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
     };
 
     const setView = (view: "cards" | "list") => {
@@ -207,12 +227,15 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
     search?.addEventListener("input", update);
     keywordButtons.forEach((button) => {
       button.addEventListener("click", () => {
-        keyword = button.dataset.readingKeyword ?? "all";
-        keywordButtons.forEach((item) => {
-          const active = item.dataset.readingKeyword === keyword;
-          item.classList.toggle("active", active);
-          item.setAttribute("aria-pressed", String(active));
-        });
+        const keyword = button.dataset.readingKeyword ?? "all";
+        if (keyword === "all") {
+          selectedKeywords.clear();
+        } else if (selectedKeywords.has(keyword)) {
+          selectedKeywords.delete(keyword);
+        } else {
+          selectedKeywords.add(keyword);
+        }
+        syncKeywordButtons();
         update();
       });
     });

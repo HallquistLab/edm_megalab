@@ -1,0 +1,63 @@
+[
+  {
+    "id": "treadway",
+    "shortName": "TReAD Lab",
+    "name": "Translational Research in Affective Disorders Lab",
+    "pi": "Michael Treadway",
+    "piOverview": "Michael Treadway is a cognitive neuroscientist and clinical psychologist who studies motivation and the brain systems involved in weighing costs and benefits.",
+    "researchOverview": "The TReAD Lab investigates how changes in reward circuitry contribute to motivational difficulties in depression and other affective disorders, including the roles of stress and immune function. Its work combines computational models, brain imaging, assessments of daily experience, and experimental interventions to identify mechanisms that could inform treatment.",
+    "links": [
+      { "label": "Lab website", "url": "https://www.treadlab.org/" },
+      {
+        "label": "PI profile",
+        "url": "https://psychology.emory.edu/people/faculty/treadway-michael.html"
+      }
+    ]
+  },
+  {
+    "id": "brown",
+    "shortName": "COMP Lab",
+    "name": "Computational Mechanisms of Psychopathology Lab",
+    "pi": "Vanessa Brown",
+    "piOverview": "Vanessa Brown is a clinical scientist whose research examines learning and decision-making in anxiety, trauma-related conditions, and depression, with an emphasis on processes relevant to treatment.",
+    "researchOverview": "The COMP Lab uses computational models to study how people learn under uncertainty and how these processes change with psychological difficulties and treatment. Behavioral tasks, neuroimaging, real-world assessments, and interventions help connect formal theories of learning to clinically meaningful questions, including whether computational measures are reliable and useful in practice.",
+    "links": [
+      { "label": "Lab website", "url": "https://scholarblogs.emory.edu/complab/" },
+      {
+        "label": "PI profile",
+        "url": "https://psychology.emory.edu/people/faculty/brown-vanessa.html"
+      }
+    ]
+  },
+  {
+    "id": "hitchcock",
+    "shortName": "Translational Lab",
+    "name": "The Translational Lab",
+    "pi": "Pete Hitchcock",
+    "piOverview": "Pete Hitchcock combines training in clinical psychology and behavioral treatment with computational research on learning and choice in depression and anxiety.",
+    "researchOverview": "The Translational Lab studies how emotions, beliefs, and context shape decisions, including the processes underlying rumination and worry. Carefully designed behavioral experiments and models of learning and evidence accumulation support its broader aim: translating decision science into precise, scalable psychological interventions, including self-guided treatments.",
+    "links": [
+      { "label": "Lab website", "url": "https://www.translational-lab.com/home" },
+      {
+        "label": "PI profile",
+        "url": "https://psychology.emory.edu/people/faculty/hitchcock-peter-f.html"
+      }
+    ]
+  },
+  {
+    "id": "hallquist",
+    "shortName": "DEPENd Lab",
+    "name": "Developmental Personality Neuroscience Lab",
+    "pi": "Michael Hallquist",
+    "piOverview": "Michael Hallquist studies the brain and behavioral processes underlying personality, emotional instability, and self-regulation, with particular attention to adolescence and young adulthood.",
+    "researchOverview": "The DEPENd Lab examines how emotions and social cues interact with reward learning and goal-directed decisions. Computational models, functional neuroimaging, and assessments of daily experience help explain individual differences in impulsivity and interpersonal difficulties. The lab also shares training resources in quantitative methods and reproducible data analysis.",
+    "links": [
+      { "label": "Lab website", "url": "https://dependlab.unc.edu/" },
+      { "label": "Research overview", "url": "https://dependlab.unc.edu/studies/" },
+      {
+        "label": "Methods resources",
+        "url": "https://dependlab.unc.edu/quantitative-methods/"
+      }
+    ]
+  }
+]

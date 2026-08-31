@@ -1,0 +1,126 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import labs from "../../data/labs.json";
+
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+---
+
+<BaseLayout
+  title="About us"
+  description="The mission, goals, and participating labs of the Emory Decision-Making Megalab: Treadway, Brown, Hitchcock, and Hallquist."
+>
+  <PageIntro
+    eyebrow="Emory Decision-Making Megalab"
+    title="About us"
+    intro="Four labs, meeting biweekly to connect decision-making research, computational approaches, and clinical science."
+    compact
+  />
+
+  <section class="about-purpose shell" aria-labelledby="about-mission-title">
+    <div class="about-mission">
+      <h2 class="eyebrow" id="about-mission-title">Our mission</h2>
+      <p class="about-lead">
+        EDM Megalab brings together faculty, trainees, and research staff to understand
+        how people learn, value options, and make decisions—and how these processes relate
+        to mental health.
+      </p>
+      <p>
+        Our meetings create a regular space for work that benefits from perspectives
+        beyond a single lab. We discuss emerging findings, work through methodological
+        challenges, and connect questions across decision neuroscience, computational
+        psychiatry, affective science, and quantitative psychology.
+      </p>
+    </div>
+    <div class="about-aspiration" aria-labelledby="about-aspiration-title">
+      <h2 class="eyebrow" id="about-aspiration-title">Our aspiration</h2>
+      <p>
+        Build a lasting, collaborative research community at Emory where sharing an
+        unfinished idea is routine, methods travel readily between labs, and trainees help
+        shape the scientific conversation.
+      </p>
+      <p>
+        We hope that sustained exchange leads to stronger studies, shared tools, and new
+        collaborations that advance our understanding of behavior and mental health.
+      </p>
+    </div>
+  </section>
+
+  <section class="about-goals shell" aria-labelledby="about-goals-title">
+    <h2 class="eyebrow" id="about-goals-title">Our goals</h2>
+    <div class="about-goal-grid">
+      <article>
+        <h3>Strengthen work in progress</h3>
+        <p>
+          Offer constructive, specific feedback while projects are still taking shape:
+          from a study question or task design to an analysis, grant, or manuscript.
+        </p>
+      </article>
+      <article>
+        <h3>Share practical methods</h3>
+        <p>
+          Make technical knowledge usable through workshops, worked examples, and candid
+          discussion of modeling, measurement, and neuroimaging decisions.
+        </p>
+      </article>
+      <article>
+        <h3>Connect ideas across labs</h3>
+        <p>
+          Read consequential papers together, examine emerging topics, and identify
+          questions that benefit from our complementary approaches and expertise.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <section class="about-labs shell" aria-labelledby="about-labs-title">
+    <header class="about-labs-heading">
+      <p class="eyebrow">Participating labs</p>
+      <h2 id="about-labs-title">Four labs, complementary perspectives.</h2>
+      <p>
+        Our shared interest in decision-making connects research on motivation, learning,
+        emotion, personality, and mental health.
+      </p>
+    </header>
+    <div class="about-lab-grid">
+      {
+        labs.map((lab) => (
+          <article class="about-lab" aria-labelledby={`${lab.id}-title`}>
+            <header>
+              <p class="eyebrow">{lab.shortName}</p>
+              <h3 id={`${lab.id}-title`}>{lab.pi}</h3>
+              <p class="about-lab-name">{lab.name}</p>
+            </header>
+            <p>{lab.piOverview}</p>
+            <p>{lab.researchOverview}</p>
+            <ul class="about-lab-links" aria-label={`${lab.pi} lab and profile links`}>
+              {lab.links.map((link) => (
+                <li>
+                  <a href={link.url}>
+                    {link.label} <span aria-hidden="true">↗</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+    <p class="about-source-note">
+      Profiles adapted from the public lab and university pages linked above.
+    </p>
+  </section>
+
+  <section class="about-participate shell" aria-labelledby="about-participate-title">
+    <div>
+      <h2 id="about-participate-title">Bring a question to the next meeting.</h2>
+      <p>Suggest a work in progress, a methods session, or a topic for discussion.</p>
+    </div>
+    <div class="button-row">
+      <a class="button button-primary" href={`${base}propose/`}>Propose a Session</a>
+      <a class="button button-secondary" href={`${base}schedule/`}>View the schedule</a>
+    </div>
+  </section>
+</BaseLayout>
