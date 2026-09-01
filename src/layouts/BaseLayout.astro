@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = "Emory Decision-Making Megalab",
-  description = "A biweekly Emory Psychology forum for works in progress, practical methods, and decision-making research.",
+  description = "A biweekly forum for colleagues across Emory to share works in progress, practical methods, and decision-making research.",
   socialImage = "https://hallquistlab.github.io/edm_megalab/og.png",
   pageType = "website",
 } = Astro.props;
@@ -119,7 +119,7 @@ const isCurrent = (matches: string[]) =>
     </div>
     <footer>
       <div>
-        <p>Emory University · Department of Psychology</p>
+        <p>Emory University</p>
       </div>
       <nav class="footer-nav" aria-label="Footer navigation">
         {navItems.map((item) => <a href={`${base}${item.path}`}>{item.label}</a>)}
