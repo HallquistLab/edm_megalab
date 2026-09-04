@@ -10,14 +10,14 @@ X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2026-10-23-fmri-preprocessing@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20261023
-DTEND;VALUE=DATE:20261024
+DTSTART;TZID=America/New_York:20261023T120000
+DTEND;TZID=America/New_York:20261023T133000
 SUMMARY:Modern fMRI preprocessing: what choices actually matter? — Emory 
  Decision-Making Megalab
 DESCRIPTION:Methods workshop. Compare pipelines used across Emory labs: d
  istortion and motion correction\, nuisance regression\, censoring\, glob
  al signal\, surface versus volume\, and QC.  Lead: Workshop lead to be a
- nnounced. Time and location to be announced.
+ nnounced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-10-23-fmri-
  preprocessing

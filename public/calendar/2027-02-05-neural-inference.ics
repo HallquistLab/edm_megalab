@@ -11,14 +11,14 @@ X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2027-02-05-neural-inference@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270205
-DTEND;VALUE=DATE:20270206
+DTSTART;TZID=America/New_York:20270205T120000
+DTEND;TZID=America/New_York:20270205T133000
 SUMMARY:Fitting computational models with neural and amortized inference 
  — Emory Decision-Making Megalab
 DESCRIPTION:Methods workshop. Parameter recovery\, likelihood approximati
  on\, simulation-based inference\, diagnostics\, and when these methods b
- eat MCMC or optimization.  Lead: Workshop lead to be announced. Time and
-  location to be announced.
+ eat MCMC or optimization.  Lead: Workshop lead to be announced. Location
+  to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-02-05-neura
  l-inference

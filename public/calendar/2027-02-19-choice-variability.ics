@@ -11,8 +11,8 @@ X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2027-02-19-choice-variability@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270219
-DTEND;VALUE=DATE:20270220
+DTSTART;TZID=America/New_York:20270219T120000
+DTEND;TZID=America/New_York:20270219T133000
 SUMMARY:Compulsivity\, choice variability\, and computational phenotypes 
  — Emory Decision-Making Megalab
 DESCRIPTION:Article discussion. Separate variability in learning from var
@@ -21,7 +21,7 @@ DESCRIPTION:Article discussion. Separate variability in learning from var
  imal choice variability but unaltered reinforcement learning under uncer
  tainty. Authors: Lee\, Rouault & Wyart. Journal: Nature Mental Health (2
  025). https://doi.org/10.1038/s44220-024-00364-5 Lead: Discussion leader
-  to be announced. Time and location to be announced.
+  to be announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-02-19-choic
  e-variability

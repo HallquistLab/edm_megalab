@@ -40,7 +40,7 @@ const foldLine = (line) => {
 const eventLines = (session) => {
   const logistics = site.location
     ? `Location: ${site.location}`
-    : "Time and location to be announced";
+    : "Location to be announced";
   const featuredArticles = session.readings
     .filter((reading) => reading.title)
     .map(

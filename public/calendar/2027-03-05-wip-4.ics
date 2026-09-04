@@ -10,12 +10,12 @@ X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2027-03-05-wip-4@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270305
-DTEND;VALUE=DATE:20270306
+DTSTART;TZID=America/New_York:20270305T120000
+DTEND;TZID=America/New_York:20270305T133000
 SUMMARY:WIP Session 3 — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. A project crossing clinical and basic deci
  sion science\, presented early enough for the conversation to matter.  L
- ead: Presenter to be announced. Time and location to be announced.
+ ead: Presenter to be announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-03-05-wip-4
 STATUS:TENTATIVE

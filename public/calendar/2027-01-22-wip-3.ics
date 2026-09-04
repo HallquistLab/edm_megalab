@@ -10,12 +10,12 @@ X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2027-01-22-wip-3@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270122
-DTEND;VALUE=DATE:20270123
+DTSTART;TZID=America/New_York:20270122T120000
+DTEND;TZID=America/New_York:20270122T133000
 SUMMARY:WIP Session 2 / Spring kickoff — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. One substantial project or two shorter pro
  jects\, followed by a brief reset of priorities for the semester.  Lead:
-  Presenter to be announced. Time and location to be announced.
+  Presenter to be announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-01-22-wip-3
 STATUS:TENTATIVE

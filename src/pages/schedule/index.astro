@@ -1,11 +1,18 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CalendarSubscription from "../../components/CalendarSubscription.astro";
-import { formatDate, schedule, weekday } from "../../lib/content";
+import { formatDate, formatTime, schedule, weekday } from "../../lib/content";
+import siteData from "../../data/site.json";
+import type { SiteConfig } from "../../types";
 
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+const site = siteData as SiteConfig;
+const meetingTime =
+  site.startTime && site.endTime
+    ? `${formatTime(site.startTime)}–${formatTime(site.endTime)}`
+    : "Time to be announced";
 const filters = [
   ["all", "All types"],
   ["wip", "Works in progress"],
@@ -20,7 +27,10 @@ const filters = [
   description="The 2026–2027 schedule for EDM Megalab meetings."
 >
   <header class="page-intro page-intro-single schedule-page-intro shell">
-    <h1>Schedule 2026-2027</h1>
+    <div>
+      <h1>Schedule 2026-2027</h1>
+      <p>Meeting time: Fridays, {meetingTime}</p>
+    </div>
   </header>
 
   <section class="schedule-tools shell" aria-label="Schedule tools">

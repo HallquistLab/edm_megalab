@@ -10,8 +10,8 @@ X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2026-10-09-computational-phenotypes@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20260925
-DTEND;VALUE=DATE:20260926
+DTSTART;TZID=America/New_York:20260925T120000
+DTEND;TZID=America/New_York:20260925T133000
 SUMMARY:Computational phenotypes: traits\, states\, or moving targets? — 
  Emory Decision-Making Megalab
 DESCRIPTION:Article discussion. A discussion of individual differences\, 
@@ -19,8 +19,8 @@ DESCRIPTION:Article discussion. A discussion of individual differences\,
  putational phenotype. Featured article: Dynamic computational phenotypin
  g of human cognition. Authors: Schurr\, Reznik\, Hillman\, Bhui\, et al.
  . Journal: Nature Human Behaviour (2024). https://doi.org/10.1038/s41562
- -024-01814-x Lead: Discussion leader to be announced. Time and location 
- to be announced.
+ -024-01814-x Lead: Discussion leader to be announced. Location to be ann
+ ounced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-10-09-compu
  tational-phenotypes
@@ -30,14 +30,14 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-11-community-kickoff@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20261009
-DTEND;VALUE=DATE:20261010
+DTSTART;TZID=America/New_York:20261009T120000
+DTEND;TZID=America/New_York:20261009T133000
 SUMMARY:What should EDM Megalab be? — Emory Decision-Making Megalab
 DESCRIPTION:Community planning meeting. Meet the core organizing labs and
   colleagues from across Emory\; map shared interests\, methods\, dataset
  s\, and opportunities\; and help shape priorities for the series. Planni
  ng takes place at our second meeting so all five core labs can participa
- te.  Lead: Core lab organizers. Time and location to be announced.
+ te.  Lead: Core lab organizers. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-09-11-commu
  nity-kickoff
@@ -47,14 +47,14 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-23-fmri-preprocessing@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20261023
-DTEND;VALUE=DATE:20261024
+DTSTART;TZID=America/New_York:20261023T120000
+DTEND;TZID=America/New_York:20261023T133000
 SUMMARY:Modern fMRI preprocessing: what choices actually matter? — Emory 
  Decision-Making Megalab
 DESCRIPTION:Methods workshop. Compare pipelines used across Emory labs: d
  istortion and motion correction\, nuisance regression\, censoring\, glob
  al signal\, surface versus volume\, and QC.  Lead: Workshop lead to be a
- nnounced. Time and location to be announced.
+ nnounced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-10-23-fmri-
  preprocessing
@@ -64,14 +64,14 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-06-ai-computational-psychiatry@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20261106
-DTEND;VALUE=DATE:20261107
+DTSTART;TZID=America/New_York:20261106T120000
+DTEND;TZID=America/New_York:20261106T133000
 SUMMARY:AI in computational psychiatry and decision neuroscience — Emory 
  Decision-Making Megalab
 DESCRIPTION:Current topic / workshop. Concrete use cases in coding\, mode
  ling\, literature synthesis\, analysis validation\, writing\, privacy\, 
  reproducibility\, and emerging failure modes.  Lead: Facilitators to be 
- announced. Time and location to be announced.
+ announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-11-06-ai-co
  mputational-psychiatry
@@ -81,12 +81,12 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-20-wip-2@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20261120
-DTEND;VALUE=DATE:20261121
+DTSTART;TZID=America/New_York:20261120T120000
+DTEND;TZID=America/New_York:20261120T133000
 SUMMARY:WIP Session 1 — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. An analysis or modeling problem where a la
  rger pool of expertise can materially change the project.  Lead: Present
- er to be announced. Time and location to be announced.
+ er to be announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-11-20-wip-2
 STATUS:TENTATIVE
@@ -95,8 +95,8 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-04-decision-neuroscience@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20261204
-DTEND;VALUE=DATE:20261205
+DTSTART;TZID=America/New_York:20261204T120000
+DTEND;TZID=America/New_York:20261204T133000
 SUMMARY:Sources of decision variability: latent states\, noise\, and mech
  anism — Emory Decision-Making Megalab
 DESCRIPTION:Article + year-end discussion. Variability\, latent states\, 
@@ -104,8 +104,7 @@ DESCRIPTION:Article + year-end discussion. Variability\, latent states\,
  ities. Featured article: Disentangling sources of variability in decisio
  n-making. Authors: Duffy\, Bellgrove\, Murphy\, et al.. Journal: Nature 
  Reviews Neuroscience (2025). https://doi.org/10.1038/s41583-025-00916-3 
- Lead: Discussion leader to be announced. Time and location to be announc
- ed.
+ Lead: Discussion leader to be announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-12-04-decis
  ion-neuroscience
@@ -115,12 +114,12 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2027-01-22-wip-3@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270122
-DTEND;VALUE=DATE:20270123
+DTSTART;TZID=America/New_York:20270122T120000
+DTEND;TZID=America/New_York:20270122T133000
 SUMMARY:WIP Session 2 / Spring kickoff — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. One substantial project or two shorter pro
  jects\, followed by a brief reset of priorities for the semester.  Lead:
-  Presenter to be announced. Time and location to be announced.
+  Presenter to be announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-01-22-wip-3
 STATUS:TENTATIVE
@@ -129,14 +128,14 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2027-02-05-neural-inference@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270205
-DTEND;VALUE=DATE:20270206
+DTSTART;TZID=America/New_York:20270205T120000
+DTEND;TZID=America/New_York:20270205T133000
 SUMMARY:Fitting computational models with neural and amortized inference 
  — Emory Decision-Making Megalab
 DESCRIPTION:Methods workshop. Parameter recovery\, likelihood approximati
  on\, simulation-based inference\, diagnostics\, and when these methods b
- eat MCMC or optimization.  Lead: Workshop lead to be announced. Time and
-  location to be announced.
+ eat MCMC or optimization.  Lead: Workshop lead to be announced. Location
+  to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-02-05-neura
  l-inference
@@ -146,8 +145,8 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2027-02-19-choice-variability@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270219
-DTEND;VALUE=DATE:20270220
+DTSTART;TZID=America/New_York:20270219T120000
+DTEND;TZID=America/New_York:20270219T133000
 SUMMARY:Compulsivity\, choice variability\, and computational phenotypes 
  — Emory Decision-Making Megalab
 DESCRIPTION:Article discussion. Separate variability in learning from var
@@ -156,7 +155,7 @@ DESCRIPTION:Article discussion. Separate variability in learning from var
  imal choice variability but unaltered reinforcement learning under uncer
  tainty. Authors: Lee\, Rouault & Wyart. Journal: Nature Mental Health (2
  025). https://doi.org/10.1038/s44220-024-00364-5 Lead: Discussion leader
-  to be announced. Time and location to be announced.
+  to be announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-02-19-choic
  e-variability
@@ -166,12 +165,12 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2027-03-05-wip-4@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270305
-DTEND;VALUE=DATE:20270306
+DTSTART;TZID=America/New_York:20270305T120000
+DTEND;TZID=America/New_York:20270305T133000
 SUMMARY:WIP Session 3 — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. A project crossing clinical and basic deci
  sion science\, presented early enough for the conversation to matter.  L
- ead: Presenter to be announced. Time and location to be announced.
+ ead: Presenter to be announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-03-05-wip-4
 STATUS:TENTATIVE
@@ -180,8 +179,8 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2027-03-19-state-representation@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270319
-DTEND;VALUE=DATE:20270320
+DTSTART;TZID=America/New_York:20270319T120000
+DTEND;TZID=America/New_York:20270319T133000
 SUMMARY:Representations\, schemas\, and state inference in reinforcement 
  learning — Emory Decision-Making Megalab
 DESCRIPTION:Article discussion. Move beyond scalar learning parameters to
@@ -189,7 +188,7 @@ DESCRIPTION:Article discussion. Move beyond scalar learning parameters to
   Schemas\, reinforcement learning and the medial prefrontal cortex. Auth
  ors: Bein & Niv. Journal: Nature Reviews Neuroscience (2025). https://do
  i.org/10.1038/s41583-024-00893-z Lead: Discussion leader to be announced
- . Time and location to be announced.
+ . Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-03-19-state
  -representation
@@ -199,14 +198,14 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2027-04-02-foundation-models@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270402
-DTEND;VALUE=DATE:20270403
+DTSTART;TZID=America/New_York:20270402T120000
+DTEND;TZID=America/New_York:20270402T133000
 SUMMARY:Computational psychiatry in the era of foundation models — Emory 
  Decision-Making Megalab
 DESCRIPTION:Methods / current topic. Mechanistic versus predictive models
  \, construct validity\, LLMs as tools or participants\, interpretability
  \, evaluation\, and data governance.  Lead: Facilitators to be announced
- . Time and location to be announced.
+ . Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-04-02-found
  ation-models
@@ -216,13 +215,13 @@ END:VEVENT
 BEGIN:VEVENT
 UID:2027-04-16-wip-5-planning@edm-megalab.emory.edu
 DTSTAMP:20260904T120000Z
-DTSTART;VALUE=DATE:20270416
-DTEND;VALUE=DATE:20270417
+DTSTART;TZID=America/New_York:20270416T120000
+DTEND;TZID=America/New_York:20270416T133000
 SUMMARY:WIP Session 4 and 2027–28 planning — Emory Decision-Making Megala
  b
 DESCRIPTION:Works in progress + planning. One WIP followed by a candid ev
  aluation of the series and a conversation about next year’s priorities. 
-  Lead: Presenter to be announced. Time and location to be announced.
+  Lead: Presenter to be announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-04-16-wip-5
  -planning

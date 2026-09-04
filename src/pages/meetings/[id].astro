@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { formatDate, schedule, weekday } from "../../lib/content";
+import { formatDate, formatTime, schedule, weekday } from "../../lib/content";
+import siteData from "../../data/site.json";
+import type { SiteConfig } from "../../types";
 import type { Session } from "../../types";
 
 export function getStaticPaths() {
@@ -19,6 +21,11 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
 const currentIndex = schedule.findIndex((item) => item.id === session.id);
+const site = siteData as SiteConfig;
+const meetingTime =
+  site.startTime && site.endTime
+    ? `${formatTime(site.startTime)}–${formatTime(site.endTime)}`
+    : "To be announced";
 const previousSession = currentIndex > 0 ? schedule[currentIndex - 1] : undefined;
 const nextSession =
   currentIndex < schedule.length - 1 ? schedule[currentIndex + 1] : undefined;
@@ -69,6 +76,10 @@ const resources = [
               {weekday(session.date)}, {formatDate(session.date, { year: "numeric" })}
             </time>
           </dd>
+        </div>
+        <div>
+          <dt>Time</dt>
+          <dd>{meetingTime}</dd>
         </div>
         <div>
           <dt>Lead</dt>

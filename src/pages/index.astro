@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CalendarSubscription from "../components/CalendarSubscription.astro";
-import { formatDate, schedule, weekday } from "../lib/content";
+import { formatDate, formatTime, schedule, weekday } from "../lib/content";
 import siteData from "../data/site.json";
 import type { SiteConfig } from "../types";
 const base = import.meta.env.BASE_URL.endsWith("/")
@@ -19,7 +19,7 @@ const nextFeaturedReading =
     : undefined;
 const [nextMonth, nextDay] = formatDate(nextSession.date).toUpperCase().split(" ");
 const timeLabel = site.startTime
-  ? `${site.startTime}–${site.endTime ?? "TBA"}`
+  ? `${formatTime(site.startTime)}–${site.endTime ? formatTime(site.endTime) : "TBA"}`
   : "Time to be confirmed";
 const locationLabel = site.location ?? "Location to be confirmed";
 ---
