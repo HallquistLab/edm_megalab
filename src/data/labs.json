@@ -59,5 +59,20 @@
         "url": "https://dependlab.unc.edu/quantitative-methods/"
       }
     ]
+  },
+  {
+    "id": "kragel",
+    "shortName": "ECCO Lab",
+    "name": "Emotion Cognition and Computation Lab",
+    "pi": "Philip Kragel",
+    "piOverview": "Philip Kragel studies how the brain gives rise to cognition and emotion, combining psychology, neuroscience, and machine learning to understand what distinguishes different mental processes.",
+    "researchOverview": "The ECCO Lab develops biologically grounded models of cognition and emotion using functional neuroimaging, physiological recordings, and computational models of behavior. Its work links neural networks and other quantitative models to human brain activity, with an emphasis on predictions that can be tested across independent studies and laboratories.",
+    "links": [
+      { "label": "Lab website", "url": "https://www.ecco-lab.org/" },
+      {
+        "label": "PI profile",
+        "url": "https://psychology.emory.edu/people/faculty/kragel-philip.html"
+      }
+    ]
   }
 ]

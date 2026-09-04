@@ -3,16 +3,16 @@ VERSION:2.0
 PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:WIP Session 3 / Spring kickoff
+X-WR-CALNAME:WIP Session 2 / Spring kickoff
 X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2027-01-22-wip-3@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20270122
 DTEND;VALUE=DATE:20270123
-SUMMARY:WIP Session 3 / Spring kickoff — Emory Decision-Making Megalab
+SUMMARY:WIP Session 2 / Spring kickoff — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. One substantial project or two shorter pro
  jects\, followed by a brief reset of priorities for the semester.  Lead:
   Presenter to be announced. Time and location to be announced.

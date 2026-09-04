@@ -8,41 +8,10 @@ X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
-UID:2026-09-11-community-kickoff@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
-DTSTART;VALUE=DATE:20260911
-DTEND;VALUE=DATE:20260912
-SUMMARY:What should EDM Megalab be? — Emory Decision-Making Megalab
-DESCRIPTION:EDM Megalab kickoff. Meet the core organizing labs and collea
- gues from across Emory\; map shared interests\, methods\, datasets\, and
-  opportunities\; and help shape priorities for the series.  Lead: Core l
- ab organizers. Time and location to be announced.
-LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-09-11-commu
- nity-kickoff
-STATUS:TENTATIVE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-09-25-wip-1@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+UID:2026-10-09-computational-phenotypes@edm-megalab.emory.edu
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20260925
 DTEND;VALUE=DATE:20260926
-SUMMARY:WIP Session 1 — Emory Decision-Making Megalab
-DESCRIPTION:Works in progress. Two shorter presentations\, ideally from d
- ifferent labs across Emory\, with emphasis on questions where EDM Megala
- b feedback can still change the work.  Lead: Presenters to be announced.
-  Time and location to be announced.
-LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-09-25-wip-1
-STATUS:TENTATIVE
-TRANSP:TRANSPARENT
-END:VEVENT
-BEGIN:VEVENT
-UID:2026-10-09-computational-phenotypes@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
-DTSTART;VALUE=DATE:20261009
-DTEND;VALUE=DATE:20261010
 SUMMARY:Computational phenotypes: traits\, states\, or moving targets? — 
  Emory Decision-Making Megalab
 DESCRIPTION:Article discussion. A discussion of individual differences\, 
@@ -59,8 +28,25 @@ STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:2026-09-11-community-kickoff@edm-megalab.emory.edu
+DTSTAMP:20260904T120000Z
+DTSTART;VALUE=DATE:20261009
+DTEND;VALUE=DATE:20261010
+SUMMARY:What should EDM Megalab be? — Emory Decision-Making Megalab
+DESCRIPTION:Community planning meeting. Meet the core organizing labs and
+  colleagues from across Emory\; map shared interests\, methods\, dataset
+ s\, and opportunities\; and help shape priorities for the series. Planni
+ ng takes place at our second meeting so all five core labs can participa
+ te.  Lead: Core lab organizers. Time and location to be announced.
+LOCATION:To be announced
+URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-09-11-commu
+ nity-kickoff
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:2026-10-23-fmri-preprocessing@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20261023
 DTEND;VALUE=DATE:20261024
 SUMMARY:Modern fMRI preprocessing: what choices actually matter? — Emory 
@@ -77,7 +63,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-06-ai-computational-psychiatry@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20261106
 DTEND;VALUE=DATE:20261107
 SUMMARY:AI in computational psychiatry and decision neuroscience — Emory 
@@ -94,10 +80,10 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-11-20-wip-2@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20261120
 DTEND;VALUE=DATE:20261121
-SUMMARY:WIP Session 2 — Emory Decision-Making Megalab
+SUMMARY:WIP Session 1 — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. An analysis or modeling problem where a la
  rger pool of expertise can materially change the project.  Lead: Present
  er to be announced. Time and location to be announced.
@@ -108,7 +94,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-04-decision-neuroscience@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20261204
 DTEND;VALUE=DATE:20261205
 SUMMARY:Sources of decision variability: latent states\, noise\, and mech
@@ -128,10 +114,10 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-01-22-wip-3@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20270122
 DTEND;VALUE=DATE:20270123
-SUMMARY:WIP Session 3 / Spring kickoff — Emory Decision-Making Megalab
+SUMMARY:WIP Session 2 / Spring kickoff — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. One substantial project or two shorter pro
  jects\, followed by a brief reset of priorities for the semester.  Lead:
   Presenter to be announced. Time and location to be announced.
@@ -142,7 +128,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-02-05-neural-inference@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20270205
 DTEND;VALUE=DATE:20270206
 SUMMARY:Fitting computational models with neural and amortized inference 
@@ -159,7 +145,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-02-19-choice-variability@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20270219
 DTEND;VALUE=DATE:20270220
 SUMMARY:Compulsivity\, choice variability\, and computational phenotypes 
@@ -179,10 +165,10 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-03-05-wip-4@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20270305
 DTEND;VALUE=DATE:20270306
-SUMMARY:WIP Session 4 — Emory Decision-Making Megalab
+SUMMARY:WIP Session 3 — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. A project crossing clinical and basic deci
  sion science\, presented early enough for the conversation to matter.  L
  ead: Presenter to be announced. Time and location to be announced.
@@ -193,7 +179,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-03-19-state-representation@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20270319
 DTEND;VALUE=DATE:20270320
 SUMMARY:Representations\, schemas\, and state inference in reinforcement 
@@ -212,7 +198,7 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-04-02-foundation-models@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20270402
 DTEND;VALUE=DATE:20270403
 SUMMARY:Computational psychiatry in the era of foundation models — Emory 
@@ -229,10 +215,10 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-04-16-wip-5-planning@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
+DTSTAMP:20260904T120000Z
 DTSTART;VALUE=DATE:20270416
 DTEND;VALUE=DATE:20270417
-SUMMARY:WIP Session 5 and 2027–28 planning — Emory Decision-Making Megala
+SUMMARY:WIP Session 4 and 2027–28 planning — Emory Decision-Making Megala
  b
 DESCRIPTION:Works in progress + planning. One WIP followed by a candid ev
  aluation of the series and a conversation about next year’s priorities. 

@@ -1,29 +1,7 @@
 [
   {
-    "id": "2026-09-11-community-kickoff",
-    "date": "2026-09-11",
-    "semester": "Fall 2026",
-    "type": "community",
-    "typeLabel": "EDM Megalab kickoff",
-    "title": "What should EDM Megalab be?",
-    "description": "Meet the core organizing labs and colleagues from across Emory; map shared interests, methods, datasets, and opportunities; and help shape priorities for the series.",
-    "presenter": "Core lab organizers",
-    "readings": []
-  },
-  {
-    "id": "2026-09-25-wip-1",
-    "date": "2026-09-25",
-    "semester": "Fall 2026",
-    "type": "wip",
-    "typeLabel": "Works in progress",
-    "title": "WIP Session 1",
-    "description": "Two shorter presentations, ideally from different labs across Emory, with emphasis on questions where EDM Megalab feedback can still change the work.",
-    "presenter": "Presenters to be announced",
-    "readings": []
-  },
-  {
     "id": "2026-10-09-computational-phenotypes",
-    "date": "2026-10-09",
+    "date": "2026-09-25",
     "semester": "Fall 2026",
     "type": "article",
     "typeLabel": "Article discussion",
@@ -40,6 +18,17 @@
         "year": 2024
       }
     ]
+  },
+  {
+    "id": "2026-09-11-community-kickoff",
+    "date": "2026-10-09",
+    "semester": "Fall 2026",
+    "type": "community",
+    "typeLabel": "Community planning meeting",
+    "title": "What should EDM Megalab be?",
+    "description": "Meet the core organizing labs and colleagues from across Emory; map shared interests, methods, datasets, and opportunities; and help shape priorities for the series. Planning takes place at our second meeting so all five core labs can participate.",
+    "presenter": "Core lab organizers",
+    "readings": []
   },
   {
     "id": "2026-10-23-fmri-preprocessing",
@@ -69,7 +58,7 @@
     "semester": "Fall 2026",
     "type": "wip",
     "typeLabel": "Works in progress",
-    "title": "WIP Session 2",
+    "title": "WIP Session 1",
     "description": "An analysis or modeling problem where a larger pool of expertise can materially change the project.",
     "presenter": "Presenter to be announced",
     "readings": []
@@ -100,7 +89,7 @@
     "semester": "Spring 2027",
     "type": "wip",
     "typeLabel": "Works in progress",
-    "title": "WIP Session 3 / Spring kickoff",
+    "title": "WIP Session 2 / Spring kickoff",
     "description": "One substantial project or two shorter projects, followed by a brief reset of priorities for the semester.",
     "presenter": "Presenter to be announced",
     "readings": []
@@ -151,7 +140,7 @@
     "semester": "Spring 2027",
     "type": "wip",
     "typeLabel": "Works in progress",
-    "title": "WIP Session 4",
+    "title": "WIP Session 3",
     "description": "A project crossing clinical and basic decision science, presented early enough for the conversation to matter.",
     "presenter": "Presenter to be announced",
     "readings": []
@@ -193,7 +182,7 @@
     "semester": "Spring 2027",
     "type": "wip",
     "typeLabel": "Works in progress + planning",
-    "title": "WIP Session 5 and 2027–28 planning",
+    "title": "WIP Session 4 and 2027–28 planning",
     "description": "One WIP followed by a candid evaluation of the series and a conversation about next year’s priorities.",
     "presenter": "Presenter to be announced",
     "readings": []

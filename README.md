@@ -29,7 +29,7 @@ Supported material types are `slides`, `notes`, `code`, `recording`, `handout`, 
 
 Local planning documents belong in the ignored `documentation/` folder. Do not link to or commit that folder; move only deliberately public material into the site source.
 
-Calendar files are regenerated from the schedule automatically before every production build. The stable subscription feed lives at `calendar/edm-megalab.ics`; keep that filename unchanged so existing subscribers continue receiving updates. If time and location are not yet set, events are exported as transparent, all-day tentative placeholders so they reserve the date without falsely implying logistics.
+Calendar files are regenerated from the schedule automatically before every production build. Keep existing meeting `id` values unchanged when rescheduling or renumbering sessions: they identify permanent meeting pages and calendar events, even when their original date or number no longer matches the current schedule. The stable subscription feed lives at `calendar/edm-megalab.ics`; keep that filename unchanged so existing subscribers continue receiving updates. If time and location are not yet set, events are exported as transparent, all-day tentative placeholders so they reserve the date without falsely implying logistics.
 
 ## Local preview
 

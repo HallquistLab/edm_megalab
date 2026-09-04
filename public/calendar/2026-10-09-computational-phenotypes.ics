@@ -10,9 +10,9 @@ REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2026-10-09-computational-phenotypes@edm-megalab.emory.edu
-DTSTAMP:20260831T120000Z
-DTSTART;VALUE=DATE:20261009
-DTEND;VALUE=DATE:20261010
+DTSTAMP:20260904T120000Z
+DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
 SUMMARY:Computational phenotypes: traits\, states\, or moving targets? — 
  Emory Decision-Making Megalab
 DESCRIPTION:Article discussion. A discussion of individual differences\, 
