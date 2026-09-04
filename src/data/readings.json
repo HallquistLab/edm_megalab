@@ -1,5 +1,21 @@
 [
   {
+    "id": "hayden-2026",
+    "keywords": [
+      "Functional organization",
+      "Neural representation",
+      "Systems neuroscience"
+    ],
+    "presented": false,
+    "title": "Rethinking the centrality of brain areas in understanding functional organization",
+    "authors": "Hayden, Heilbronner & Yoo",
+    "year": 2026,
+    "journal": "Nature Neuroscience",
+    "citation": "29, 267–278",
+    "doi": "https://doi.org/10.1038/s41593-025-02166-z",
+    "why": "A provocative case for treating brain areas as one organizing principle among gradients, distributed networks, layers, columns, and patches—and for rethinking how neuroscience links structure to cognitive function."
+  },
+  {
     "id": "schurr-2024",
     "keywords": ["Measurement", "Computational phenotyping", "Individual differences"],
     "presented": false,
