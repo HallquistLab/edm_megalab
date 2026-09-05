@@ -74,5 +74,20 @@
         "url": "https://psychology.emory.edu/people/faculty/kragel-philip.html"
       }
     ]
+  },
+  {
+    "id": "cohen",
+    "shortName": "LUMeN Lab",
+    "name": "Learning, Understanding, Memory, & Neurodevelopment Lab",
+    "pi": "Ali Cohen",
+    "piOverview": "Ali Cohen is a developmental cognitive neuroscientist who studies how emotion and motivation shape learning and memory from childhood through adulthood.",
+    "researchOverview": "The LUMeN Lab investigates the brain and cognitive mechanisms through which motivationally salient experiences become lasting memories and guide future behavior across development. Its work combines behavioral paradigms, neuroimaging, psychophysiology, and computational modeling to examine reward, emotion, and the complexity of learning environments across age.",
+    "links": [
+      { "label": "Lab website", "url": "https://scholarblogs.emory.edu/lumenlab/" },
+      {
+        "label": "PI profile",
+        "url": "https://psychology.emory.edu/people/faculty/cohen-alexandra-ali.html"
+      }
+    ]
   }
 ]
