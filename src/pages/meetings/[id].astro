@@ -112,14 +112,18 @@ const resources = [
             {
               resources.length > 0
                 ? "Readings and shared resources."
-                : "Materials will live here."
+                : "No materials posted yet."
             }
           </h2>
         </div>
-        <p>
-          Public slides, notes, code, recordings, and readings stay attached to this
-          meeting so the context is easy to recover later.
-        </p>
+        {
+          resources.length > 0 && (
+            <p>
+              Public slides, notes, code, recordings, and readings stay attached to this
+              meeting so the context is easy to recover later.
+            </p>
+          )
+        }
       </div>
 
       {
@@ -135,16 +139,7 @@ const resources = [
               </a>
             ))}
           </div>
-        ) : (
-          <div class="resource-empty" data-resource-empty data-date={session.date}>
-            <p class="eyebrow">Nothing public yet</p>
-            <h3 data-resource-empty-title>Materials will be added after the meeting.</h3>
-            <p data-resource-empty-copy>
-              When public resources are ready, they will appear here and in the materials
-              archive.
-            </p>
-          </div>
-        )
+        ) : null
       }
     </section>
 
@@ -189,17 +184,6 @@ const resources = [
       const isPast = (status.dataset.date ?? "") < today;
       status.textContent = isPast ? "Completed" : "Scheduled";
       status.classList.toggle("is-complete", isPast);
-    }
-
-    const empty = document.querySelector<HTMLElement>("[data-resource-empty]");
-    if (empty && (empty.dataset.date ?? "") < today) {
-      const title = empty.querySelector<HTMLElement>("[data-resource-empty-title]");
-      const copy = empty.querySelector<HTMLElement>("[data-resource-empty-copy]");
-      if (title) title.textContent = "No public materials have been posted yet.";
-      if (copy) {
-        copy.textContent =
-          "If resources from this meeting are shared later, they will appear here automatically.";
-      }
     }
   </script>
 </BaseLayout>
