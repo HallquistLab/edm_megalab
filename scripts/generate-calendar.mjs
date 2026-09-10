@@ -38,9 +38,8 @@ const foldLine = (line) => {
 };
 
 const eventLines = (session) => {
-  const logistics = site.location
-    ? `Location: ${site.location}`
-    : "Location to be announced";
+  const location = session.location ?? site.location;
+  const logistics = location ? `Location: ${location}` : "Location to be announced";
   const featuredArticles = session.readings
     .filter((reading) => reading.title)
     .map(
@@ -71,7 +70,7 @@ const eventLines = (session) => {
     ...lines,
     `SUMMARY:${escapeIcs(session.title)} — Emory Decision-Making Megalab`,
     `DESCRIPTION:${escapeIcs(description)}`,
-    `LOCATION:${escapeIcs(site.location ?? "To be announced")}`,
+    `LOCATION:${escapeIcs(location ?? "To be announced")}`,
     `URL:${site.publicUrl}/schedule/#${session.id}`,
     "STATUS:TENTATIVE",
     "TRANSP:TRANSPARENT",

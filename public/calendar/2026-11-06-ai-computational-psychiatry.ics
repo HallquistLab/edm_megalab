@@ -9,7 +9,7 @@ REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2026-11-06-ai-computational-psychiatry@edm-megalab.emory.edu
-DTSTAMP:20260904T120000Z
+DTSTAMP:20260910T120000Z
 DTSTART;TZID=America/New_York:20261106T120000
 DTEND;TZID=America/New_York:20261106T133000
 SUMMARY:AI in computational psychiatry and decision neuroscience — Emory 
@@ -17,8 +17,8 @@ SUMMARY:AI in computational psychiatry and decision neuroscience — Emory
 DESCRIPTION:Current topic / workshop. Concrete use cases in coding\, mode
  ling\, literature synthesis\, analysis validation\, writing\, privacy\, 
  reproducibility\, and emerging failure modes.  Lead: Facilitators to be 
- announced. Location to be announced.
-LOCATION:To be announced
+ announced. Location: PAIS 280.
+LOCATION:PAIS 280
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-11-06-ai-co
  mputational-psychiatry
 STATUS:TENTATIVE

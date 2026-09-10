@@ -21,7 +21,7 @@ const [nextMonth, nextDay] = formatDate(nextSession.date).toUpperCase().split(" 
 const timeLabel = site.startTime
   ? `${formatTime(site.startTime)}–${site.endTime ? formatTime(site.endTime) : "TBA"}`
   : "Time to be confirmed";
-const locationLabel = site.location ?? "Location to be confirmed";
+const locationLabel = nextSession.location ?? site.location ?? "Location to be confirmed";
 ---
 
 <BaseLayout>

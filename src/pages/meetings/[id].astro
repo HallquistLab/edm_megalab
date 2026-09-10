@@ -82,6 +82,10 @@ const resources = [
           <dd>{meetingTime}</dd>
         </div>
         <div>
+          <dt>Location</dt>
+          <dd>{session.location ?? site.location ?? "To be announced"}</dd>
+        </div>
+        <div>
           <dt>Lead</dt>
           <dd>{session.presenter}</dd>
         </div>

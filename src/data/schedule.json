@@ -8,6 +8,7 @@
     "title": "Computational phenotypes: traits, states, or moving targets?",
     "description": "A discussion of individual differences, repeated measurement, parameter stability, and what makes a useful computational phenotype.",
     "presenter": "Discussion leader to be announced",
+    "location": "PAIS 280",
     "readings": [
       {
         "label": "Schurr et al. (2024)",
@@ -28,6 +29,7 @@
     "title": "What should EDM Megalab be?",
     "description": "Meet the core organizing labs and colleagues from across Emory; map shared interests, methods, datasets, and opportunities; and help shape priorities for the series. Planning takes place at our second meeting so all six core labs can participate.",
     "presenter": "Core lab organizers",
+    "location": "PAIS 280",
     "readings": []
   },
   {
@@ -39,6 +41,7 @@
     "title": "Modern fMRI preprocessing: what choices actually matter?",
     "description": "Compare pipelines used across Emory labs: distortion and motion correction, nuisance regression, censoring, global signal, surface versus volume, and QC.",
     "presenter": "Workshop lead to be announced",
+    "location": "PAIS 280",
     "readings": []
   },
   {
@@ -50,6 +53,7 @@
     "title": "AI in computational psychiatry and decision neuroscience",
     "description": "Concrete use cases in coding, modeling, literature synthesis, analysis validation, writing, privacy, reproducibility, and emerging failure modes.",
     "presenter": "Facilitators to be announced",
+    "location": "PAIS 280",
     "readings": []
   },
   {
@@ -72,6 +76,7 @@
     "title": "Sources of decision variability: latent states, noise, and mechanism",
     "description": "Variability, latent states, and mechanism—plus a springboard for choosing EDM Megalab’s spring priorities.",
     "presenter": "Discussion leader to be announced",
+    "location": "PAIS 280",
     "readings": [
       {
         "label": "Duffy et al. (2025)",

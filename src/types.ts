@@ -35,6 +35,7 @@ export interface Session {
   title: string;
   description: string;
   presenter: string;
+  location?: string;
   readings: ReadingLink[];
   materials?: MaterialLink[];
 }
