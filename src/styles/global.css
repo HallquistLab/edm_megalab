@@ -1106,13 +1106,47 @@ h1 em {
 }
 
 .reading-tools {
-  align-items: flex-start;
-}
-.reading-control-panel {
   display: grid;
   gap: 18px;
-  justify-items: stretch;
-  max-width: 780px;
+  align-items: stretch;
+}
+.reading-primary-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: end;
+}
+.reading-primary-controls .search-box {
+  min-width: 0;
+}
+.reading-keyword-filters {
+  min-width: 0;
+  border-block: 1px solid var(--line);
+}
+.reading-keyword-filters summary {
+  min-height: 44px;
+  padding-block: 12px;
+  color: var(--emory-blue);
+  cursor: pointer;
+  font-size: var(--type-ui);
+  font-weight: 750;
+}
+.reading-keyword-filters summary span {
+  color: var(--muted);
+}
+.reading-keyword-filters > .reading-filter-group {
+  padding: 6px 0 18px;
+}
+.reading-clear-filters {
+  min-height: 44px;
+  margin-right: auto;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--emory-blue);
+  font-size: var(--type-ui);
+  font-weight: 750;
 }
 .reading-filter-group {
   display: grid;
@@ -1184,6 +1218,7 @@ h1 em {
 }
 .reading-view-options {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
   gap: 18px;
@@ -3068,14 +3103,11 @@ footer > div {
   .cta-band .eyebrow {
     grid-column: auto;
   }
-  .reading-tools {
-    flex-direction: column;
+  .reading-primary-controls {
+    grid-template-columns: minmax(0, 1fr);
   }
   .reading-tools .filter-bar {
     justify-content: flex-start;
-  }
-  .reading-control-panel {
-    justify-items: start;
   }
   .reading-view-options {
     justify-content: flex-start;
@@ -3268,7 +3300,6 @@ footer > div {
   .agenda-actions .calendar-link {
     width: 100%;
   }
-  .reading-control-panel,
   .reading-view-options {
     width: 100%;
   }

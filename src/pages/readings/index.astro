@@ -20,18 +20,44 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
   />
 
   <section class="reading-tools shell" aria-label="Reading filters">
-    <label class="search-box">
-      <span class="sr-only">Search readings</span>
-      <span aria-hidden="true">⌕</span>
-      <input
-        type="search"
-        placeholder="Search by title, author, journal, or topic…"
-        data-search
-      />
-    </label>
-    <div class="reading-control-panel">
+    <div class="reading-primary-controls">
+      <label class="search-box">
+        <span class="sr-only">Search readings</span>
+        <span aria-hidden="true">⌕</span>
+        <input
+          type="search"
+          placeholder="Search by title, author, journal, or topic…"
+          data-search
+        />
+      </label>
+      <div class="reading-filter-group reading-status-controls">
+        <span>Discussion status</span>
+        <div class="filter-bar" role="group" aria-label="Filter by discussion status">
+          {
+            [
+              ["all", "All readings"],
+              ["active", "Not yet presented"],
+              ["presented", "Presented"],
+            ].map(([value, label], index) => (
+              <button
+                class:list={{ active: index === 0 }}
+                type="button"
+                data-reading-status={value}
+                aria-pressed={index === 0 ? "true" : "false"}
+              >
+                {label}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <details class="reading-keyword-filters">
+      <summary>
+        Keywords <span data-keyword-selection-count></span>
+      </summary>
       <div class="reading-filter-group">
-        <span>Keywords · Match all selected</span>
+        <span>Match all selected keywords</span>
         <div
           class="keyword-filter-bar"
           role="group"
@@ -59,40 +85,22 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
           }
         </div>
       </div>
-      <div class="reading-filter-group reading-status-controls">
-        <span>Discussion status</span>
-        <div class="filter-bar" role="group" aria-label="Filter by discussion status">
-          {
-            [
-              ["all", "All readings"],
-              ["active", "Not yet presented"],
-              ["presented", "Presented"],
-            ].map(([value, label], index) => (
-              <button
-                class:list={{ active: index === 0 }}
-                type="button"
-                data-reading-status={value}
-                aria-pressed={index === 0 ? "true" : "false"}
-              >
-                {label}
-              </button>
-            ))
-          }
-        </div>
-      </div>
-      <div class="reading-view-options">
-        <p class="reading-count" data-reading-count aria-live="polite">
-          {readings.length} articles
-        </p>
-        <div class="view-toggle" role="group" aria-label="Choose reading display">
-          <span>View</span>
-          <button type="button" data-reading-view="cards" aria-pressed="true">
-            Cards
-          </button>
-          <button type="button" data-reading-view="list" aria-pressed="false">
-            List
-          </button>
-        </div>
+    </details>
+    <div class="reading-view-options">
+      <button class="reading-clear-filters" type="button" data-clear-filters>
+        Clear filters
+      </button>
+      <p class="reading-count" data-reading-count aria-live="polite">
+        {readings.length} articles
+      </p>
+      <div class="view-toggle" role="group" aria-label="Choose reading display">
+        <span>View</span>
+        <button type="button" data-reading-view="cards" aria-pressed="true">
+          Cards
+        </button>
+        <button type="button" data-reading-view="list" aria-pressed="false">
+          List
+        </button>
       </div>
     </div>
   </section>
@@ -170,6 +178,11 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
     const viewButtons = Array.from(
       document.querySelectorAll<HTMLButtonElement>("[data-reading-view]"),
     );
+    const clearFilters =
+      document.querySelector<HTMLButtonElement>("[data-clear-filters]");
+    const keywordSelectionCount = document.querySelector<HTMLElement>(
+      "[data-keyword-selection-count]",
+    );
     const selectedKeywords = new Set<string>();
     let discussionStatus = "all";
 
@@ -197,6 +210,10 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
     };
 
     const syncKeywordButtons = () => {
+      if (keywordSelectionCount) {
+        keywordSelectionCount.textContent =
+          selectedKeywords.size > 0 ? `(${selectedKeywords.size} selected)` : "";
+      }
       keywordButtons.forEach((button) => {
         const value = button.dataset.readingKeyword ?? "all";
         const active =
@@ -205,6 +222,23 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
         button.setAttribute("aria-pressed", String(active));
       });
     };
+
+    const syncStatusButtons = () => {
+      statusButtons.forEach((button) => {
+        const active = button.dataset.readingStatus === discussionStatus;
+        button.classList.toggle("active", active);
+        button.setAttribute("aria-pressed", String(active));
+      });
+    };
+
+    clearFilters?.addEventListener("click", () => {
+      if (search) search.value = "";
+      selectedKeywords.clear();
+      discussionStatus = "all";
+      syncKeywordButtons();
+      syncStatusButtons();
+      update();
+    });
 
     const setView = (view: "cards" | "list") => {
       if (grid) grid.dataset.view = view;
@@ -242,11 +276,7 @@ const keywords = [...new Set(readings.flatMap((reading) => reading.keywords))].s
     statusButtons.forEach((button) => {
       button.addEventListener("click", () => {
         discussionStatus = button.dataset.readingStatus ?? "all";
-        statusButtons.forEach((item) => {
-          const active = item === button;
-          item.classList.toggle("active", active);
-          item.setAttribute("aria-pressed", String(active));
-        });
+        syncStatusButtons();
         update();
       });
     });
