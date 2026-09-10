@@ -5,9 +5,6 @@ import { readings } from "../../lib/content";
 import { keywordTone } from "../../lib/keywords";
 
 const queue = readings.slice(3, 7);
-const base = import.meta.env.BASE_URL.endsWith("/")
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
 ---
 
 <BaseLayout
@@ -17,7 +14,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   <PageIntro
     eyebrow="EDM Megalab · Article queue"
     title="What should we read next?"
-    intro="Suggest a paper for a future discussion. Coordinators can turn a short list into a poll for an upcoming meeting."
+    intro="Suggest a paper for a future discussion. Coordinators review suggestions before adding them to the public queue."
     compact
   />
 
@@ -31,10 +28,11 @@ const base = import.meta.env.BASE_URL.endsWith("/")
     <div class="queue-action-buttons">
       <details class="member-access" data-member-panel>
         <summary class="button button-secondary">
-          Member access <span aria-hidden="true">＋</span>
+          <span data-member-label>Sign in</span>
+          <span aria-hidden="true">＋</span>
         </summary>
         <div class="member-access-panel">
-          <div class="member-access-copy">
+          <div class="member-access-copy" data-member-copy>
             <strong>Sign in with your Emory email.</strong>
             <p>Suggest articles or vote using a secure email link—no password needed.</p>
           </div>
@@ -59,16 +57,24 @@ const base = import.meta.env.BASE_URL.endsWith("/")
           </div>
         </div>
       </details>
-      <a class="button button-secondary" href={`${base}admin/`}>
-        Coordinator console <span aria-hidden="true">→</span>
-      </a>
-      <button class="button button-primary" type="button" data-open-proposal>
+      <button
+        class="button button-primary"
+        type="button"
+        data-open-proposal
+        aria-controls="article-proposal"
+        aria-expanded="false"
+      >
         Suggest an article <span aria-hidden="true">＋</span>
       </button>
     </div>
   </section>
 
-  <section class="proposal-drawer shell" data-proposal-drawer hidden>
+  <section
+    class="proposal-drawer shell"
+    id="article-proposal"
+    data-proposal-drawer
+    hidden
+  >
     <div class="form-heading">
       <div>
         <p class="eyebrow">New suggestion</p>
@@ -134,6 +140,10 @@ const base = import.meta.env.BASE_URL.endsWith("/")
       </header>
       <div class="ballot-grid" data-ballot-grid></div>
       <p class="demo-note" data-ballot-note></p>
+      <p class="ballot-selection-note">
+        Coordinators choose a paper based on votes, the meeting schedule, and
+        discussion-leader availability.
+      </p>
     </div>
   </section>
 
@@ -143,10 +153,6 @@ const base = import.meta.env.BASE_URL.endsWith("/")
         <p class="eyebrow">The queue</p>
         <h2>Suggested articles</h2>
       </div>
-      <p>
-        Articles proposed for discussion appear here. We will add queued papers to a poll
-        when we have an open slot.
-      </p>
     </div>
     <div class="queue-list" data-queue-list>
       {
@@ -171,44 +177,6 @@ const base = import.meta.env.BASE_URL.endsWith("/")
           </article>
         ))
       }
-    </div>
-  </section>
-
-  <section class="voting-guide" id="voting-guide">
-    <div class="shell">
-      <p class="eyebrow">How it works</p>
-      <ol>
-        <li>
-          <span>01</span><div>
-            <h2>Suggest</h2><p>
-              Sign in with an Emory email and share the citation, link, and rationale.
-            </p>
-          </div>
-        </li>
-        <li>
-          <span>02</span><div>
-            <h2>Curate</h2><p>
-              A coordinator reviews new suggestions, places promising papers in the public
-              queue, and selects a short poll slate.
-            </p>
-          </div>
-        </li>
-        <li>
-          <span>03</span><div>
-            <h2>Vote</h2><p>
-              Members vote for up to three papers they would genuinely like to discuss.
-            </p>
-          </div>
-        </li>
-        <li>
-          <span>04</span><div>
-            <h2>Schedule</h2><p>
-              Organizers use the result alongside timing, thematic balance, and
-              discussion-leader availability—not vote count alone.
-            </p>
-          </div>
-        </li>
-      </ol>
     </div>
   </section>
 

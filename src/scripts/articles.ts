@@ -45,6 +45,11 @@ const authForm = select<HTMLFormElement>("[data-auth-form]");
 const authStatus = select<HTMLElement>("[data-auth-status]");
 const signedInState = select<HTMLElement>("[data-signed-in]");
 const memberEmail = select<HTMLElement>("[data-member-email]");
+const memberPanel = select<HTMLDetailsElement>("[data-member-panel]");
+const memberLabel = select<HTMLElement>("[data-member-label]");
+const memberCopy = select<HTMLElement>("[data-member-copy]");
+const memberEmailInput = select<HTMLInputElement>("#member-email");
+const openProposalButton = select<HTMLButtonElement>("[data-open-proposal]");
 const proposalDrawer = select<HTMLElement>("[data-proposal-drawer]");
 const proposalForm = select<HTMLFormElement>("[data-proposal-form]");
 const proposalStatus = select<HTMLElement>("[data-proposal-status]");
@@ -54,6 +59,57 @@ let currentPoll: Poll | null = null;
 let currentOptions: PollOption[] = [];
 let currentVotes = new Set<string>();
 let tallies = new Map<string, number>();
+type SignInAction = "suggest" | "vote";
+const returnAction = new URL(window.location.href).searchParams.get("action");
+let pendingAction: SignInAction | null =
+  returnAction === "suggest" || returnAction === "vote" ? returnAction : null;
+
+function showSignIn(action: SignInAction) {
+  pendingAction = action;
+  if (memberPanel) {
+    memberPanel.open = true;
+    memberPanel.scrollIntoView({ block: "center" });
+  }
+  if (authStatus) {
+    authStatus.textContent =
+      action === "suggest"
+        ? "Sign in with your Emory email to suggest an article."
+        : "Sign in with your Emory email to vote.";
+  }
+  memberEmailInput?.focus({ preventScroll: true });
+}
+
+function showProposal() {
+  if (!proposalDrawer) return;
+  proposalDrawer.hidden = false;
+  openProposalButton?.setAttribute("aria-expanded", "true");
+  if (memberPanel) memberPanel.open = false;
+  proposalDrawer.scrollIntoView({ block: "start" });
+  proposalForm?.querySelector<HTMLInputElement>("input")?.focus({ preventScroll: true });
+}
+
+function closeProposal() {
+  if (proposalDrawer) proposalDrawer.hidden = true;
+  openProposalButton?.setAttribute("aria-expanded", "false");
+}
+
+function resumeAction() {
+  if (!currentUser || !pendingAction) return;
+  const action = pendingAction;
+  pendingAction = null;
+  const url = new URL(window.location.href);
+  url.searchParams.delete("action");
+  window.history.replaceState(null, "", url);
+  if (memberPanel) memberPanel.open = false;
+  if (action === "suggest") {
+    showProposal();
+  } else if (ballotSection && !ballotSection.hidden) {
+    ballotSection.scrollIntoView({ block: "start" });
+    ballotGrid
+      ?.querySelector<HTMLButtonElement>("button")
+      ?.focus({ preventScroll: true });
+  }
+}
 
 function node<K extends keyof HTMLElementTagNameMap>(tag: K, className = "", text = "") {
   const item = document.createElement(tag);
@@ -77,6 +133,9 @@ function updateAuth(user: User | null) {
   if (authForm) authForm.hidden = Boolean(user);
   if (signedInState) signedInState.hidden = !user;
   if (memberEmail) memberEmail.textContent = user?.email ?? "";
+  if (memberLabel) memberLabel.textContent = user ? "Account" : "Sign in";
+  if (memberCopy) memberCopy.hidden = Boolean(user);
+  if (!user) closeProposal();
 }
 
 function queueCard(article: Suggestion, index: number) {
@@ -130,9 +189,14 @@ function ballotCard(option: PollOption, index: number) {
     approved ? "Voted ✓" : currentUser ? "Vote for this paper" : "Sign in to vote",
   );
   vote.type = "button";
-  vote.disabled = !currentUser;
   vote.setAttribute("aria-pressed", String(approved));
-  vote.addEventListener("click", () => toggleVote(article.id, vote));
+  vote.addEventListener("click", () => {
+    if (!currentUser) {
+      showSignIn("vote");
+      return;
+    }
+    void toggleVote(article.id, vote);
+  });
   card.append(top, content, link, vote);
   return card;
 }
@@ -148,12 +212,12 @@ function renderBallot() {
   if (pollTitle) pollTitle.textContent = currentPoll.title;
   if (pollLimit) pollLimit.textContent = `Up to ${currentPoll.max_approvals} votes`;
   if (pollInstructions) {
-    pollInstructions.textContent = `Vote for up to ${currentPoll.max_approvals} articles. You may change your votes until ${friendlyDate(currentPoll.closes_at)}.`;
+    pollInstructions.textContent = `You may change your votes until ${friendlyDate(currentPoll.closes_at)}.`;
   }
   if (ballotNote) {
     ballotNote.textContent = currentUser
       ? `${currentVotes.size} of ${currentPoll.max_approvals} votes selected · Results update immediately`
-      : `Poll closes ${friendlyDate(currentPoll.closes_at)} · Sign in to vote`;
+      : "Sign in to vote.";
   }
   if (ballotSection) ballotSection.hidden = false;
 }
@@ -285,9 +349,13 @@ authForm?.addEventListener("submit", async (event) => {
     return;
   }
   if (authStatus) authStatus.textContent = "Sending your secure link…";
+  const redirectUrl = new URL(window.location.href);
+  redirectUrl.hash = "";
+  redirectUrl.searchParams.delete("action");
+  if (pendingAction) redirectUrl.searchParams.set("action", pendingAction);
   const { error } = await supabase.auth.signInWithOtp({
     email,
-    options: { emailRedirectTo: window.location.href.split("#")[0] },
+    options: { emailRedirectTo: redirectUrl.toString() },
   });
   if (authStatus) {
     authStatus.textContent = error
@@ -311,23 +379,23 @@ select<HTMLButtonElement>("[data-sign-out]")?.addEventListener("click", async ()
   );
 });
 
-select<HTMLButtonElement>("[data-open-proposal]")?.addEventListener("click", () => {
-  if (proposalDrawer) {
-    proposalDrawer.hidden = false;
-    proposalDrawer.scrollIntoView({ behavior: "smooth", block: "start" });
+openProposalButton?.addEventListener("click", () => {
+  if (!currentUser) {
+    showSignIn("suggest");
+    return;
   }
+  showProposal();
 });
 
 select<HTMLButtonElement>("[data-close-proposal]")?.addEventListener("click", () => {
-  if (proposalDrawer) proposalDrawer.hidden = true;
+  closeProposal();
+  openProposalButton?.focus();
 });
 
 proposalForm?.addEventListener("submit", async (event) => {
   event.preventDefault();
   if (!supabase || !currentUser) {
-    if (proposalStatus)
-      proposalStatus.textContent = "Sign in with your Emory email before submitting.";
-    showActionFeedback("Sign in with your Emory email before submitting.", "error");
+    showSignIn("suggest");
     return;
   }
   const data = Object.fromEntries(new FormData(proposalForm).entries());
@@ -363,7 +431,8 @@ proposalForm?.addEventListener("submit", async (event) => {
     return;
   }
   proposalForm.reset();
-  if (proposalDrawer) proposalDrawer.hidden = true;
+  closeProposal();
+  openProposalButton?.focus();
   showActionFeedback(
     "Article suggestion submitted. Coordinators will review it before it appears in the queue.",
   );
@@ -378,6 +447,7 @@ async function start() {
   updateAuth(data.session?.user ?? null);
   try {
     await Promise.all([loadQueue(), loadPoll()]);
+    resumeAction();
   } catch (error) {
     const message =
       error && typeof error === "object" && "message" in error
@@ -387,7 +457,17 @@ async function start() {
   }
   supabase.auth.onAuthStateChange((_event, session) => {
     updateAuth(session?.user ?? null);
-    void loadPoll();
+    window.setTimeout(async () => {
+      try {
+        await loadPoll();
+        resumeAction();
+      } catch {
+        showActionFeedback(
+          "We couldn’t refresh the ballot. Please reload the page.",
+          "error",
+        );
+      }
+    }, 0);
   });
 }
 

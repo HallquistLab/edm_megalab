@@ -2073,13 +2073,13 @@ h1 em {
 .member-access summary::-webkit-details-marker {
   display: none;
 }
-.member-access summary span {
+.member-access summary span[aria-hidden="true"] {
   margin-left: 8px;
   font-size: 16px;
   font-weight: 500;
   transition: transform 160ms ease;
 }
-.member-access[open] summary span {
+.member-access[open] summary span[aria-hidden="true"] {
   transform: rotate(45deg);
 }
 .member-access-panel {
@@ -2258,6 +2258,12 @@ h1 em {
   color: rgba(255, 255, 255, 0.48);
   font-size: var(--type-ui);
   text-align: right;
+}
+.ballot-selection-note {
+  margin: 18px 0 0;
+  color: var(--mint);
+  font-size: var(--type-ui);
+  line-height: 1.5;
 }
 .article-queue {
   padding-block: 72px 82px;
