@@ -9,14 +9,14 @@ REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2026-11-20-wip-2@edm-megalab.emory.edu
-DTSTAMP:20260910T120000Z
+DTSTAMP:20260911T120000Z
 DTSTART;TZID=America/New_York:20261120T120000
 DTEND;TZID=America/New_York:20261120T133000
 SUMMARY:WIP Session 1 — Emory Decision-Making Megalab
 DESCRIPTION:Works in progress. An analysis or modeling problem where a la
  rger pool of expertise can materially change the project.  Lead: Present
- er to be announced. Location to be announced.
-LOCATION:To be announced
+ er to be announced. Location: PAIS 230.
+LOCATION:PAIS 230
 URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-11-20-wip-2
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
