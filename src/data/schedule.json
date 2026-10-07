@@ -6,7 +6,7 @@
     "type": "article",
     "typeLabel": "Article discussion",
     "title": "Computational phenotypes: traits, states, or moving targets?",
-    "description": "A discussion of individual differences, repeated measurement, parameter stability, and what makes a useful computational phenotype.",
+    "description": "At our September 25 meeting, we discussed individual differences, repeated measurement, parameter stability, and what makes a useful computational phenotype, drawing on Schurr et al. (2024) and the companion paper by Katahira, Oba & Toyama (2024).",
     "presenter": "Michael Hallquist",
     "location": "PAIS 280",
     "readings": [
@@ -16,6 +16,14 @@
         "title": "Dynamic computational phenotyping of human cognition",
         "authors": "Schurr, Reznik, Hillman, Bhui, et al.",
         "journal": "Nature Human Behaviour",
+        "year": 2024
+      },
+      {
+        "label": "Katahira, Oba & Toyama (2024)",
+        "url": "https://doi.org/10.3758/s13423-024-02490-8",
+        "title": "Does the reliability of computational models truly improve with hierarchical modeling? Some recommendations and considerations for the assessment of model parameter reliability",
+        "authors": "Katahira, Oba & Toyama",
+        "journal": "Psychonomic Bulletin & Review",
         "year": 2024
       }
     ]
@@ -27,8 +35,8 @@
     "type": "community",
     "typeLabel": "Community planning meeting",
     "title": "What should EDM Megalab be?",
-    "description": "Meet the core organizing labs and colleagues from across Emory; map shared interests, methods, datasets, and opportunities; and help shape priorities for the series. Planning takes place at our second meeting so all six core labs can participate.",
-    "presenter": "Core lab organizers",
+    "description": "Building on our September 25 article discussion, meet the core organizing labs and colleagues from across Emory; map shared interests, methods, datasets, and opportunities; and help shape priorities for the series. This second meeting focuses on community planning so all six core labs can participate.",
+    "presenter": "Michael Hallquist",
     "location": "PAIS 280",
     "readings": []
   },

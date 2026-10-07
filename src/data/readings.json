@@ -18,14 +18,28 @@
   {
     "id": "schurr-2024",
     "keywords": ["Measurement", "Computational phenotyping", "Individual differences"],
-    "presented": false,
+    "presented": true,
     "title": "Dynamic computational phenotyping of human cognition",
     "authors": "Schurr, Reznik, Hillman, Bhui, et al.",
     "year": 2024,
     "journal": "Nature Human Behaviour",
     "citation": "8, 917–931",
     "doi": "https://doi.org/10.1038/s41562-024-01814-x",
-    "why": "Repeated measurement reveals meaningful differences in parameter stability and systematic temporal change—a strong bridge across computational psychiatry, individual differences, and decision science."
+    "why": "Repeated measurement reveals meaningful differences in parameter stability and systematic temporal change—a strong bridge across computational psychiatry, individual differences, and decision science.",
+    "presentedOn": "2026-09-25"
+  },
+  {
+    "id": "katahira-2024",
+    "keywords": ["Measurement", "Reliability", "Hierarchical modeling"],
+    "presented": true,
+    "presentedOn": "2026-09-25",
+    "title": "Does the reliability of computational models truly improve with hierarchical modeling? Some recommendations and considerations for the assessment of model parameter reliability",
+    "authors": "Katahira, Oba & Toyama",
+    "year": 2024,
+    "journal": "Psychonomic Bulletin & Review",
+    "citation": "31, 2465–2486",
+    "doi": "https://doi.org/10.3758/s13423-024-02490-8",
+    "why": "Mentioned in the September 25 discussion as a companion to Schurr et al. (2024), addressing how hierarchical estimation affects assessments of computational parameter reliability."
   },
   {
     "id": "duffy-2025",
