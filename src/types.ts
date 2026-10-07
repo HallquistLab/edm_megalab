@@ -28,6 +28,7 @@ export interface MaterialLink {
 
 export interface Session {
   id: string;
+  legacyIds?: string[];
   date: string;
   semester: "Fall 2026" | "Spring 2027";
   type: SessionType;

@@ -50,7 +50,7 @@ const eventLines = (session) => {
   const description = `${session.typeLabel}. ${session.description} ${featuredArticles} Lead: ${session.presenter}. ${logistics}.`;
   const lines = [
     "BEGIN:VEVENT",
-    `UID:${session.id}@edm-megalab.emory.edu`,
+    `UID:${session.legacyIds?.[0] ?? session.id}@edm-megalab.emory.edu`,
     `DTSTAMP:${compactDate(new Date().toISOString().slice(0, 10))}T120000Z`,
   ];
 
@@ -71,7 +71,7 @@ const eventLines = (session) => {
     `SUMMARY:${escapeIcs(session.title)} — Emory Decision-Making Megalab`,
     `DESCRIPTION:${escapeIcs(description)}`,
     `LOCATION:${escapeIcs(location ?? "To be announced")}`,
-    `URL:${site.publicUrl}/schedule/#${session.id}`,
+    `URL:${site.publicUrl}/meetings/${session.id}/`,
     "STATUS:TENTATIVE",
     "TRANSP:TRANSPARENT",
     "END:VEVENT",
@@ -103,12 +103,18 @@ await Promise.all([
     path.join(outputDirectory, "edm-megalab-2026-27.ics"),
     calendar(schedule, `${site.name} ${site.academicYear}`),
   ),
-  ...schedule.map((session) =>
-    writeFile(
-      path.join(outputDirectory, `${session.id}.ics`),
-      calendar([session], session.title),
+  ...schedule.flatMap((session) =>
+    [session.id, ...(session.legacyIds ?? [])].map((id) =>
+      writeFile(
+        path.join(outputDirectory, `${id}.ics`),
+        calendar([session], session.title),
+      ),
     ),
   ),
 ]);
 
-console.log(`Generated ${schedule.length + 2} calendar files.`);
+const calendarCount = schedule.reduce(
+  (count, session) => count + 1 + (session.legacyIds?.length ?? 0),
+  2,
+);
+console.log(`Generated ${calendarCount} calendar files.`);

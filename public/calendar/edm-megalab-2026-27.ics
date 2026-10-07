@@ -27,8 +27,8 @@ DESCRIPTION:Article discussion. At our September 25 meeting\, we discusse
  . Journal: Psychonomic Bulletin & Review (2024). https://doi.org/10.3758
  /s13423-024-02490-8 Lead: Michael Hallquist. Location: PAIS 280.
 LOCATION:PAIS 280
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-10-09-compu
- tational-phenotypes
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-09-25-comput
+ ational-phenotypes/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -46,8 +46,8 @@ DESCRIPTION:Community planning meeting. Everyone in the Emory community w
  ed last time or are new to EDM Megalab.  Lead: Michael Hallquist. Locati
  on: PAIS 280.
 LOCATION:PAIS 280
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-09-11-commu
- nity-kickoff
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-10-09-commun
+ ity-planning/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -63,8 +63,8 @@ DESCRIPTION:Methods workshop. Compare pipelines used across Emory labs: d
  al signal\, surface versus volume\, and QC.  Lead: Workshop lead to be a
  nnounced. Location: PAIS 280.
 LOCATION:PAIS 280
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-10-23-fmri-
- preprocessing
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-10-23-fmri-p
+ reprocessing/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -80,8 +80,8 @@ DESCRIPTION:Current topic / workshop. Concrete use cases in coding\, mode
  reproducibility\, and emerging failure modes.  Lead: Facilitators to be 
  announced. Location: PAIS 280.
 LOCATION:PAIS 280
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-11-06-ai-co
- mputational-psychiatry
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-06-ai-com
+ putational-psychiatry/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -95,7 +95,7 @@ DESCRIPTION:Works in progress. An analysis or modeling problem where a la
  rger pool of expertise can materially change the project.  Lead: Present
  er to be announced. Location: PAIS 230.
 LOCATION:PAIS 230
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-11-20-wip-2
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-20-wip-2/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -113,8 +113,8 @@ DESCRIPTION:Article + year-end discussion. Variability\, latent states\,
  Reviews Neuroscience (2025). https://doi.org/10.1038/s41583-025-00916-3 
  Lead: Discussion leader to be announced. Location: PAIS 280.
 LOCATION:PAIS 280
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2026-12-04-decis
- ion-neuroscience
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-12-04-decisi
+ on-neuroscience/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -128,7 +128,7 @@ DESCRIPTION:Works in progress. One substantial project or two shorter pro
  jects\, followed by a brief reset of priorities for the semester.  Lead:
   Presenter to be announced. Location to be announced.
 LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-01-22-wip-3
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-01-22-wip-3/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -144,8 +144,8 @@ DESCRIPTION:Methods workshop. Parameter recovery\, likelihood approximati
  eat MCMC or optimization.  Lead: Workshop lead to be announced. Location
   to be announced.
 LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-02-05-neura
- l-inference
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-02-05-neural
+ -inference/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -164,8 +164,8 @@ DESCRIPTION:Article discussion. Separate variability in learning from var
  025). https://doi.org/10.1038/s44220-024-00364-5 Lead: Discussion leader
   to be announced. Location to be announced.
 LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-02-19-choic
- e-variability
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-02-19-choice
+ -variability/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -179,7 +179,7 @@ DESCRIPTION:Works in progress. A project crossing clinical and basic deci
  sion science\, presented early enough for the conversation to matter.  L
  ead: Presenter to be announced. Location to be announced.
 LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-03-05-wip-4
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-03-05-wip-4/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -197,8 +197,8 @@ DESCRIPTION:Article discussion. Move beyond scalar learning parameters to
  i.org/10.1038/s41583-024-00893-z Lead: Discussion leader to be announced
  . Location to be announced.
 LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-03-19-state
- -representation
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-03-19-state-
+ representation/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -214,8 +214,8 @@ DESCRIPTION:Methods / current topic. Mechanistic versus predictive models
  \, evaluation\, and data governance.  Lead: Facilitators to be announced
  . Location to be announced.
 LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-04-02-found
- ation-models
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-04-02-founda
+ tion-models/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
@@ -230,8 +230,8 @@ DESCRIPTION:Works in progress + planning. One WIP followed by a candid ev
  aluation of the series and a conversation about next year’s priorities. 
   Lead: Presenter to be announced. Location to be announced.
 LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/schedule/#2027-04-16-wip-5
- -planning
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-04-16-wip-5-
+ planning/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT

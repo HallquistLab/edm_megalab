@@ -1,6 +1,7 @@
 [
   {
-    "id": "2026-10-09-computational-phenotypes",
+    "id": "2026-09-25-computational-phenotypes",
+    "legacyIds": ["2026-10-09-computational-phenotypes"],
     "date": "2026-09-25",
     "semester": "Fall 2026",
     "type": "article",
@@ -29,7 +30,8 @@
     ]
   },
   {
-    "id": "2026-09-11-community-kickoff",
+    "id": "2026-10-09-community-planning",
+    "legacyIds": ["2026-09-11-community-kickoff"],
     "date": "2026-10-09",
     "semester": "Fall 2026",
     "type": "community",

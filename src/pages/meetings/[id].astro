@@ -6,20 +6,25 @@ import type { SiteConfig } from "../../types";
 import type { Session } from "../../types";
 
 export function getStaticPaths() {
-  return schedule.map((session) => ({
-    params: { id: session.id },
-    props: { session },
-  }));
+  return schedule.flatMap((session) => [
+    { params: { id: session.id }, props: { session, redirect: false } },
+    ...(session.legacyIds ?? []).map((id) => ({
+      params: { id },
+      props: { session, redirect: true },
+    })),
+  ]);
 }
 
 interface Props {
   session: Session;
+  redirect: boolean;
 }
 
 const { session } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+if (Astro.props.redirect) return Astro.redirect(`${base}meetings/${session.id}/`);
 const currentIndex = schedule.findIndex((item) => item.id === session.id);
 const site = siteData as SiteConfig;
 const meetingTime =
