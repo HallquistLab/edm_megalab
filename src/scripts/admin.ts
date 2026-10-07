@@ -3,6 +3,7 @@ import type { User } from "@supabase/supabase-js";
 import { formatSessionDate } from "../lib/dates";
 import { keywordTone } from "../lib/keywords";
 import { showActionFeedback } from "./feedback";
+import { isPresentedArticle } from "../lib/article-status";
 
 type Suggestion = {
   id: string;
@@ -382,6 +383,23 @@ async function loadWorkspace() {
   if (articleError || pollError || proposalError)
     throw articleError ?? pollError ?? proposalError;
   suggestions = (articleData ?? []) as Suggestion[];
+  // Keep the live moderation and ballot queue aligned with the discussion archive.
+  const presented = suggestions.filter(
+    (article) => article.status !== "archived" && isPresentedArticle(article),
+  );
+  if (presented.length) {
+    const { error } = await supabase
+      .from("article_suggestions")
+      .update({ status: "archived" })
+      .in(
+        "id",
+        presented.map((article) => article.id),
+      );
+    if (error) throw error;
+    presented.forEach((article) => {
+      article.status = "archived";
+    });
+  }
   const polls = (pollData ?? []) as Poll[];
   sessionProposals = (proposalData ?? []) as SessionProposal[];
   const pending = suggestions.filter((article) => article.status === "pending");

@@ -4,7 +4,7 @@ import PageIntro from "../../components/PageIntro.astro";
 import { readings } from "../../lib/content";
 import { keywordTone } from "../../lib/keywords";
 
-const queue = readings.slice(3, 7);
+const queue = readings.slice(3, 7).filter((reading) => !reading.presented);
 ---
 
 <BaseLayout

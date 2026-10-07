@@ -3,6 +3,7 @@ import type { User } from "@supabase/supabase-js";
 import { formatSessionDate } from "../lib/dates";
 import { keywordTone } from "../lib/keywords";
 import { showActionFeedback } from "./feedback";
+import { isPresentedArticle } from "../lib/article-status";
 
 type Suggestion = {
   id: string;
@@ -230,7 +231,9 @@ async function loadQueue() {
     .in("status", ["queued", "selected"])
     .order("created_at", { ascending: false });
   if (error) throw error;
-  const articles = (data ?? []) as Suggestion[];
+  const articles = ((data ?? []) as Suggestion[]).filter(
+    (article) => !isPresentedArticle(article),
+  );
   if (queueList) {
     queueList.replaceChildren(
       ...(articles.length
@@ -278,7 +281,10 @@ async function loadPoll() {
     .eq("poll_id", currentPoll.id)
     .order("position");
   if (optionError) throw optionError;
-  currentOptions = (options ?? []) as unknown as PollOption[];
+  currentOptions = ((options ?? []) as unknown as PollOption[]).filter(
+    (option) =>
+      option.article_suggestions && !isPresentedArticle(option.article_suggestions),
+  );
 
   const { data: results, error: resultError } = await supabase.rpc("get_poll_results", {
     p_poll_id: currentPoll.id,
