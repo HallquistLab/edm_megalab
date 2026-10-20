@@ -8,6 +8,7 @@ A content-driven Astro website for coordinating the Emory Decision-Making Joint 
 - **Default time, location, and calendar behavior:** edit [`src/data/site.json`](src/data/site.json). Use `semesterTimes` for semester-specific start and end times; these apply to meeting pages, the homepage, the schedule, and calendar files.
 - **Reading room:** edit [`src/data/readings.json`](src/data/readings.json).
 - **About us:** edit lab and PI profiles, including their public source links, in [`src/data/labs.json`](src/data/labs.json). The Megalab's mission and goals live in [`src/pages/about/index.astro`](src/pages/about/index.astro).
+- **Topics:** members suggest lightweight ideas and upvote at `/topics/`. Coordinators approve suggestions, refine wording, archive duplicates, and link topics to published meetings at `/admin/`.
 - **Session proposals, article queue, and ballot:** visitors propose sessions at `/propose/`; members submit articles and vote; coordinators review everything at `/admin/`. Supabase stores the private proposals, live queue, and ballots.
 - **Standing resources:** edit [`src/pages/materials/index.astro`](src/pages/materials/index.astro). Keep sensitive WIP material in a private Emory location.
 
@@ -66,3 +67,39 @@ The static GitHub Pages frontend uses Supabase for persistent article suggestion
 The public proposal form accepts private WIP, current-topic, and workshop proposals without requiring an account. Only approved coordinators can read them; the console hides archived proposals by default and can restore them when needed. The public article page reads only queued suggestions and open poll totals. Members authenticate with an `@emory.edu` magic link to suggest papers or vote. The coordinator console can also approve or archive pending article suggestions, create polls from two to eight queued articles, set a closing time, and close or reopen a ballot. The database enforces the configured approval limit; the default is three choices per member.
 
 Without Supabase environment variables, both pages remain in a polished demo mode so the visual mock-up can still be reviewed locally.
+
+## Topics and member interest
+
+The topic board uses the same Supabase client, persisted session, Emory email sign-in helper, and member access component as the article page. Topic suggestions require a title and accept optional context; they carry no presentation commitment. Each suggestion starts as `pending` and appears only to its submitter and coordinators until approved.
+
+Apply `supabase/migrations/202610200001_topics.sql` to the existing Supabase project **before publishing this frontend**. It adds `topics`, `topic_votes`, row-level security, explicit column grants, and the `get_topics()` aggregate function. The earlier community migration must already be installed. The migration does not modify article ballots or expose private session proposals. It is additive and intentionally does not seed the board with unapproved draft topics.
+
+The existing authentication redirect allowlist (`https://hallquistlab.github.io/edm_megalab/**`) covers `/topics/`; add the local preview origin if using a different port. Returning from the sign-in link reopens a suggestion or returns to the chosen topic. A vote still requires an explicit click after sign-in.
+
+Coordinator workflow:
+
+1. In **Topics**, review the pending suggestion. Refine the title/context if needed and choose **Approve for interest**, or set **Archived** and save to decline a suggestion or consolidate duplicates. Duplicate handling is manual; votes are not transferred automatically.
+2. Members can show interest in any number of topics marked `open` or `planning`, once per member and topic. They can remove that interest while these statuses remain active. The database enforces ownership and uniqueness. Counts are public; individual choices and submitter IDs are not returned by the board API.
+3. Use **In planning** while arranging a session. Confirm the program in `src/data/schedule.json` and publish it through the normal build/deployment workflow.
+4. Choose that published meeting in the coordinator dropdown and save the topic as **Scheduled** (or **Discussed** afterward). These states require a meeting ID and preserve existing vote totals. Voting is closed for scheduled, discussed, pending, and archived topics.
+
+Meeting references use the stable IDs in `schedule.json`; the console validates choices against this file, and the board creates links only for IDs present in the published schedule. A topic can link to one meeting in this first version. A console edit does not change the static schedule or calendar, and it does not trigger a GitHub deployment. If meeting dates or IDs are added to the source, deploy that source before linking them in the console.
+
+If the Topics migration is missing or the backend is unavailable, the board shows a retry message. The console isolates topic-loading failures so the existing article/proposal tools still work. Without Supabase configuration, Topics clearly reports that participation is unavailable and shows no fabricated vote counts.
+
+### Topics verification
+
+```bash
+npm run test:topics:db
+```
+
+Requires Python 3 and PostgreSQL's `initdb`, `pg_ctl`, and `psql` on `PATH`. This creates and removes a disposable database with a local Unix socket and no TCP listener. The tests apply the actual community and Topics migrations with test Supabase roles/JWT helpers, then exercise public/private visibility, Emory membership, approval permissions, vote ownership, uniqueness/removal, scheduled meeting constraints, and coexistence with article ballots. No production database is contacted.
+
+For browser checks, run the configured local site on port 4325, install Python Playwright and its Chromium browser, then run:
+
+```bash
+npm run dev -- --host 127.0.0.1 --port 4325
+npm run test:topics:browser
+```
+
+The browser suite mocks every Supabase request; it sends no emails and writes no live records. It checks sign-in redirects, a shared article-page session, suggestions, upvotes/removal, filters, scheduled meeting links, coordinator approval/editing/scheduling/archiving, error recovery, and mobile overflow. Set `TOPICS_TEST_URL` for another preview URL, or `TOPICS_TEST_BROWSER_CHANNEL=chrome` to use an installed Chrome browser in a temporary profile. Finish with `npm run build` to verify the production site.

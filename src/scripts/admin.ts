@@ -4,6 +4,8 @@ import { formatSessionDate } from "../lib/dates";
 import { keywordTone } from "../lib/keywords";
 import { showActionFeedback } from "./feedback";
 import { isPresentedArticle } from "../lib/article-status";
+import { clearAdminTopics, loadAdminTopics } from "./admin-topics";
+import { requestEmorySignIn } from "../lib/member-auth";
 
 type Suggestion = {
   id: string;
@@ -433,6 +435,8 @@ async function loadWorkspace() {
 showArchivedProposals?.addEventListener("change", renderSessionProposals);
 
 async function updateSession(nextUser: User | null) {
+  clearAdminTopics();
+  if (workspace) workspace.hidden = true;
   user = nextUser;
   if (authForm) authForm.hidden = Boolean(user);
   if (signedIn) signedIn.hidden = !user;
@@ -451,7 +455,7 @@ async function updateSession(nextUser: User | null) {
   }
   if (authStatus) authStatus.textContent = "Coordinator access confirmed.";
   if (workspace) workspace.hidden = false;
-  await loadWorkspace();
+  await Promise.all([loadWorkspace(), loadAdminTopics()]);
 }
 
 authForm?.addEventListener("submit", async (event) => {
@@ -471,10 +475,17 @@ authForm?.addEventListener("submit", async (event) => {
     return;
   }
   if (authStatus) authStatus.textContent = "Sending your secure link…";
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-    options: { emailRedirectTo: window.location.href.split("#")[0] },
-  });
+  let error: { message: string } | null = null;
+  try {
+    await requestEmorySignIn(email, window.location.href.split("#")[0]);
+  } catch (cause) {
+    error = {
+      message:
+        cause && typeof cause === "object" && "message" in cause
+          ? String(cause.message)
+          : "Unable to send sign-in link.",
+    };
+  }
   if (authStatus)
     authStatus.textContent = error
       ? error.message
@@ -559,7 +570,12 @@ async function start() {
         error instanceof Error ? error.message : "Unable to load the console.";
   }
   supabase.auth.onAuthStateChange((_event, session) => {
-    void updateSession(session?.user ?? null);
+    window.setTimeout(() => {
+      void updateSession(session?.user ?? null).catch(() => {
+        if (authStatus)
+          authStatus.textContent = "Unable to refresh the console. Please reload.";
+      });
+    }, 0);
   });
 }
 

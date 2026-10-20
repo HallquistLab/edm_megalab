@@ -1,0 +1,111 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import MemberAccess from "../../components/MemberAccess.astro";
+---
+
+<BaseLayout
+  title="Topics"
+  description="Suggest research topics and help shape future EDM Megalab meetings."
+>
+  <PageIntro
+    eyebrow="EDM Megalab · Shared interests"
+    title="What should we explore?"
+    intro="Suggest a question, method, or idea. Show interest in topics you’d like to discuss—suggesting one doesn’t commit you to present."
+    compact
+  />
+
+  <section class="queue-actions shell" aria-label="Topic participation">
+    <p data-topics-status role="status">Loading topics…</p>
+    <div class="queue-action-buttons">
+      <MemberAccess />
+      <button
+        class="button button-primary"
+        type="button"
+        data-open-topic
+        aria-controls="topic-suggestion"
+        aria-expanded="false">Suggest a topic <span aria-hidden="true">＋</span></button
+      >
+    </div>
+  </section>
+
+  <section class="proposal-drawer shell" id="topic-suggestion" data-topic-drawer hidden>
+    <div class="form-heading">
+      <div><p class="eyebrow">A starting point</p><h2>Suggest a topic</h2></div>
+      <button class="text-button" type="button" data-close-topic>Close</button>
+    </div>
+    <form class="proposal-form" data-topic-form>
+      <label class="form-wide"
+        >What would you like the group to explore?
+        <input
+          name="title"
+          required
+          minlength="3"
+          maxlength="200"
+          placeholder="e.g. How do different labs handle unreliable model parameters?"
+        />
+      </label>
+      <label class="form-wide"
+        >A little context <span>Optional</span>
+        <textarea
+          name="description"
+          rows="3"
+          maxlength="1500"
+          placeholder="One or two sentences about the question or why it matters."
+        ></textarea>
+      </label>
+      <div class="form-submit form-wide">
+        <p>
+          Coordinators review suggestions before they appear publicly. Keep confidential
+          project details out of this form.
+        </p>
+        <button class="button button-primary" type="submit">Send for review</button>
+      </div>
+      <p class="form-status form-wide" data-topic-form-status role="status"></p>
+    </form>
+  </section>
+
+  <section class="topics-board shell" aria-labelledby="topics-board-title">
+    <div class="section-heading compact-heading">
+      <div>
+        <p class="eyebrow">Community topics</p><h2 id="topics-board-title">
+          Follow your curiosity.
+        </h2>
+      </div>
+      <button class="text-button" type="button" data-refresh-topics>Refresh topics</button
+      >
+    </div>
+    <p class="topics-explainer">
+      Choose “I’m interested” on as many topics as you like. You can remove your upvote
+      while a topic is collecting interest or in planning. Counts are public; individual
+      choices are private. Coordinators use this interest to help plan future meetings.
+    </p>
+    <div class="topic-controls">
+      <label
+        >Sort by
+        <select data-topic-sort
+          ><option value="interest">Most interest</option><option value="newest"
+            >Newest</option
+          ></select
+        >
+      </label>
+      <label
+        >Show
+        <select data-topic-filter
+          ><option value="active">Open for interest</option><option value="mine"
+            >My interests</option
+          ><option value="scheduled">Scheduled / discussed</option><option value="pending"
+            >My pending suggestions</option
+          ><option value="all">All topics</option></select
+        >
+      </label>
+    </div>
+    <div class="topic-list" data-topic-list aria-busy="true"></div>
+    <noscript
+      ><p>Enable JavaScript to load topics, suggest ideas, and upvote.</p></noscript
+    >
+  </section>
+  <script>
+    import "../../scripts/topics";
+  </script>
+</BaseLayout>

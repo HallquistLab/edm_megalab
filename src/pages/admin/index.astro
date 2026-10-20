@@ -13,7 +13,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
   <PageIntro
     eyebrow="Coordinator console · Restricted"
     title="Keep the queue moving."
-    intro="Review session proposals and article suggestions, shape a short ballot, and close voting when the next discussion is set."
+    intro="Review topics, session proposals, and article suggestions, and help shape future meetings."
   />
 
   <section class="admin-access shell" data-admin-access>
@@ -57,6 +57,38 @@ const base = import.meta.env.BASE_URL.endsWith("/")
       <article><span>In the queue</span><strong data-queued-count>0</strong></article>
       <article><span>Open polls</span><strong data-open-count>0</strong></article>
     </div>
+
+    <section class="admin-panel topic-review">
+      <div class="admin-panel-heading">
+        <div>
+          <p class="eyebrow">Community interests</p><h2>
+            Topics · <span data-topic-review-count>0</span> awaiting review
+          </h2>
+        </div>
+        <a class="text-link" href={`${base}topics/`}>View topic board →</a>
+      </div>
+      <p>
+        Approve ideas for the public board, refine wording, or archive duplicates. Choose
+        a published meeting when marking a topic Scheduled or Discussed. Update the
+        schedule and calendar separately when the program is confirmed.
+      </p>
+      <div class="topic-controls">
+        <label
+          >Show topics
+          <select data-admin-topic-filter
+            ><option value="review">Awaiting review</option><option value="active"
+              >Approved topics</option
+            ><option value="archived">Archived</option><option value="all"
+              >All topics</option
+            ></select
+          >
+        </label>
+        <button class="text-button" type="button" data-admin-topics-refresh
+          >Refresh topic review</button
+        >
+      </div>
+      <div data-admin-topics><p class="empty-state">Loading topics…</p></div>
+    </section>
 
     <section class="admin-panel proposal-register">
       <div class="admin-panel-heading">

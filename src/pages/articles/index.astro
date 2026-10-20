@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import MemberAccess from "../../components/MemberAccess.astro";
 import PageIntro from "../../components/PageIntro.astro";
 import { readings } from "../../lib/content";
 import { keywordTone } from "../../lib/keywords";
@@ -26,37 +27,9 @@ const queue = readings.slice(3, 7).filter((reading) => !reading.presented);
       </p>
     </div>
     <div class="queue-action-buttons">
-      <details class="member-access" data-member-panel>
-        <summary class="button button-secondary">
-          <span data-member-label>Sign in</span>
-          <span aria-hidden="true">＋</span>
-        </summary>
-        <div class="member-access-panel">
-          <div class="member-access-copy" data-member-copy>
-            <strong>Sign in with your Emory email.</strong>
-            <p>Suggest articles or vote using a secure email link—no password needed.</p>
-          </div>
-          <form class="inline-auth" data-auth-form>
-            <label for="member-email">Emory email</label>
-            <div>
-              <input
-                id="member-email"
-                name="email"
-                type="email"
-                autocomplete="email"
-                placeholder="name@emory.edu"
-                required
-              />
-              <button class="button button-primary" type="submit">Email me a link</button>
-            </div>
-            <p class="form-status" data-auth-status aria-live="polite"></p>
-          </form>
-          <div class="signed-in-state" data-signed-in hidden>
-            <p>Signed in as <strong data-member-email></strong></p>
-            <button class="text-button" type="button" data-sign-out>Sign out</button>
-          </div>
-        </div>
-      </details>
+      <MemberAccess
+        description="Suggest articles or vote using a secure email link—no password needed."
+      />
       <button
         class="button button-primary"
         type="button"

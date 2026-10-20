@@ -10,7 +10,9 @@
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "format:check": "prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test:topics:db": "python3 scripts/test-topics-db.py",
+    "test:topics:browser": "python3 scripts/test-topics-browser.py"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.3",

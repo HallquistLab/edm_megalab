@@ -1,3 +1,4 @@
+import { requestEmorySignIn } from "../lib/member-auth";
 import { isSupabaseConfigured, supabase } from "../lib/supabase";
 import type { User } from "@supabase/supabase-js";
 import { formatSessionDate } from "../lib/dates";
@@ -359,10 +360,17 @@ authForm?.addEventListener("submit", async (event) => {
   redirectUrl.hash = "";
   redirectUrl.searchParams.delete("action");
   if (pendingAction) redirectUrl.searchParams.set("action", pendingAction);
-  const { error } = await supabase.auth.signInWithOtp({
-    email,
-    options: { emailRedirectTo: redirectUrl.toString() },
-  });
+  let error: { message: string } | null = null;
+  try {
+    await requestEmorySignIn(email, redirectUrl.toString());
+  } catch (cause) {
+    error = {
+      message:
+        cause && typeof cause === "object" && "message" in cause
+          ? String(cause.message)
+          : "Unable to send sign-in link.",
+    };
+  }
   if (authStatus) {
     authStatus.textContent = error
       ? error.message
