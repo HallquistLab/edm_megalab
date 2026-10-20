@@ -49,10 +49,39 @@
     "type": "wip",
     "typeLabel": "Works in progress",
     "title": "WIP presentations",
-    "description": "Works-in-progress presentations from Pete Hitchcock and Michael Hallquist, with time for discussion and feedback.",
+    "description": "Works-in-progress presentations from Pete Hitchcock and Michael Hallquist, with time for discussion and feedback. Background papers for Michael’s presentation, “Free-operant learning, vigor, and psychopathology,” are linked with this meeting. No advance reading is required.",
     "presenter": "Pete Hitchcock and Michael Hallquist",
     "location": "PAIS 280",
-    "readings": []
+    "readings": [
+      {
+        "label": "Niv et al. (2007)",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17031711/",
+        "title": "Tonic dopamine: Opportunity costs and the control of response vigor",
+        "authors": "Niv, Daw, Joel & Dayan",
+        "journal": "Psychopharmacology",
+        "year": 2007,
+        "description": "Background on average reward rate, the opportunity cost of time, and response vigor."
+      },
+      {
+        "label": "Baum (1974)",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1333261/",
+        "title": "On two types of deviation from the matching law: Bias and undermatching",
+        "authors": "Baum",
+        "journal": "Journal of the Experimental Analysis of Behavior",
+        "year": 1974,
+        "description": "Background on how behavior is allocated across competing sources of reinforcement."
+      },
+      {
+        "label": "Zuriff (1970) — optional background",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1333678/",
+        "title": "A comparison of variable-ratio and variable-interval schedules of reinforcement",
+        "authors": "Zuriff",
+        "journal": "Journal of the Experimental Analysis of Behavior",
+        "year": 1970,
+        "description": "Shows how different reinforcement contingencies can produce different response rates even at equal reinforcement rates.",
+        "optional": true
+      }
+    ]
   },
   {
     "id": "2026-11-06-ai-computational-psychiatry",

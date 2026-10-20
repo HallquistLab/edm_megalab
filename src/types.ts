@@ -13,6 +13,8 @@ export interface ReadingLink {
   authors?: string;
   journal?: string;
   year?: number;
+  description?: string;
+  optional?: boolean;
 }
 
 export type MaterialType =

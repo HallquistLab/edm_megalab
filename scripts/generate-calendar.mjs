@@ -45,7 +45,7 @@ const eventLines = (session) => {
     .filter((reading) => reading.title)
     .map(
       (reading) =>
-        `Featured article: ${reading.title}. Authors: ${reading.authors}. Journal: ${reading.journal} (${reading.year}). ${reading.url}`,
+        `${reading.optional ? "Optional background" : session.type === "wip" ? "Background reading" : "Featured article"}: ${reading.title}. Authors: ${reading.authors}. Journal: ${reading.journal} (${reading.year}). ${reading.description ? `${reading.description} ` : ""}${reading.url}`,
     )
     .join(" ");
   const description = `${session.typeLabel}. ${session.description} ${featuredArticles} Lead: ${session.presenter}. ${logistics}.`;

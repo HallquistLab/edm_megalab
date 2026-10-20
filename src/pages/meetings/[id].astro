@@ -43,14 +43,19 @@ const nextSession =
   currentIndex < schedule.length - 1 ? schedule[currentIndex + 1] : undefined;
 const resources = [
   ...session.readings.map((reading) => ({
-    type: "Reading",
+    type: reading.optional ? "Optional background" : "Reading",
     title: reading.title ?? reading.label,
     label: reading.label,
     url: reading.url,
     description:
-      reading.authors && reading.journal
-        ? `${reading.authors} · ${reading.journal}${reading.year ? ` · ${reading.year}` : ""}`
-        : undefined,
+      [
+        reading.authors && reading.journal
+          ? `${reading.authors} · ${reading.journal}${reading.year ? ` · ${reading.year}` : ""}`
+          : undefined,
+        reading.description,
+      ]
+        .filter(Boolean)
+        .join(" · ") || undefined,
   })),
   ...(session.materials ?? []).map((material) => ({
     type: material.label,
