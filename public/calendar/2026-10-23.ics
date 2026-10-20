@@ -1,0 +1,40 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:WIP presentations
+X-WR-TIMEZONE:America/New_York
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:2026-10-23-fmri-preprocessing@edm-megalab.emory.edu
+DTSTAMP:20261020T120000Z
+DTSTART;TZID=America/New_York:20261023T120000
+DTEND;TZID=America/New_York:20261023T133000
+SUMMARY:WIP presentations — Emory Decision-Making Megalab
+DESCRIPTION:Works in progress. Works-in-progress presentations from Pete 
+ Hitchcock and Michael Hallquist\, with time for discussion and feedback.
+  Background papers for Michael’s presentation\, “Free-operant learning\,
+  vigor\, and psychopathology\,” are linked with this meeting. No advance
+  reading is required. Background reading: Tonic dopamine: Opportunity co
+ sts and the control of response vigor. Authors: Niv\, Daw\, Joel & Dayan
+ . Journal: Psychopharmacology (2007). Background on average reward rate\
+ , the opportunity cost of time\, and response vigor. https://pubmed.ncbi
+ .nlm.nih.gov/17031711/ Background reading: On two types of deviation fro
+ m the matching law: Bias and undermatching. Authors: Baum. Journal: Jour
+ nal of the Experimental Analysis of Behavior (1974). Background on how b
+ ehavior is allocated across competing sources of reinforcement. https://
+ pmc.ncbi.nlm.nih.gov/articles/PMC1333261/ Optional background: A compari
+ son of variable-ratio and variable-interval schedules of reinforcement. 
+ Authors: Zuriff. Journal: Journal of the Experimental Analysis of Behavi
+ or (1970). Shows how different reinforcement contingencies can produce d
+ ifferent response rates even at equal reinforcement rates. https://pmc.n
+ cbi.nlm.nih.gov/articles/PMC1333678/ Lead: Pete Hitchcock and Michael Ha
+ llquist. Location: PAIS 280.
+LOCATION:PAIS 280
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-10-23/
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

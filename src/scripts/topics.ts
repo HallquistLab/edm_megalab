@@ -117,7 +117,7 @@ function topicCard(topic: Topic) {
       "text-link",
       `${topic.status === "discussed" ? "Meeting record" : "View meeting"}: ${formatSessionDate(meeting.date)} →`,
     );
-    link.href = `${siteBase}meetings/${meeting.id}/`;
+    link.href = `${siteBase}meetings/${meeting.date}/`;
     body.append(link);
   }
   const actions = node("div", "topic-interest");

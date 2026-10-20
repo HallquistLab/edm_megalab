@@ -13,11 +13,13 @@ import type { Session } from "../../types";
 
 export function getStaticPaths() {
   return schedule.flatMap((session) => [
-    { params: { id: session.id }, props: { session, redirect: false } },
-    ...(session.legacyIds ?? []).map((id) => ({
-      params: { id },
-      props: { session, redirect: true },
-    })),
+    { params: { id: session.date }, props: { session, redirect: false } },
+    ...[...new Set([session.id, ...(session.legacyIds ?? [])])]
+      .filter((id) => id !== session.date)
+      .map((id) => ({
+        params: { id },
+        props: { session, redirect: true },
+      })),
   ]);
 }
 
@@ -30,7 +32,7 @@ const { session } = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
-if (Astro.props.redirect) return Astro.redirect(`${base}meetings/${session.id}/`);
+if (Astro.props.redirect) return Astro.redirect(`${base}meetings/${session.date}/`, 301);
 const currentIndex = schedule.findIndex((item) => item.id === session.id);
 const site = siteData as SiteConfig;
 const { startTime, endTime } = getMeetingTimes(session.semester);
@@ -116,7 +118,7 @@ const resources = [
         <p class="eyebrow" id="meeting-overview-title">Meeting overview</p>
         <p class="meeting-abstract">{session.description}</p>
       </div>
-      <a class="calendar-link" href={`${base}calendar/${session.id}.ics`}>
+      <a class="calendar-link" href={`${base}calendar/${session.date}.ics`}>
         Add to calendar
       </a>
     </section>
@@ -163,7 +165,7 @@ const resources = [
     <nav class="meeting-pagination" aria-label="Adjacent meetings">
       {
         previousSession ? (
-          <a href={`${base}meetings/${previousSession.id}/`}>
+          <a href={`${base}meetings/${previousSession.date}/`}>
             <span>← Previous meeting</span>
             <strong>{previousSession.title}</strong>
           </a>
@@ -173,7 +175,7 @@ const resources = [
       }
       {
         nextSession ? (
-          <a href={`${base}meetings/${nextSession.id}/`}>
+          <a href={`${base}meetings/${nextSession.date}/`}>
             <span>Next meeting →</span>
             <strong>{nextSession.title}</strong>
           </a>

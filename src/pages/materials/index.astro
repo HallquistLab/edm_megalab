@@ -59,7 +59,7 @@ const meetingsNewestFirst = [...schedule].reverse();
               <div class="archive-meeting-main">
                 <span class={`tag tag-${session.type}`}>{session.typeLabel}</span>
                 <h3>
-                  <a href={`${base}meetings/${session.id}/`}>{session.title}</a>
+                  <a href={`${base}meetings/${session.date}/`}>{session.title}</a>
                 </h3>
                 <p>{session.description}</p>
                 {resources.length > 0 ? (
@@ -77,7 +77,7 @@ const meetingsNewestFirst = [...schedule].reverse();
                   <p class="archive-no-resources">No public materials posted yet.</p>
                 )}
               </div>
-              <a class="archive-meeting-link" href={`${base}meetings/${session.id}/`}>
+              <a class="archive-meeting-link" href={`${base}meetings/${session.date}/`}>
                 View meeting →
               </a>
             </article>

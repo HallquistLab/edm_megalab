@@ -72,7 +72,7 @@ const eventLines = (session) => {
     `SUMMARY:${escapeIcs(session.title)} — Emory Decision-Making Megalab`,
     `DESCRIPTION:${escapeIcs(description)}`,
     `LOCATION:${escapeIcs(location ?? "To be announced")}`,
-    `URL:${site.publicUrl}/meetings/${session.id}/`,
+    `URL:${site.publicUrl}/meetings/${session.date}/`,
     "STATUS:TENTATIVE",
     "TRANSP:TRANSPARENT",
     "END:VEVENT",
@@ -105,7 +105,7 @@ await Promise.all([
     calendar(schedule, `${site.name} ${site.academicYear}`),
   ),
   ...schedule.flatMap((session) =>
-    [session.id, ...(session.legacyIds ?? [])].map((id) =>
+    [...new Set([session.date, session.id, ...(session.legacyIds ?? [])])].map((id) =>
       writeFile(
         path.join(outputDirectory, `${id}.ics`),
         calendar([session], session.title),
@@ -115,7 +115,8 @@ await Promise.all([
 ]);
 
 const calendarCount = schedule.reduce(
-  (count, session) => count + 1 + (session.legacyIds?.length ?? 0),
+  (count, session) =>
+    count + new Set([session.date, session.id, ...(session.legacyIds ?? [])]).size,
   2,
 );
 console.log(`Generated ${calendarCount} calendar files.`);

@@ -130,7 +130,7 @@ with sync_playwright() as playwright:
     page.locator('[data-topic-filter]').select_option('pending')
     expect(page.locator('[data-topic-list]')).to_contain_text('Sign in')
     page.locator('[data-topic-filter]').select_option('scheduled')
-    expect(page.get_by_role('link', name='View meeting: November 20, 2026 →')).to_have_attribute('href', '/meetings/2026-11-20-wip-2/')
+    expect(page.get_by_role('link', name='View meeting: November 20, 2026 →')).to_have_attribute('href', '/meetings/2026-11-20/')
     assert not errors, errors
     context.close()
 

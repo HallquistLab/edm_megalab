@@ -122,7 +122,7 @@ const locationLabel = nextSession.location ?? site.location ?? "Location to be c
             </time>
             <span class={`tag tag-${session.type}`}>{session.typeLabel}</span>
             <h3>
-              <a href={`${base}meetings/${session.id}/`}>{session.title}</a>
+              <a href={`${base}meetings/${session.date}/`}>{session.title}</a>
             </h3>
             {featuredReading ? (
               <div class="meeting-featured-paper">
@@ -136,7 +136,7 @@ const locationLabel = nextSession.location ?? site.location ?? "Location to be c
               <p>{session.description}</p>
             )}
             <a
-              href={`${base}meetings/${session.id}/`}
+              href={`${base}meetings/${session.date}/`}
               aria-label={`View ${session.title}`}
             >
               ↗

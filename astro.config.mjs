@@ -8,5 +8,12 @@ export default defineConfig({
   site: "https://hallquistlab.github.io",
   base: isGitHubPages ? `/${repository}` : "/",
   output: "static",
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) => {
+        const meeting = new URL(page).pathname.match(/\/meetings\/([^/]+)\/?$/)?.[1];
+        return !meeting || /^\d{4}-\d{2}-\d{2}$/.test(meeting);
+      },
+    }),
+  ],
 });

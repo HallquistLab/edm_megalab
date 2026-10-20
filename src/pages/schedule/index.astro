@@ -118,7 +118,7 @@ const filters = [
                   <div class="agenda-main">
                     <span class={`tag tag-${session.type}`}>{session.typeLabel}</span>
                     <h3 id={`${session.id}-title`}>
-                      <a href={`${base}meetings/${session.id}/`}>{session.title}</a>
+                      <a href={`${base}meetings/${session.date}/`}>{session.title}</a>
                     </h3>
                     <p>{session.description}</p>
                     {featuredReading && (
@@ -165,7 +165,7 @@ const filters = [
                   <div class="agenda-actions">
                     <a
                       class="calendar-link"
-                      href={`${base}calendar/${session.id}.ics`}
+                      href={`${base}calendar/${session.date}.ics`}
                       aria-label={`Add ${session.title} to your calendar`}
                     >
                       Add to calendar

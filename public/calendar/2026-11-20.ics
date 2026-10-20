@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:To be announced
+X-WR-TIMEZONE:America/New_York
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:2026-11-20-wip-2@edm-megalab.emory.edu
+DTSTAMP:20261020T120000Z
+DTSTART;TZID=America/New_York:20261120T120000
+DTEND;TZID=America/New_York:20261120T133000
+SUMMARY:To be announced — Emory Decision-Making Megalab
+DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
+ e announced. Location: PAIS 230.
+LOCATION:PAIS 230
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-20/
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR
