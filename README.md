@@ -74,6 +74,8 @@ The topic board uses the same Supabase client, persisted session, Emory email si
 
 Apply `supabase/migrations/202610200001_topics.sql` to the existing Supabase project **before publishing this frontend**. It adds `topics`, `topic_votes`, row-level security, explicit column grants, and the `get_topics()` aggregate function. The earlier community migration must already be installed. The migration does not modify article ballots or expose private session proposals. It is additive and intentionally does not seed the board with unapproved draft topics.
 
+The October 9 meeting themes are provided by `supabase/migrations/202610200002_seed_meeting_topics.sql`: clinical translation, comparisons across labs, study design and analysis, applications and misuses of methods, and grant proposal ideas. These coordinator-curated group suggestions have no personal submitter, assigned meeting, or initial votes. Member submissions still require the signed-in member’s own ID. Stable seed IDs make this migration safe to rerun without duplicating topics or replacing coordinator edits and votes.
+
 The existing authentication redirect allowlist (`https://hallquistlab.github.io/edm_megalab/**`) covers `/topics/`; add the local preview origin if using a different port. Returning from the sign-in link reopens a suggestion or returns to the chosen topic. A vote still requires an explicit click after sign-in.
 
 Coordinator workflow:

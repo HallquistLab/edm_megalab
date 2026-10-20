@@ -36,11 +36,11 @@ grant usage on schema auth to anon, authenticated;
 grant execute on function auth.uid(), auth.jwt() to anon, authenticated;
 """
         subprocess.run(psql, input=bootstrap, text=True, check=True, capture_output=True)
-        for filename in ('supabase/migrations/202608290001_megalab_community.sql', 'supabase/migrations/202610200001_topics.sql', 'supabase/tests/topics.sql'):
+        for filename in ('supabase/migrations/202608290001_megalab_community.sql', 'supabase/migrations/202610200001_topics.sql', 'supabase/tests/topics.sql', 'supabase/tests/topics-seed.sql'):
             result = subprocess.run(psql + ['-f', str(root / filename)], capture_output=True, text=True)
             if result.returncode:
                 raise SystemExit(result.stdout + result.stderr)
-        print('Topics database tests passed: moderation, member ownership, vote uniqueness/removal, privacy, meeting links, and article-poll coexistence.')
+        print('Topics database tests passed: moderation, member ownership, vote uniqueness/removal, privacy, meeting links, article-poll coexistence, and idempotent group topic seeds.')
     finally:
         if started:
             subprocess.run(['pg_ctl', '-D', str(cluster), '-m', 'immediate', '-w', 'stop'], check=True, capture_output=True)
