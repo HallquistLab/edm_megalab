@@ -99,20 +99,28 @@
     "type": "wip",
     "typeLabel": "Works in progress",
     "title": "WIP presentations",
-    "description": "Works-in-progress presentations, with time for discussion and feedback. Presenters to be announced.",
-    "presenter": "To be announced",
+    "description": "Works-in-progress presentations from Michael Treadway and Phil Kragel, with time for discussion and feedback. Presentation titles to be announced.",
+    "presenter": "Michael Treadway and Phil Kragel",
     "location": "PAIS 280",
-    "readings": []
+    "readings": [],
+    "presentations": [
+      {
+        "presenter": "Michael Treadway"
+      },
+      {
+        "presenter": "Phil Kragel"
+      }
+    ]
   },
   {
     "id": "2026-11-20-wip-2",
     "date": "2026-11-20",
     "semester": "Fall 2026",
-    "type": "tba",
-    "typeLabel": "To be announced",
-    "title": "To be announced",
-    "description": "Session details to be announced.",
-    "presenter": "To be announced",
+    "type": "article",
+    "typeLabel": "Article discussion",
+    "title": "Journal article presentation",
+    "description": "Journal article presentation from the Treadway lab. Article and presenter to be announced.",
+    "presenter": "Treadway lab",
     "location": "PAIS 230",
     "readings": []
   },

@@ -86,9 +86,11 @@ DTSTAMP:20261020T120000Z
 DTSTART;TZID=America/New_York:20261106T120000
 DTEND;TZID=America/New_York:20261106T133000
 SUMMARY:WIP presentations — Emory Decision-Making Megalab
-DESCRIPTION:Works in progress. Works-in-progress presentations\, with tim
- e for discussion and feedback. Presenters to be announced.  Lead: To be 
- announced. Location: PAIS 280.
+DESCRIPTION:Works in progress. Works-in-progress presentations from Micha
+ el Treadway and Phil Kragel\, with time for discussion and feedback. Pre
+ sentation titles to be announced. Presentations: Michael Treadway: Title
+  to be announced\; Phil Kragel: Title to be announced.  Lead: Michael Tr
+ eadway and Phil Kragel. Location: PAIS 280.
 LOCATION:PAIS 280
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-06/
 STATUS:TENTATIVE
@@ -99,9 +101,10 @@ UID:2026-11-20-wip-2@edm-megalab.emory.edu
 DTSTAMP:20261020T120000Z
 DTSTART;TZID=America/New_York:20261120T120000
 DTEND;TZID=America/New_York:20261120T133000
-SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
- e announced. Location: PAIS 230.
+SUMMARY:Journal article presentation — Emory Decision-Making Megalab
+DESCRIPTION:Article discussion. Journal article presentation from the Tre
+ adway lab. Article and presenter to be announced.  Lead: Treadway lab. L
+ ocation: PAIS 230.
 LOCATION:PAIS 230
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-20/
 STATUS:TENTATIVE
