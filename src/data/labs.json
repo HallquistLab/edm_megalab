@@ -46,11 +46,11 @@
   },
   {
     "id": "hallquist",
-    "shortName": "DEPENd Lab",
-    "name": "Developmental Personality Neuroscience Lab",
+    "shortName": "Hallquist Lab",
+    "name": "Hallquist Lab",
     "pi": "Michael Hallquist",
     "piOverview": "Michael Hallquist studies the brain and behavioral processes underlying personality, emotional instability, and self-regulation, with particular attention to adolescence and young adulthood.",
-    "researchOverview": "The DEPENd Lab examines how emotions and social cues interact with reward learning and goal-directed decisions. Computational models, functional neuroimaging, and assessments of daily experience help explain individual differences in impulsivity and interpersonal difficulties. The lab also shares training resources in quantitative methods and reproducible data analysis.",
+    "researchOverview": "The Hallquist Lab examines how emotions and social cues interact with reward learning and goal-directed decisions. Computational models, functional neuroimaging, and assessments of daily experience help explain individual differences in impulsivity and interpersonal difficulties. The lab also shares training resources in quantitative methods and reproducible data analysis.",
     "links": [
       { "label": "Lab website", "url": "https://dependlab.unc.edu/" },
       { "label": "Research overview", "url": "https://dependlab.unc.edu/studies/" },
