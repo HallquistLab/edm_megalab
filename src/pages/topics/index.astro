@@ -1,19 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import PageIntro from "../../components/PageIntro.astro";
 import MemberAccess from "../../components/MemberAccess.astro";
 ---
 
 <BaseLayout
   title="Topics"
-  description="Suggest research topics and help shape future EDM Megalab meetings."
+  description="Suggest and upvote topics for future EDM Megalab meetings."
 >
-  <PageIntro
-    eyebrow="EDM Megalab · Shared interests"
-    title="What should we explore?"
-    intro="Suggest a question, method, or idea. Show interest in topics you’d like to discuss—suggesting one doesn’t commit you to present."
-    compact
-  />
+  <header class="topics-heading shell">
+    <h1 id="topics-board-title">MEETING TOPICS</h1>
+  </header>
 
   <section class="queue-actions shell" aria-label="Topic participation">
     <p data-topics-status role="status">Loading topics…</p>
@@ -31,12 +27,12 @@ import MemberAccess from "../../components/MemberAccess.astro";
 
   <section class="proposal-drawer shell" id="topic-suggestion" data-topic-drawer hidden>
     <div class="form-heading">
-      <div><p class="eyebrow">A starting point</p><h2>Suggest a topic</h2></div>
+      <h2>Suggest a topic</h2>
       <button class="text-button" type="button" data-close-topic>Close</button>
     </div>
     <form class="proposal-form" data-topic-form>
       <label class="form-wide"
-        >What would you like the group to explore?
+        >Topic
         <input
           name="title"
           required
@@ -46,7 +42,7 @@ import MemberAccess from "../../components/MemberAccess.astro";
         />
       </label>
       <label class="form-wide"
-        >A little context <span>Optional</span>
+        >Context <span>Optional</span>
         <textarea
           name="description"
           rows="3"
@@ -66,20 +62,14 @@ import MemberAccess from "../../components/MemberAccess.astro";
   </section>
 
   <section class="topics-board shell" aria-labelledby="topics-board-title">
-    <div class="section-heading compact-heading">
-      <div>
-        <p class="eyebrow">Community topics</p><h2 id="topics-board-title">
-          Follow your curiosity.
-        </h2>
-      </div>
+    <div class="topics-board-tools">
+      <p class="topics-explainer">
+        Suggest a topic or choose “I’m interested” on any number of topics. Individual
+        choices are private.
+      </p>
       <button class="text-button" type="button" data-refresh-topics>Refresh topics</button
       >
     </div>
-    <p class="topics-explainer">
-      Choose “I’m interested” on as many topics as you like. You can remove your upvote
-      while a topic is collecting interest or in planning. Counts are public; individual
-      choices are private. Coordinators use this interest to help plan future meetings.
-    </p>
     <div class="topic-controls">
       <label
         >Sort by

@@ -3513,8 +3513,26 @@ footer > div {
 }
 
 /* Lightweight topic suggestions and community interest. */
+.topics-heading {
+  padding-block: 56px 24px;
+}
+.topics-heading h1 {
+  margin: 0;
+  font: 750 clamp(28px, 3vw, 40px) / 1.15 var(--sans);
+  letter-spacing: 0.05em;
+}
 .topics-board {
-  padding-block: 40px 90px;
+  padding-block: 24px 90px;
+}
+.topics-board-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.topics-board-tools .topics-explainer {
+  margin: 0;
 }
 .topics-explainer {
   max-width: 800px;
@@ -3523,8 +3541,7 @@ footer > div {
   font-size: 15px;
   line-height: 1.6;
 }
-.topics-board .section-heading > .text-button {
-  justify-self: end;
+.topics-board-tools .text-button {
   min-height: 44px;
 }
 .topic-controls {
@@ -3565,7 +3582,7 @@ footer > div {
   border-top: 1px solid var(--line);
   scroll-margin-top: 24px;
 }
-.topic-copy h3,
+.topic-copy h2,
 .admin-topic-heading h3 {
   margin: 14px 0;
   overflow-wrap: anywhere;
@@ -3656,8 +3673,5 @@ footer > div {
   }
   .topic-editor .form-split {
     grid-template-columns: 1fr;
-  }
-  .topics-board .section-heading > .text-button {
-    justify-self: start;
   }
 }

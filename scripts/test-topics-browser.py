@@ -147,7 +147,7 @@ with sync_playwright() as playwright:
     card.get_by_role('button').click()
     expect(card).to_contain_text('4 people interested')
     page.locator('[data-topic-sort]').select_option('newest')
-    expect(page.locator('.topic-card h3').first).to_have_text(seed[2]['title'])
+    expect(page.locator('.topic-card h2').first).to_have_text(seed[2]['title'])
     page.locator('[data-topic-filter]').select_option('mine')
     expect(page.locator('[data-topic-list]')).to_contain_text('Choose “I’m interested”')
     page.locator('[data-open-topic]').click()

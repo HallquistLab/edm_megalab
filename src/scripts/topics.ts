@@ -97,7 +97,7 @@ function topicCard(topic: Topic) {
       topicStatusLabels[topic.status],
     ),
   );
-  const title = node("h3", "", topic.title);
+  const title = node("h2", "", topic.title);
   title.id = `topic-title-${topic.id}`;
   card.setAttribute("aria-labelledby", title.id);
   body.append(title);
@@ -183,7 +183,7 @@ function render() {
                   ? "Choose “I’m interested” on a topic to find it here."
                   : mode === "scheduled"
                     ? "No topics have been linked to meetings yet."
-                    : "No topics here yet. Suggest a question to get the conversation started.",
+                    : "No topics to show.",
           ),
         ]),
   );
