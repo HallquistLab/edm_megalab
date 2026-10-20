@@ -26,6 +26,8 @@ To attach a public resource to a meeting, add a `materials` array to that meetin
 ]
 ```
 
+For meetings with multiple talks, add a `presentations` array with a `presenter` and optional `title` for each talk. Omit a title until it is confirmed; it will appear as “Title to be announced.” These entries appear separately on the meeting page and in calendar descriptions.
+
 Supported material types are `slides`, `notes`, `code`, `recording`, `handout`, `dataset`, and `other`. Existing meeting `readings` are included on the meeting page and in the archive automatically.
 
 Local planning documents belong in the ignored `documentation/` folder. Do not link to or commit that folder; move only deliberately public material into the site source.

@@ -28,7 +28,7 @@ interface Props {
   redirect: boolean;
 }
 
-const { session } = Astro.props;
+const { session }: Props = Astro.props;
 const base = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -105,7 +105,7 @@ const resources = [
           <dd>{session.location ?? site.location ?? "To be announced"}</dd>
         </div>
         <div>
-          <dt>Lead</dt>
+          <dt>{session.presentations?.length ? "Presenters" : "Lead"}</dt>
           <dd>{session.presenter}</dd>
         </div>
       </dl>
@@ -122,6 +122,25 @@ const resources = [
         Add to calendar
       </a>
     </section>
+
+    {
+      session.presentations?.length ? (
+        <section
+          class="meeting-presentations"
+          aria-labelledby="meeting-presentations-title"
+        >
+          <h2 id="meeting-presentations-title">Presentations</h2>
+          <div class="meeting-presentation-list">
+            {session.presentations.map((presentation) => (
+              <article class="meeting-presentation">
+                <p class="meeting-presentation-speaker">{presentation.presenter}</p>
+                <h3>{presentation.title ?? "Title to be announced"}</h3>
+              </article>
+            ))}
+          </div>
+        </section>
+      ) : null
+    }
 
     <section class="meeting-resources" aria-labelledby="meeting-resources-title">
       <div class="meeting-section-heading">

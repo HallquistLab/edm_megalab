@@ -49,7 +49,7 @@
     "type": "wip",
     "typeLabel": "Works in progress",
     "title": "WIP presentations",
-    "description": "Works-in-progress presentations from Pete Hitchcock and Michael Hallquist, with time for discussion and feedback. Background papers for Michael’s presentation, “Free-operant learning, vigor, and psychopathology,” are linked with this meeting. No advance reading is required.",
+    "description": "Works-in-progress presentations from Pete Hitchcock and Michael Hallquist, with time for discussion and feedback. Background papers for Michael’s presentation are linked with this meeting. No advance reading is required.",
     "presenter": "Pete Hitchcock and Michael Hallquist",
     "location": "PAIS 280",
     "readings": [
@@ -80,6 +80,15 @@
         "year": 1970,
         "description": "Shows how different reinforcement contingencies can produce different response rates even at equal reinforcement rates.",
         "optional": true
+      }
+    ],
+    "presentations": [
+      {
+        "presenter": "Pete Hitchcock"
+      },
+      {
+        "presenter": "Michael Hallquist",
+        "title": "Free-operant learning, vigor, and psychopathology"
       }
     ]
   },

@@ -34,6 +34,11 @@ export interface MaterialLink {
   description?: string;
 }
 
+export interface Presentation {
+  presenter: string;
+  title?: string;
+}
+
 export interface Session {
   id: string;
   legacyIds?: string[];
@@ -47,6 +52,7 @@ export interface Session {
   location?: string;
   readings: ReadingLink[];
   materials?: MaterialLink[];
+  presentations?: Presentation[];
 }
 
 export interface Reading {

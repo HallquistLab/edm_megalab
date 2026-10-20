@@ -1812,6 +1812,43 @@ h1 em {
   font-size: clamp(19px, 2vw, 25px);
   line-height: 1.5;
 }
+.meeting-presentations {
+  padding-bottom: 64px;
+}
+.meeting-presentations > h2 {
+  margin: 0 0 24px;
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+}
+.meeting-presentation-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.meeting-presentation {
+  padding: 24px;
+  border: 1px solid var(--line);
+}
+.meeting-presentation-speaker {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 750;
+}
+.meeting-presentation h3 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(26px, 2.6vw, 36px);
+  font-weight: 400;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+@media (max-width: 700px) {
+  .meeting-presentation-list {
+    grid-template-columns: 1fr;
+  }
+}
 .meeting-resources {
   padding-block: 78px 86px;
   border-top: 2px solid var(--ink);

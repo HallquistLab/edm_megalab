@@ -48,7 +48,13 @@ const eventLines = (session) => {
         `${reading.optional ? "Optional background" : session.type === "wip" ? "Background reading" : "Featured article"}: ${reading.title}. Authors: ${reading.authors}. Journal: ${reading.journal} (${reading.year}). ${reading.description ? `${reading.description} ` : ""}${reading.url}`,
     )
     .join(" ");
-  const description = `${session.typeLabel}. ${session.description} ${featuredArticles} Lead: ${session.presenter}. ${logistics}.`;
+  const presentations = (session.presentations ?? [])
+    .map(
+      (presentation) =>
+        `${presentation.presenter}: ${presentation.title ?? "Title to be announced"}`,
+    )
+    .join("; ");
+  const description = `${session.typeLabel}. ${session.description} ${presentations ? `Presentations: ${presentations}. ` : ""}${featuredArticles} Lead: ${session.presenter}. ${logistics}.`;
   const lines = [
     "BEGIN:VEVENT",
     `UID:${session.legacyIds?.[0] ?? session.id}@edm-megalab.emory.edu`,
