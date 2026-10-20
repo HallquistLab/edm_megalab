@@ -3,21 +3,18 @@ VERSION:2.0
 PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Computational psychiatry in the era of foundation models
+X-WR-CALNAME:To be announced
 X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2027-04-02-foundation-models@edm-megalab.emory.edu
-DTSTAMP:20261007T120000Z
-DTSTART;TZID=America/New_York:20270402T120000
-DTEND;TZID=America/New_York:20270402T133000
-SUMMARY:Computational psychiatry in the era of foundation models — Emory 
- Decision-Making Megalab
-DESCRIPTION:Methods / current topic. Mechanistic versus predictive models
- \, construct validity\, LLMs as tools or participants\, interpretability
- \, evaluation\, and data governance.  Lead: Facilitators to be announced
- . Location to be announced.
+DTSTAMP:20261020T120000Z
+DTSTART;TZID=America/New_York:20270402T103000
+DTEND;TZID=America/New_York:20270402T120000
+SUMMARY:To be announced — Emory Decision-Making Megalab
+DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
+ e announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-04-02-founda
  tion-models/

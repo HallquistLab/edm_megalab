@@ -38,6 +38,7 @@ const foldLine = (line) => {
 };
 
 const eventLines = (session) => {
+  const { startTime, endTime } = site.semesterTimes?.[session.semester] ?? site;
   const location = session.location ?? site.location;
   const logistics = location ? `Location: ${location}` : "Location to be announced";
   const featuredArticles = session.readings
@@ -54,10 +55,10 @@ const eventLines = (session) => {
     `DTSTAMP:${compactDate(new Date().toISOString().slice(0, 10))}T120000Z`,
   ];
 
-  if (site.startTime && site.endTime) {
+  if (startTime && endTime) {
     lines.push(
-      `DTSTART;TZID=${site.timezone}:${compactDate(session.date)}T${compactTime(site.startTime)}`,
-      `DTEND;TZID=${site.timezone}:${compactDate(session.date)}T${compactTime(site.endTime)}`,
+      `DTSTART;TZID=${site.timezone}:${compactDate(session.date)}T${compactTime(startTime)}`,
+      `DTEND;TZID=${site.timezone}:${compactDate(session.date)}T${compactTime(endTime)}`,
     );
   } else {
     lines.push(

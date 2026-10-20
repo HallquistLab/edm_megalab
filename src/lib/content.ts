@@ -1,9 +1,14 @@
 import scheduleData from "../data/schedule.json";
 import readingsData from "../data/readings.json";
-import type { Reading, Session } from "../types";
+import siteData from "../data/site.json";
+import type { Reading, Session, SiteConfig } from "../types";
 
 export const schedule = scheduleData as Session[];
 export const readings = readingsData as Reading[];
+const site = siteData as SiteConfig;
+
+export const getMeetingTimes = (semester: Session["semester"]) =>
+  site.semesterTimes?.[semester] ?? site;
 
 export const formatDate = (date: string, options?: Intl.DateTimeFormatOptions) =>
   new Intl.DateTimeFormat("en-US", {

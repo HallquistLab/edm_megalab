@@ -1,7 +1,13 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CalendarSubscription from "../components/CalendarSubscription.astro";
-import { formatDate, formatTime, schedule, weekday } from "../lib/content";
+import {
+  formatDate,
+  formatTime,
+  getMeetingTimes,
+  schedule,
+  weekday,
+} from "../lib/content";
 import siteData from "../data/site.json";
 import type { SiteConfig } from "../types";
 const base = import.meta.env.BASE_URL.endsWith("/")
@@ -18,8 +24,9 @@ const nextFeaturedReading =
     ? nextSession.readings.find((reading) => reading.title)
     : undefined;
 const [nextMonth, nextDay] = formatDate(nextSession.date).toUpperCase().split(" ");
-const timeLabel = site.startTime
-  ? `${formatTime(site.startTime)}–${site.endTime ? formatTime(site.endTime) : "TBA"}`
+const { startTime, endTime } = getMeetingTimes(nextSession.semester);
+const timeLabel = startTime
+  ? `${formatTime(startTime)}–${endTime ? formatTime(endTime) : "TBA"}`
   : "Time to be confirmed";
 const locationLabel = nextSession.location ?? site.location ?? "Location to be confirmed";
 ---

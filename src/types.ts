@@ -1,4 +1,10 @@
-export type SessionType = "community" | "wip" | "article" | "methods" | "current-topic";
+export type SessionType =
+  | "community"
+  | "wip"
+  | "article"
+  | "methods"
+  | "current-topic"
+  | "tba";
 
 export interface ReadingLink {
   label: string;
@@ -55,13 +61,17 @@ export interface Reading {
   why: string;
 }
 
-export interface SiteConfig {
+export interface MeetingTimes {
+  startTime: string | null;
+  endTime: string | null;
+}
+
+export interface SiteConfig extends MeetingTimes {
   name: string;
   publicUrl: string;
   academicYear: string;
   timezone: string;
-  startTime: string | null;
-  endTime: string | null;
+  semesterTimes?: Partial<Record<Session["semester"], MeetingTimes>>;
   location: string | null;
   calendarNote: string;
 }
