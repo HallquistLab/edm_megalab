@@ -70,6 +70,7 @@ const showArchivedProposals = select<HTMLInputElement>("[data-show-archived-prop
 let user: User | null = null;
 let suggestions: Suggestion[] = [];
 let sessionProposals: SessionProposal[] = [];
+let sessionGeneration = 0;
 
 function node<K extends keyof HTMLElementTagNameMap>(tag: K, className = "", text = "") {
   const item = document.createElement(tag);
@@ -435,8 +436,11 @@ async function loadWorkspace() {
 showArchivedProposals?.addEventListener("change", renderSessionProposals);
 
 async function updateSession(nextUser: User | null) {
-  clearAdminTopics();
-  if (workspace) workspace.hidden = true;
+  const current = ++sessionGeneration;
+  if (user?.id !== nextUser?.id) {
+    clearAdminTopics();
+    if (workspace) workspace.hidden = true;
+  }
   user = nextUser;
   if (authForm) authForm.hidden = Boolean(user);
   if (signedIn) signedIn.hidden = !user;
@@ -446,7 +450,15 @@ async function updateSession(nextUser: User | null) {
     return;
   }
   const { data: isAdmin, error } = await supabase.rpc("is_current_user_admin");
-  if (error || !isAdmin) {
+  if (current !== sessionGeneration) return;
+  if (error) {
+    if (authStatus)
+      authStatus.textContent =
+        "Coordinator access could not be checked. Please reload to try again.";
+    return;
+  }
+  if (!isAdmin) {
+    clearAdminTopics();
     if (workspace) workspace.hidden = true;
     if (authStatus)
       authStatus.textContent =

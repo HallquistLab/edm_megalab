@@ -82,12 +82,14 @@ The existing authentication redirect allowlist (`https://hallquistlab.github.io/
 
 Coordinator workflow:
 
+The console can sort topics by interest or recency and filter by each status. Unsaved edits are kept in memory per topic while saving another topic, changing views, or refreshing the list. Each changed topic shows **Discard changes**, and leaving the page prompts before drafts are lost. Drafts are not stored across page reloads and are cleared on sign-out or account changes. Authentication token refreshes preserve drafts.
+
 1. In **Topics**, review the pending suggestion. Refine the title/context if needed and choose **Approve for interest**, or set **Archived** and save to decline a suggestion or consolidate duplicates. Duplicate handling is manual; votes are not transferred automatically.
 2. Members can show interest in any number of topics marked `open` or `planning`, once per member and topic. They can remove that interest while these statuses remain active. The database enforces ownership and uniqueness. Counts are public; individual choices and submitter IDs are not returned by the board API.
 3. Use **In planning** while arranging a session. Confirm the program in `src/data/schedule.json` and publish it through the normal build/deployment workflow.
 4. Choose that published meeting in the coordinator dropdown and save the topic as **Scheduled** (or **Discussed** afterward). These states require a meeting ID and preserve existing vote totals. Voting is closed for scheduled, discussed, pending, and archived topics.
 
-Meeting references use the stable IDs in `schedule.json`; the console validates choices against this file, and the board creates links only for IDs present in the published schedule. A topic can link to one meeting in this first version. A console edit does not change the static schedule or calendar, and it does not trigger a GitHub deployment. If meeting dates or IDs are added to the source, deploy that source before linking them in the console.
+Meeting references use the stable IDs in `schedule.json`; the console validates choices against this file and offers a preview link to the selected meeting. The board creates links only for IDs present in the published schedule. A topic can link to one meeting in this first version. Meeting pages load their linked Scheduled/Discussed topics from Supabase, with links back to the specific topic on the board. These links appear immediately after saving in the console, without a GitHub deployment. Pending and archived topics are excluded even for signed-in coordinators. A console edit does not change the static meeting program or calendar. If meeting dates or IDs are added to the source, deploy that source before linking them in the console.
 
 If the Topics migration is missing or the backend is unavailable, the board shows a retry message. The console isolates topic-loading failures so the existing article/proposal tools still work. Without Supabase configuration, Topics clearly reports that participation is unavailable and shows no fabricated vote counts.
 

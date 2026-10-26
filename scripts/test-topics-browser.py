@@ -41,7 +41,7 @@ with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True, channel=os.environ.get('TOPICS_TEST_BROWSER_CHANNEL'))
 
     def setup(role=None, viewport=None):
-        state = dict(role=role, topics=copy.deepcopy(seed), otp=[], fail=False)
+        state = dict(role=role, topics=copy.deepcopy(seed), otp=[], fail=False, patch_fail=False)
         context = browser.new_context(viewport=viewport or dict(width=1440, height=1100))
         if role:
             user_id, email = (admin, 'coordinator@emory.edu') if role == 'admin' else (alpha, 'alpha@emory.edu')
@@ -52,6 +52,7 @@ with sync_playwright() as playwright:
             storage_key = 'sb-' + urlparse(api_url).hostname.split('.')[0] + '-auth-token'
             context.add_init_script('localStorage.setItem(' + json.dumps(storage_key) + ', ' + json.dumps(json.dumps(session)) + ');')
             state['user'] = user
+            state['session'] = session
 
         def api(route):
             request = route.request
@@ -66,7 +67,7 @@ with sync_playwright() as playwright:
                     status_code, response = 500, dict(message='Simulated unavailable database')
                 else:
                     response = [dict(t, is_owner=t['is_owner'] if state['role'] else False, is_interested=t['is_interested'] if state['role'] else False)
-                                for t in state['topics'] if t['status'] != 'pending' or state['role']]
+                                for t in state['topics'] if t['status'] in ('open', 'planning', 'scheduled', 'discussed') or state['role'] == 'admin' or (state['role'] and t['is_owner'] and t['status'] == 'pending')]
             elif endpoint.endswith('/rpc/is_current_user_admin'):
                 response = state['role'] == 'admin'
             elif endpoint.endswith('/topic_votes'):
@@ -89,13 +90,18 @@ with sync_playwright() as playwright:
             elif endpoint.endswith('/topics') and request.method == 'PATCH':
                 topic_id = parse_qs(parsed.query)['id'][0].removeprefix('eq.')
                 t = next(t for t in state['topics'] if t['id'] == topic_id)
-                t.update(data)
-                response = dict(id=topic_id)
+                if state['patch_fail']:
+                    status_code, response = 500, dict(message='Simulated save failure')
+                else:
+                    t.update(data)
+                    response = dict(id=topic_id)
             elif endpoint.endswith('/auth/v1/otp'):
                 state['otp'].append(dict(data=data, query=parse_qs(parsed.query)))
                 response = {}
             elif endpoint.endswith('/auth/v1/user'):
                 response = state.get('user', {})
+            elif endpoint.endswith('/auth/v1/token'):
+                response = state['session']
             elif endpoint.endswith('/auth/v1/logout'):
                 state['role'] = None
                 response = {}
@@ -173,6 +179,19 @@ with sync_playwright() as playwright:
     page.locator('[data-sign-out]').click()
     expect(page.locator('[data-topic-list]')).to_contain_text('Sign in')
     expect(page.locator('[data-topic-list]')).not_to_contain_text('My pending question')
+    expect(page.locator('[data-member-panel]')).not_to_have_attribute('open', '')
+    expect(page.locator('[data-member-panel] summary')).to_be_focused()
+    page.locator('[data-member-panel] summary').click()
+    # On mobile the expanded panel must push board controls down, not cover them.
+    panel_box = page.locator('.member-access-panel').bounding_box()
+    refresh_box = page.locator('[data-refresh-topics]').bounding_box()
+    assert panel_box['y'] + panel_box['height'] <= refresh_box['y'], 'sign-in panel covers board controls'
+    page.locator('#member-email').focus()
+    page.keyboard.press('Escape')
+    expect(page.locator('[data-member-panel]')).not_to_have_attribute('open', '')
+    page.locator('[data-member-panel] summary').click()
+    page.get_by_role('heading', name='Meeting topics', exact=True).click()
+    expect(page.locator('[data-member-panel]')).not_to_have_attribute('open', '')
     state['fail'] = True
     page.locator('[data-refresh-topics]').click()
     expect(page.locator('[data-topics-status]')).to_contain_text('could not be loaded')
@@ -201,20 +220,133 @@ with sync_playwright() as playwright:
     expect(page.locator('[data-topic-review-count]')).to_have_text('0')
     assert state['topics'][4]['status'] == 'open'
     page.locator('[data-admin-topic-filter]').select_option('active')
+    expect(page.locator('.admin-topic-card h3').first).to_have_text(seed[0]['title'])
+    other = page.locator(f'[data-topic-id="{seed[0]["id"]}"]')
+    other.locator('input[name="title"]').fill('Unsaved edits to another topic')
+    other.locator('textarea').fill('Keep this context while reviewing other topics.')
+    other.locator('select[name="status"]').select_option('planning')
+    expect(page.locator('[data-topic-draft-count]')).to_contain_text('1 topic has unsaved changes')
+    page.locator('[data-admin-topic-sort]').select_option('newest')
+    expect(page.locator('.admin-topic-card h3').first).to_have_text('A clarified research question')
+    page.locator('[data-admin-topic-filter]').select_option('planning')
+    expect(page.locator('.admin-topic-card')).to_have_count(1)
+    page.locator('[data-admin-topic-filter]').select_option('active')
+    page.locator('[data-admin-topics-refresh]').click()
+    expect(page.locator('[data-admin-topics]')).to_have_attribute('aria-busy', 'false')
+    expect(other.locator('input[name="title"]')).to_have_value('Unsaved edits to another topic')
+    expect(other.locator('textarea')).to_have_value('Keep this context while reviewing other topics.')
+    expect(other.locator('select[name="status"]')).to_have_value('planning')
+    # Refreshing the real Supabase client session must not clear this account's drafts.
+    other.locator('input[name="title"]').focus()
+    page.evaluate("""async () => {
+      const { supabase } = await import('/src/lib/supabase.ts');
+      const { error } = await supabase.auth.refreshSession();
+      if (error) throw error;
+    }""")
+    expect(page.locator('[data-admin-workspace]')).to_be_visible()
+    expect(other.locator('input[name="title"]')).to_have_value('Unsaved edits to another topic')
+    expect(other.locator('input[name="title"]')).to_be_focused()
+    state['fail'] = True
+    page.locator('[data-admin-topics-refresh]').click()
+    expect(page.locator('[data-admin-topics-status]')).to_contain_text('could not be refreshed')
+    expect(other.locator('input[name="title"]')).to_have_value('Unsaved edits to another topic')
+    state['fail'] = False
+    page.locator('[data-admin-topics-refresh]').click()
+    expect(page.locator('[data-admin-topics-status]')).to_be_empty()
     editor = page.locator('.admin-topic-card').filter(has=page.get_by_role('heading', name='A clarified research question', exact=True))
     editor.locator('select[name="status"]').select_option('scheduled')
     expect(editor.locator('select[name="scheduled_meeting_id"]')).to_be_enabled()
     editor.locator('select[name="scheduled_meeting_id"]').select_option('2026-11-20-wip-2')
+    expect(editor.get_by_role('link', name='View published meeting →')).to_have_attribute('href', '/meetings/2026-11-20/')
     editor.get_by_role('button', name='Save topic', exact=True).click()
     expect(editor.locator('.topic-status')).to_have_text('Scheduled')
     assert state['topics'][4]['scheduled_meeting_id'] == '2026-11-20-wip-2'
+    expect(other.locator('input[name="title"]')).to_have_value('Unsaved edits to another topic')
+    expect(other.locator('textarea')).to_have_value('Keep this context while reviewing other topics.')
+    expect(other.locator('select[name="status"]')).to_have_value('planning')
+    state['patch_fail'] = True
+    other.get_by_role('button', name='Save topic', exact=True).click()
+    expect(other.locator('.form-status')).to_contain_text('couldn’t save')
+    expect(other.locator('input[name="title"]')).to_have_value('Unsaved edits to another topic')
+    expect(other.get_by_role('button', name='Save topic', exact=True)).to_be_enabled()
+    state['patch_fail'] = False
+    other.get_by_role('button', name='Discard changes', exact=True).click()
+    expect(other.locator('input[name="title"]')).to_have_value(seed[0]['title'])
+    expect(page.locator('[data-topic-draft-count]')).to_be_hidden()
+    page.locator('[data-admin-topic-filter]').select_option('scheduled')
+    expect(page.locator('.admin-topic-card')).to_have_count(2)
+    page.locator('[data-admin-topic-filter]').select_option('discussed')
+    expect(page.locator('.admin-topic-card')).to_have_count(0)
+    page.locator('[data-admin-topic-filter]').select_option('open')
+    expect(page.locator('.admin-topic-card')).to_have_count(2)
+    page.locator('[data-admin-topic-filter]').select_option('active')
+    page.locator('[data-admin-topic-sort]').select_option('interest')
     page.screenshot(path='/tmp/edm-topics-admin.png', full_page=True)
+    page.set_viewport_size(dict(width=390, height=844))
+    page.locator('[data-admin-topic-filter]').scroll_into_view_if_needed()
+    assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), 'coordinator mobile overflow'
+    page.screenshot(path='/tmp/edm-topics-admin-mobile.png', full_page=False)
+    page.set_viewport_size(dict(width=1440, height=1100))
     editor.locator('select[name="status"]').select_option('archived')
     editor.get_by_role('button', name='Save topic', exact=True).click()
     expect(page.locator('.admin-topic-card').filter(has=page.get_by_role('heading', name='A clarified research question', exact=True))).to_have_count(0)
     page.locator('[data-admin-topic-filter]').select_option('archived')
     expect(page.locator('.admin-topic-card')).to_have_count(1)
+    editor.locator('select[name="status"]').select_option('open')
+    editor.get_by_role('button', name='Save topic', exact=True).click()
+    expect(page.locator('.admin-topic-card')).to_have_count(0)
+    assert state['topics'][4]['status'] == 'open' and state['topics'][4]['scheduled_meeting_id'] is None
+    page.locator('[data-admin-topic-filter]').select_option('active')
+    other.locator('input[name="title"]').fill('An account-specific unsaved draft')
+    # Exercise the actual navigation warning, then keep the editor open.
+    dialogs = []
+    def keep_draft(dialog):
+        dialogs.append(dialog.type)
+        dialog.dismiss()
+    page.once('dialog', keep_draft)
+    try:
+        page.goto(site_url + '/topics/')
+    except Exception as error:
+        assert 'ERR_ABORTED' in str(error), error
+    assert dialogs == ['beforeunload'], dialogs
+    expect(other.locator('input[name="title"]')).to_have_value('An account-specific unsaved draft')
+    page.locator('[data-admin-sign-out]').click()
+    expect(page.locator('[data-admin-workspace]')).to_be_hidden()
+    expect(page.locator('[data-admin-topics]')).to_be_empty()
+    expect(page.locator('[data-topic-draft-count]')).to_be_hidden()
     assert not errors, errors
     context.close()
+
+    context, page, state, errors = setup('admin', dict(width=390, height=844))
+    meeting_id = '2026-11-20-wip-2'
+    state['topics'] += [topic(6, 'Discussed linked question', 'discussed', meeting=meeting_id),
+                        topic(7, 'Private archived topic', 'archived', meeting=meeting_id)]
+    # Deliberately include malformed private data in the mock to check the UI's public-status guard.
+    state['topics'][4]['scheduled_meeting_id'] = meeting_id
+    state['fail'] = True
+    page.goto(site_url + '/meetings/2026-11-20/')
+    expect(page.locator('[data-meeting-topics-status]')).to_contain_text('could not be loaded')
+    state['fail'] = False
+    page.get_by_role('button', name='Retry loading topics').click()
+    expect(page.locator('.meeting-topic-card')).to_have_count(2)
+    expect(page.locator('[data-meeting-topics]')).not_to_contain_text('Private archived topic')
+    expect(page.locator('[data-meeting-topics]')).not_to_contain_text('My pending question')
+    expect(page.locator('[data-meeting-topics-status]')).to_be_hidden()
+    page.screenshot(path='/tmp/edm-meeting-topics-mobile.png', full_page=True)
+    assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), 'meeting topics mobile overflow'
+    page.get_by_role('link', name='A scheduled topic', exact=True).click()
+    expect(page.locator('[data-topic-filter]')).to_have_value('all')
+    expect(page.get_by_role('heading', name='A scheduled topic', exact=True)).to_be_focused()
+    page.goto(site_url + '/meetings/2026-11-06/')
+    expect(page.locator('[data-meeting-topics]')).to_be_hidden()
+    assert not errors, errors
+    context.close()
+
+    context, page, state, errors = setup()
+    page.goto(site_url + '/topics/?topic=' + seed[3]['id'])
+    expect(page.locator('[data-topic-filter]')).to_have_value('all')
+    expect(page.get_by_role('heading', name='A scheduled topic', exact=True)).to_be_focused()
+    assert not state['otp'] and not errors, (state['otp'], errors)
+    context.close()
     browser.close()
-print('Topics browser tests passed: sign-in return flow, shared article session, suggest/review, vote/unvote, filters, meeting links, privacy on sign-out, errors/retry, and mobile layout.')
+print('Topics browser tests passed: sign-in, suggestions, vote/unvote, coordinator sorting and status filters, draft preservation/discard/navigation warnings, save and refresh recovery, moderation and restoration, reciprocal meeting links, privacy on sign-out, and mobile layout.')

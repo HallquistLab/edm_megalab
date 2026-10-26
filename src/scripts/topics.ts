@@ -99,6 +99,7 @@ function topicCard(topic: Topic) {
   );
   const title = node("h2", "", topic.title);
   title.id = `topic-title-${topic.id}`;
+  title.tabIndex = -1;
   card.setAttribute("aria-labelledby", title.id);
   body.append(title);
   if (topic.description) body.append(node("p", "topic-description", topic.description));
@@ -152,6 +153,9 @@ function topicCard(topic: Topic) {
 
 function render() {
   if (!list) return;
+  const focusedTitle = document.activeElement?.id.startsWith("topic-title-")
+    ? document.activeElement.id
+    : null;
   const mode = filter?.value ?? "active";
   const visible = topics
     .filter((topic) => {
@@ -187,6 +191,7 @@ function render() {
           ),
         ]),
   );
+  if (focusedTitle) document.getElementById(focusedTitle)?.focus({ preventScroll: true });
 }
 
 async function loadTopics() {
@@ -214,6 +219,24 @@ async function loadTopics() {
 }
 
 function resumeAction() {
+  // Meeting pages can link directly to a public topic, including one hidden by
+  // the board's default "Open for interest" filter. This needs no sign-in.
+  if (!pendingAction && pendingTopic) {
+    const linkedTopic = topics.find(
+      (topic) =>
+        topic.id === pendingTopic &&
+        topic.status !== "pending" &&
+        topic.status !== "archived",
+    );
+    if (linkedTopic) {
+      if (filter) filter.value = "all";
+      render();
+      const heading = document.getElementById(`topic-title-${pendingTopic}`);
+      heading?.scrollIntoView({ block: "center" });
+      heading?.focus({ preventScroll: true });
+    }
+    pendingTopic = null;
+  }
   if (!user || !pendingAction) return;
   const action = pendingAction;
   const topicId = pendingTopic;

@@ -147,6 +147,22 @@ const resources = [
       ) : null
     }
 
+    <section
+      class="meeting-topics"
+      data-meeting-topics
+      data-meeting-id={session.id}
+      aria-labelledby="meeting-topics-title"
+      hidden
+    >
+      <h2 id="meeting-topics-title">Related meeting topics</h2>
+      <div class="meeting-topic-list" data-meeting-topic-list></div>
+      <p class="form-status" data-meeting-topics-status role="status" hidden></p>
+      <button class="text-button" type="button" data-meeting-topics-retry hidden
+        >Retry loading topics</button
+      >
+      <a class="text-link" href={`${base}topics/`}>Browse meeting topics →</a>
+    </section>
+
     <section class="meeting-resources" aria-labelledby="meeting-resources-title">
       <div class="meeting-section-heading">
         <div>
@@ -214,6 +230,8 @@ const resources = [
   </div>
 
   <script>
+    import "../../scripts/meeting-topics";
+
     const localDate = () => {
       const now = new Date();
       const year = now.getFullYear();

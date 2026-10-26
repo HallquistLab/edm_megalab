@@ -3440,9 +3440,9 @@ footer > div {
     width: 100%;
   }
   .member-access-panel {
-    right: auto;
-    left: 0;
-    width: min(520px, calc(100vw - 32px));
+    position: static;
+    width: 100%;
+    margin-top: 12px;
   }
   .inline-auth > div,
   .proposal-form,
@@ -3668,6 +3668,39 @@ footer > div {
 }
 .topic-editor select:disabled {
   opacity: 0.55;
+}
+.topic-editor > .text-link {
+  justify-self: start;
+}
+.topic-draft-label {
+  align-self: center;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+.meeting-topics {
+  padding-bottom: 64px;
+}
+.meeting-topics h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+}
+.meeting-topic-list {
+  display: grid;
+  gap: 24px;
+  margin-block: 24px;
+}
+.meeting-topic-card {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+.meeting-topic-card h3 {
+  margin: 12px 0;
+  font-family: var(--serif);
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 400;
+  overflow-wrap: anywhere;
 }
 @media (max-width: 700px) {
   .topic-card {
