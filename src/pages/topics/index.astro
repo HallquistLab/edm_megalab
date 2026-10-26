@@ -1,15 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import MemberAccess from "../../components/MemberAccess.astro";
+import PageIntro from "../../components/PageIntro.astro";
 ---
 
 <BaseLayout
   title="Topics"
   description="Suggest and upvote topics for future EDM Megalab meetings."
 >
-  <header class="topics-heading shell">
-    <h1 id="topics-board-title">MEETING TOPICS</h1>
-  </header>
+  <PageIntro
+    eyebrow="EDM Megalab · Community interests"
+    title="Meeting topics"
+    titleId="topics-board-title"
+    intro="Share ideas for future meetings and show interest in the questions you’d like the group to explore."
+  />
 
   <section class="queue-actions shell" aria-label="Topic participation">
     <p data-topics-status role="status">Loading topics…</p>

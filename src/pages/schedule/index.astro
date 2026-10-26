@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CalendarSubscription from "../../components/CalendarSubscription.astro";
+import PageIntro from "../../components/PageIntro.astro";
 import {
   formatDate,
   formatTime,
@@ -30,25 +31,22 @@ const filters = [
   title="Schedule"
   description="The 2026–2027 schedule for EDM Megalab meetings."
 >
-  <header class="page-intro page-intro-single schedule-page-intro shell">
-    <div>
-      <h1>Schedule 2026-2027</h1>
-      {
-        semesters.map((semester) => {
-          const { startTime, endTime } = getMeetingTimes(semester);
-          const meetingTime =
-            startTime && endTime
-              ? `${formatTime(startTime)}–${formatTime(endTime)}`
-              : "Time to be announced";
-          return (
-            <p>
-              {semester}: Fridays, {meetingTime} (Eastern)
-            </p>
-          );
-        })
-      }
-    </div>
-  </header>
+  <PageIntro eyebrow="EDM Megalab · Meeting schedule" title="Schedule 2026–2027">
+    {
+      semesters.map((semester) => {
+        const { startTime, endTime } = getMeetingTimes(semester);
+        const meetingTime =
+          startTime && endTime
+            ? `${formatTime(startTime)}–${formatTime(endTime)}`
+            : "Time to be announced";
+        return (
+          <p>
+            {semester}: Fridays, {meetingTime} (Eastern)
+          </p>
+        );
+      })
+    }
+  </PageIntro>
 
   <section class="schedule-tools shell" aria-label="Schedule tools">
     <div>

@@ -1,15 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
 ---
 
 <BaseLayout
   title="WIP presenter guide"
   description="A friendly guide to sharing unfinished work and getting useful feedback at EDM Megalab meetings."
 >
-  <article class="guide-copy shell">
-    <p class="eyebrow">Presenter guide · Works in progress</p>
-    <h1>Sharing Work in Progress with EDM Megalab</h1>
+  <PageIntro
+    eyebrow="Presenter guide · Works in progress"
+    title="WIP presenter guide"
+    intro="Share unfinished work with EDM Megalab and get useful feedback on the questions that matter to your project."
+  />
 
+  <article class="guide-copy shell">
     <h2>The short version</h2>
     <p>
       Bring the work <strong>as it is</strong>, not as you think a formal talk ought to
