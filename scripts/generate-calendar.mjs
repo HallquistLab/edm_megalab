@@ -51,7 +51,7 @@ const eventLines = (session) => {
   const presentations = (session.presentations ?? [])
     .map(
       (presentation) =>
-        `${presentation.presenter}: ${presentation.title ?? "Title to be announced"}`,
+        `${presentation.presenter}: ${presentation.title ?? "Title to be announced"}${presentation.description ? `. ${presentation.description}` : ""}`,
     )
     .join("; ");
   const description = `${session.typeLabel}. ${session.description} ${presentations ? `Presentations: ${presentations}. ` : ""}${featuredArticles} Lead: ${session.presenter}. ${logistics}.`;

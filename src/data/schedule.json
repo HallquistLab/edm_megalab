@@ -49,10 +49,30 @@
     "type": "wip",
     "typeLabel": "Works in progress",
     "title": "WIP presentations",
-    "description": "Works-in-progress presentations from Pete Hitchcock and Michael Hallquist, with time for discussion and feedback. Background papers for Michael’s presentation are linked with this meeting. No advance reading is required.",
+    "description": "Works-in-progress presentations from Pete Hitchcock on a decision-science approach to negative self-judgment in depression and Michael Hallquist on free-operant learning, vigor, and psychopathology, with time for discussion and feedback. Background papers for both presentations are linked with this meeting. No advance reading is required.",
     "presenter": "Pete Hitchcock and Michael Hallquist",
     "location": "PAIS 280",
     "readings": [
+      {
+        "label": "Shadlen & Shohamy (2016) — optional background",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4891701/",
+        "title": "Decision Making and Sequential Sampling from Memory",
+        "authors": "Shadlen & Shohamy",
+        "journal": "Neuron",
+        "year": 2016,
+        "description": "Shared by Pete Hitchcock: proposes that value-based choices accumulate evidence retrieved from memory, extending sequential-sampling accounts of perceptual decisions.",
+        "optional": true
+      },
+      {
+        "label": "Bakkour et al. (2019) — optional background",
+        "url": "https://elifesciences.org/articles/46080",
+        "title": "The hippocampus supports deliberation during value-based decisions",
+        "authors": "Bakkour, Palombo, Zylberberg, Kang, Reid, Verfaellie, Shadlen & Shohamy",
+        "journal": "eLife",
+        "year": 2019,
+        "description": "Shared by Pete Hitchcock: fMRI and evidence from patients with hippocampal damage support a role for the hippocampus in deliberation during value-based choices.",
+        "optional": true
+      },
       {
         "label": "Niv et al. (2007)",
         "url": "https://pubmed.ncbi.nlm.nih.gov/17031711/",
@@ -84,7 +104,9 @@
     ],
     "presentations": [
       {
-        "presenter": "Pete Hitchcock"
+        "presenter": "Pete Hitchcock",
+        "title": "Making Progress on Inherently Complex (\"Low Essentiality\") Disorders: A Case Study",
+        "description": "Hitchcock introduces the idea that mental health problems vary in their inherent complexity and argues that depression and generalized anxiety are inherently complex, or low in essentiality. As a case study in making progress on these problems, he describes the lab’s decision-science approach to negative self-judgment in depression. This work builds on sequential-sampling models, in which decisions unfold by accumulating evidence over time: visual evidence for perceptual judgments, such as identifying a traffic light’s color, and personal value associations for food choices, such as choosing between Butterfingers and Reese’s."
       },
       {
         "presenter": "Michael Hallquist",

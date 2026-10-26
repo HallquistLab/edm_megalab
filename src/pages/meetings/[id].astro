@@ -135,6 +135,11 @@ const resources = [
               <article class="meeting-presentation">
                 <p class="meeting-presentation-speaker">{presentation.presenter}</p>
                 <h3>{presentation.title ?? "Title to be announced"}</h3>
+                {presentation.description && (
+                  <p class="meeting-presentation-description">
+                    {presentation.description}
+                  </p>
+                )}
               </article>
             ))}
           </div>

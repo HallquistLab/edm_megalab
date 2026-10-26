@@ -37,6 +37,7 @@ export interface MaterialLink {
 export interface Presentation {
   presenter: string;
   title?: string;
+  description?: string;
 }
 
 export interface Session {
