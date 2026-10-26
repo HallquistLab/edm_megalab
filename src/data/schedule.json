@@ -49,7 +49,7 @@
     "type": "wip",
     "typeLabel": "Works in progress",
     "title": "WIP presentations",
-    "description": "Works-in-progress presentations from Pete Hitchcock on a decision-science approach to negative self-judgment in depression and Michael Hallquist on free-operant learning, vigor, and psychopathology, with time for discussion and feedback. Background papers for both presentations are linked with this meeting. No advance reading is required.",
+    "description": "Works-in-progress presentations from Pete Hitchcock on a decision-science approach to negative self-judgment in depression and Michael Hallquist on learning what to choose and when to act, connecting response vigor, matching, and free-operant behavior, with time for discussion and feedback. Background papers for both presentations are linked with this meeting. No advance reading is required.",
     "presenter": "Pete Hitchcock and Michael Hallquist",
     "location": "PAIS 280",
     "readings": [
@@ -110,7 +110,8 @@
       },
       {
         "presenter": "Michael Hallquist",
-        "title": "Free-operant learning, vigor, and psychopathology"
+        "title": "Learning when to act and what to choose",
+        "description": "Hallquist explores how learning shapes both action choice and response timing, connecting response vigor with the matching law. He compares computational models across reward schedules, extinction, changing reward environments, and tasks that reward waiting. The talk highlights where the models succeed and fall short, and proposes human studies to test their potential relevance to anhedonia, effort-related inactivity, and impulsive action."
       }
     ]
   },
