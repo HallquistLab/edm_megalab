@@ -136,7 +136,7 @@ with sync_playwright() as playwright:
     page.locator('[data-topic-filter]').select_option('pending')
     expect(page.locator('[data-topic-list]')).to_contain_text('Sign in')
     page.locator('[data-topic-filter]').select_option('scheduled')
-    expect(page.get_by_role('link', name='View meeting: November 20, 2026 →')).to_have_attribute('href', '/meetings/2026-11-20/')
+    expect(page.get_by_role('link', name='View meeting: November 13, 2026 →')).to_have_attribute('href', '/meetings/2026-11-13/')
     assert not errors, errors
     context.close()
 
@@ -257,7 +257,7 @@ with sync_playwright() as playwright:
     editor.locator('select[name="status"]').select_option('scheduled')
     expect(editor.locator('select[name="scheduled_meeting_id"]')).to_be_enabled()
     editor.locator('select[name="scheduled_meeting_id"]').select_option('2026-11-20-wip-2')
-    expect(editor.get_by_role('link', name='View published meeting →')).to_have_attribute('href', '/meetings/2026-11-20/')
+    expect(editor.get_by_role('link', name='View published meeting →')).to_have_attribute('href', '/meetings/2026-11-13/')
     editor.get_by_role('button', name='Save topic', exact=True).click()
     expect(editor.locator('.topic-status')).to_have_text('Scheduled')
     assert state['topics'][4]['scheduled_meeting_id'] == '2026-11-20-wip-2'
@@ -324,7 +324,7 @@ with sync_playwright() as playwright:
     # Deliberately include malformed private data in the mock to check the UI's public-status guard.
     state['topics'][4]['scheduled_meeting_id'] = meeting_id
     state['fail'] = True
-    page.goto(site_url + '/meetings/2026-11-20/')
+    page.goto(site_url + '/meetings/2026-11-13/')
     expect(page.locator('[data-meeting-topics-status]')).to_contain_text('could not be loaded')
     state['fail'] = False
     page.get_by_role('button', name='Retry loading topics').click()
@@ -347,6 +347,42 @@ with sync_playwright() as playwright:
     expect(page.locator('[data-topic-filter]')).to_have_value('all')
     expect(page.get_by_role('heading', name='A scheduled topic', exact=True)).to_be_focused()
     assert not state['otp'] and not errors, (state['otp'], errors)
+    context.close()
+
+    context, page, state, errors = setup()
+    page.goto(site_url + '/schedule/')
+    page.get_by_role('button', name='Full schedule', exact=True).click()
+    page.get_by_role('button', name='External speakers', exact=True).click()
+    expect(page.locator('.agenda-item:visible')).to_have_count(5)
+    hamm = page.locator('[id="2026-11-09-shari-hamm"]')
+    expect(hamm).to_contain_text('Monday')
+    expect(hamm).to_contain_text('1 p.m.–2:30 p.m.')
+    expect(page.locator('[id="2027-02-17-serife-tekin"]')).to_contain_text('Time to be announced')
+    page.set_viewport_size(dict(width=390, height=844))
+    assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), 'speaker schedule mobile overflow'
+    page.screenshot(path='/tmp/edm-external-speakers-mobile.png', full_page=True)
+    page.get_by_role('button', name='Articles', exact=True).click()
+    expect(page.locator('[id="2026-11-20-wip-2"]')).to_contain_text('Nov 13')
+    expect(page.locator('[id="2026-11-20-wip-2"]')).to_contain_text('Treadway lab')
+    page.goto(site_url + '/meetings/2026-10-30/')
+    expect(page.get_by_role('heading', level=1)).to_have_text('Advancing cognitive behavioral theories and therapies with computational models')
+    expect(page.locator('.meeting-facts')).to_contain_text('Northeastern')
+    expect(page.locator('.meeting-facts')).to_contain_text('PAIS 280')
+    expect(page.locator('.meeting-abstract-section')).to_contain_text('the importance of integrating formalized clinical theory')
+    page.locator('.meeting-abstract-section').screenshot(path='/tmp/edm-robinaugh-abstract-mobile.png')
+    assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), 'speaker meeting mobile overflow'
+    page.goto(site_url + '/meetings/2026-11-09/')
+    expect(page.locator('.meeting-facts')).to_contain_text('Monday')
+    expect(page.locator('.meeting-facts')).to_contain_text('1 p.m.–2:30 p.m.')
+    page.goto(site_url + '/meetings/2027-02-17/')
+    expect(page.locator('.meeting-facts')).to_contain_text('Wednesday')
+    expect(page.locator('.meeting-facts')).to_contain_text('Time to be announced')
+    expect(page.locator('.meeting-facts')).not_to_contain_text('10:30')
+    page.goto(site_url + '/meetings/2027-02-19/')
+    expect(page.locator('.meeting-facts')).to_contain_text('10:30 a.m.–12 p.m.')
+    page.goto(site_url + '/')
+    assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), 'homepage speaker preview mobile overflow'
+    assert not errors, errors
     context.close()
     browser.close()
 print('Topics browser tests passed: sign-in, suggestions, vote/unvote, coordinator sorting and status filters, draft preservation/discard/navigation warnings, save and refresh recovery, moderation and restoration, reciprocal meeting links, privacy on sign-out, and mobile layout.')

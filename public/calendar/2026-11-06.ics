@@ -9,15 +9,15 @@ REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2026-11-06-ai-computational-psychiatry@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20261106T120000
 DTEND;TZID=America/New_York:20261106T133000
 SUMMARY:WIP presentations — Emory Decision-Making Megalab
-DESCRIPTION:Works in progress. Works-in-progress presentations from Micha
- el Treadway and Phil Kragel\, with time for discussion and feedback. Pre
- sentation titles to be announced. Presentations: Michael Treadway: Title
-  to be announced\; Phil Kragel: Title to be announced.  Lead: Michael Tr
- eadway and Phil Kragel. Location: PAIS 280.
+DESCRIPTION:Works in progress. Works-in-progress presentations from Michael
+  Treadway and Phil Kragel\, with time for discussion and feedback. Present
+ ation titles to be announced. Presentations: Michael Treadway: Title to be
+  announced\; Phil Kragel: Title to be announced.  Lead: Michael Treadway a
+ nd Phil Kragel. Location: PAIS 280.
 LOCATION:PAIS 280
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-06/
 STATUS:TENTATIVE

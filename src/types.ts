@@ -4,6 +4,7 @@ export type SessionType =
   | "article"
   | "methods"
   | "current-topic"
+  | "external-speaker"
   | "tba";
 
 export interface ReadingLink {
@@ -50,6 +51,11 @@ export interface Session {
   title: string;
   description: string;
   presenter: string;
+  presenterAffiliation?: string;
+  presenterUrl?: string;
+  abstract?: string;
+  startTime?: string | null;
+  endTime?: string | null;
   location?: string;
   readings: ReadingLink[];
   materials?: MaterialLink[];

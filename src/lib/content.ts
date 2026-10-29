@@ -10,6 +10,19 @@ const site = siteData as SiteConfig;
 export const getMeetingTimes = (semester: Session["semester"]) =>
   site.semesterTimes?.[semester] ?? site;
 
+// Explicit null times reserve the date without inheriting a regular meeting time.
+export const getSessionTimes = (session: Session) =>
+  "startTime" in session || "endTime" in session
+    ? { startTime: session.startTime ?? null, endTime: session.endTime ?? null }
+    : getMeetingTimes(session.semester);
+
+export const sessionTimeLabel = (session: Session) => {
+  const { startTime, endTime } = getSessionTimes(session);
+  return startTime && endTime
+    ? `${formatTime(startTime)}–${formatTime(endTime)}`
+    : "Time to be announced";
+};
+
 export const formatDate = (date: string, options?: Intl.DateTimeFormatOptions) =>
   new Intl.DateTimeFormat("en-US", {
     timeZone: "UTC",

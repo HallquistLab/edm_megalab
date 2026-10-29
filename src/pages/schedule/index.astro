@@ -6,6 +6,7 @@ import {
   formatDate,
   formatTime,
   getMeetingTimes,
+  sessionTimeLabel,
   schedule,
   weekday,
 } from "../../lib/content";
@@ -21,6 +22,7 @@ const filters = [
   ["all", "All types"],
   ["wip", "Works in progress"],
   ["article", "Articles"],
+  ["external-speaker", "External speakers"],
   ["methods", "Methods"],
   ["current-topic", "Current topics"],
   ["tba", "To be announced"],
@@ -41,11 +43,14 @@ const filters = [
             : "Time to be announced";
         return (
           <p>
-            {semester}: Fridays, {meetingTime} (Eastern)
+            {semester} regular meetings: Fridays, {meetingTime} (Eastern)
           </p>
         );
       })
     }
+    <p>
+      External speakers may meet on other days or at other times. See each event below.
+    </p>
   </PageIntro>
 
   <section class="schedule-tools shell" aria-label="Schedule tools">
@@ -134,12 +139,27 @@ const filters = [
                   </div>
                   <div class="agenda-meta">
                     <p>
+                      <span>Time (Eastern)</span>
+                      {sessionTimeLabel(session)}
+                    </p>
+                    <p>
                       <span>Location</span>
                       {session.location ?? site.location ?? "To be announced"}
                     </p>
                     <p>
-                      <span>Lead</span>
-                      {session.presenter}
+                      <span>
+                        {session.type === "external-speaker" ? "Speaker" : "Lead"}
+                      </span>
+                      {session.presenterUrl ? (
+                        <a href={session.presenterUrl}>{session.presenter} ↗</a>
+                      ) : (
+                        session.presenter
+                      )}
+                      {session.presenterAffiliation && (
+                        <small class="speaker-affiliation">
+                          {session.presenterAffiliation}
+                        </small>
+                      )}
                     </p>
                     {featuredReading ? (
                       <p>

@@ -9,23 +9,23 @@ REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2026-10-09-computational-phenotypes@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20260925T120000
 DTEND;TZID=America/New_York:20260925T133000
 SUMMARY:Computational phenotypes: traits\, states\, or moving targets? — 
  Emory Decision-Making Megalab
-DESCRIPTION:Article discussion. At our September 25 meeting\, we discusse
- d individual differences\, repeated measurement\, parameter stability\, 
- and what makes a useful computational phenotype\, drawing on Schurr et a
- l. (2024) and the companion paper by Katahira\, Oba & Toyama (2024). Fea
- tured article: Dynamic computational phenotyping of human cognition. Aut
- hors: Schurr\, Reznik\, Hillman\, Bhui\, et al.. Journal: Nature Human B
- ehaviour (2024). https://doi.org/10.1038/s41562-024-01814-x Featured art
- icle: Does the reliability of computational models truly improve with hi
- erarchical modeling? Some recommendations and considerations for the ass
- essment of model parameter reliability. Authors: Katahira\, Oba & Toyama
- . Journal: Psychonomic Bulletin & Review (2024). https://doi.org/10.3758
- /s13423-024-02490-8 Lead: Michael Hallquist. Location: PAIS 280.
+DESCRIPTION:Article discussion. At our September 25 meeting\, we discussed 
+ individual differences\, repeated measurement\, parameter stability\, and 
+ what makes a useful computational phenotype\, drawing on Schurr et al. (20
+ 24) and the companion paper by Katahira\, Oba & Toyama (2024). Featured ar
+ ticle: Dynamic computational phenotyping of human cognition. Authors: Schu
+ rr\, Reznik\, Hillman\, Bhui\, et al.. Journal: Nature Human Behaviour (20
+ 24). https://doi.org/10.1038/s41562-024-01814-x Featured article: Does the
+  reliability of computational models truly improve with hierarchical model
+ ing? Some recommendations and considerations for the assessment of model p
+ arameter reliability. Authors: Katahira\, Oba & Toyama. Journal: Psychonom
+ ic Bulletin & Review (2024). https://doi.org/10.3758/s13423-024-02490-8 Le
+ ad: Michael Hallquist. Location: PAIS 280.
 LOCATION:PAIS 280
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-09-25/
 STATUS:TENTATIVE
@@ -33,17 +33,17 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-09-11-community-kickoff@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20261009T120000
 DTEND;TZID=America/New_York:20261009T133000
 SUMMARY:What should EDM Megalab be? — Emory Decision-Making Megalab
-DESCRIPTION:Community planning meeting. Everyone in the Emory community w
- ith an interest in decision-making is welcome. Building on the broad par
- ticipation at our September 25 meeting\, we will get to know one another
- \, map shared interests\, methods\, datasets\, and opportunities\, and s
- hape priorities for the series. Join the conversation whether you attend
- ed last time or are new to EDM Megalab.  Lead: Michael Hallquist. Locati
- on: PAIS 280.
+DESCRIPTION:Community planning meeting. Everyone in the Emory community wit
+ h an interest in decision-making is welcome. Building on the broad partici
+ pation at our September 25 meeting\, we will get to know one another\, map
+  shared interests\, methods\, datasets\, and opportunities\, and shape pri
+ orities for the series. Join the conversation whether you attended last ti
+ me or are new to EDM Megalab.  Lead: Michael Hallquist. Location: PAIS 280
+ .
 LOCATION:PAIS 280
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-10-09/
 STATUS:TENTATIVE
@@ -51,115 +51,180 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-10-23-fmri-preprocessing@edm-megalab.emory.edu
-DTSTAMP:20261026T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20261023T120000
 DTEND;TZID=America/New_York:20261023T133000
 SUMMARY:WIP presentations — Emory Decision-Making Megalab
-DESCRIPTION:Works in progress. Works-in-progress presentations from Pete 
- Hitchcock on a decision-science approach to negative self-judgment in de
- pression and Michael Hallquist on learning what to choose and when to ac
- t\, connecting response vigor\, matching\, and free-operant behavior\, w
- ith time for discussion and feedback. Background papers for both present
- ations are linked with this meeting. No advance reading is required. Pre
- sentations: Pete Hitchcock: Making Progress on Inherently Complex ("Low 
- Essentiality") Disorders: A Case Study. Hitchcock introduces the idea th
- at mental health problems vary in their inherent complexity and argues t
- hat depression and generalized anxiety are inherently complex\, or low i
- n essentiality. As a case study in making progress on these problems\, h
- e describes the lab’s decision-science approach to negative self-judgmen
- t in depression. This work builds on sequential-sampling models\, in whi
- ch decisions unfold by accumulating evidence over time: visual evidence 
- for perceptual judgments\, such as identifying a traffic light’s color\,
-  and personal value associations for food choices\, such as choosing bet
- ween Butterfingers and Reese’s.\; Michael Hallquist: Learning when to ac
- t and what to choose. Hallquist explores how learning shapes both action
-  choice and response timing\, connecting response vigor with the matchin
- g law. He compares computational models across reward schedules\, extinc
- tion\, changing reward environments\, and tasks that reward waiting. The
-  talk highlights where the models succeed and fall short\, and proposes 
- human studies to test their potential relevance to anhedonia\, effort-re
- lated inactivity\, and impulsive action.. Optional background: Decision 
- Making and Sequential Sampling from Memory. Authors: Shadlen & Shohamy. 
- Journal: Neuron (2016). Shared by Pete Hitchcock: proposes that value-ba
- sed choices accumulate evidence retrieved from memory\, extending sequen
- tial-sampling accounts of perceptual decisions. https://pmc.ncbi.nlm.nih
- .gov/articles/PMC4891701/ Optional background: The hippocampus supports 
- deliberation during value-based decisions. Authors: Bakkour\, Palombo\, 
- Zylberberg\, Kang\, Reid\, Verfaellie\, Shadlen & Shohamy. Journal: eLif
- e (2019). Shared by Pete Hitchcock: fMRI and evidence from patients with
-  hippocampal damage support a role for the hippocampus in deliberation d
- uring value-based choices. https://elifesciences.org/articles/46080 Back
- ground reading: Tonic dopamine: Opportunity costs and the control of res
- ponse vigor. Authors: Niv\, Daw\, Joel & Dayan. Journal: Psychopharmacol
- ogy (2007). Background on average reward rate\, the opportunity cost of 
- time\, and response vigor. https://pubmed.ncbi.nlm.nih.gov/17031711/ Bac
- kground reading: On two types of deviation from the matching law: Bias a
- nd undermatching. Authors: Baum. Journal: Journal of the Experimental An
- alysis of Behavior (1974). Background on how behavior is allocated acros
- s competing sources of reinforcement. https://pmc.ncbi.nlm.nih.gov/artic
- les/PMC1333261/ Optional background: A comparison of variable-ratio and 
- variable-interval schedules of reinforcement. Authors: Zuriff. Journal: 
- Journal of the Experimental Analysis of Behavior (1970). Shows how diffe
- rent reinforcement contingencies can produce different response rates ev
- en at equal reinforcement rates. https://pmc.ncbi.nlm.nih.gov/articles/P
- MC1333678/ Lead: Pete Hitchcock and Michael Hallquist. Location: PAIS 28
- 0.
+DESCRIPTION:Works in progress. Works-in-progress presentations from Pete Hi
+ tchcock on a decision-science approach to negative self-judgment in depres
+ sion and Michael Hallquist on learning what to choose and when to act\, co
+ nnecting response vigor\, matching\, and free-operant behavior\, with time
+  for discussion and feedback. Background papers for both presentations are
+  linked with this meeting. No advance reading is required. Presentations: 
+ Pete Hitchcock: Making Progress on Inherently Complex ("Low Essentiality")
+  Disorders: A Case Study. Hitchcock introduces the idea that mental health
+  problems vary in their inherent complexity and argues that depression and
+  generalized anxiety are inherently complex\, or low in essentiality. As a
+  case study in making progress on these problems\, he describes the lab’
+ s decision-science approach to negative self-judgment in depression. This 
+ work builds on sequential-sampling models\, in which decisions unfold by a
+ ccumulating evidence over time: visual evidence for perceptual judgments\,
+  such as identifying a traffic light’s color\, and personal value associ
+ ations for food choices\, such as choosing between Butterfingers and Reese
+ ’s.\; Michael Hallquist: Learning when to act and what to choose. Hallqu
+ ist explores how learning shapes both action choice and response timing\, 
+ connecting response vigor with the matching law. He compares computational
+  models across reward schedules\, extinction\, changing reward environment
+ s\, and tasks that reward waiting. The talk highlights where the models su
+ cceed and fall short\, and proposes human studies to test their potential 
+ relevance to anhedonia\, effort-related inactivity\, and impulsive action.
+ . Optional background: Decision Making and Sequential Sampling from Memory
+ . Authors: Shadlen & Shohamy. Journal: Neuron (2016). Shared by Pete Hitch
+ cock: proposes that value-based choices accumulate evidence retrieved from
+  memory\, extending sequential-sampling accounts of perceptual decisions. 
+ https://pmc.ncbi.nlm.nih.gov/articles/PMC4891701/ Optional background: The
+  hippocampus supports deliberation during value-based decisions. Authors: 
+ Bakkour\, Palombo\, Zylberberg\, Kang\, Reid\, Verfaellie\, Shadlen & Shoh
+ amy. Journal: eLife (2019). Shared by Pete Hitchcock: fMRI and evidence fr
+ om patients with hippocampal damage support a role for the hippocampus in 
+ deliberation during value-based choices. https://elifesciences.org/article
+ s/46080 Background reading: Tonic dopamine: Opportunity costs and the cont
+ rol of response vigor. Authors: Niv\, Daw\, Joel & Dayan. Journal: Psychop
+ harmacology (2007). Background on average reward rate\, the opportunity co
+ st of time\, and response vigor. https://pubmed.ncbi.nlm.nih.gov/17031711/
+  Background reading: On two types of deviation from the matching law: Bias
+  and undermatching. Authors: Baum. Journal: Journal of the Experimental An
+ alysis of Behavior (1974). Background on how behavior is allocated across 
+ competing sources of reinforcement. https://pmc.ncbi.nlm.nih.gov/articles/
+ PMC1333261/ Optional background: A comparison of variable-ratio and variab
+ le-interval schedules of reinforcement. Authors: Zuriff. Journal: Journal 
+ of the Experimental Analysis of Behavior (1970). Shows how different reinf
+ orcement contingencies can produce different response rates even at equal 
+ reinforcement rates. https://pmc.ncbi.nlm.nih.gov/articles/PMC1333678/ Lea
+ d: Pete Hitchcock and Michael Hallquist. Location: PAIS 280.
 LOCATION:PAIS 280
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-10-23/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:2026-10-30-don-robinaugh@edm-megalab.emory.edu
+DTSTAMP:20261029T120000Z
+DTSTART;TZID=America/New_York:20261030T120000
+DTEND;TZID=America/New_York:20261030T133000
+SUMMARY:Advancing cognitive behavioral theories and therapies with computat
+ ional models — Emory Decision-Making Megalab
+DESCRIPTION:External speaker. Don Robinaugh from Northeastern will give an 
+ EDM Zoom talk. Watch together in PAIS 280. Abstract: Cognitive behavioral 
+ theories of mental disorders have received considerable empirical support.
+  However\, these theories rarely develop over time in a way that would ind
+ icate a substantial accumulation of knowledge. Perhaps not surprisingly\, 
+ then\, the efficacy of cognitive behavioral treatments for many disorders 
+ has not improved in decades. In this talk\, I will argue that formalizing 
+ cognitive behavioral theories as computational models is one means by whic
+ h we might better advance our theories and our treatments. I will illustra
+ te how computational models equip us to more accurately and precisely dedu
+ ce what our theories predict\, and how these advantages can be applied to 
+ advance our understanding of how treatments work\, why they sometimes fail
+ \, and how they might be improved. Finally\, I will discuss the challenges
+  facing this work and the importance of integrating formalized clinical th
+ eory with computational models from other areas of psychology and psychiat
+ ry.  Speaker: Don Robinaugh (Northeastern). Speaker profile: https://schol
+ ar.google.com/citations?user=Dp0_nY0AAAAJ&hl=en&oi=ao. Location: PAIS 280 
+ · Zoom watch party.
+LOCATION:PAIS 280 · Zoom watch party
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-10-30/
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:2026-11-06-ai-computational-psychiatry@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20261106T120000
 DTEND;TZID=America/New_York:20261106T133000
 SUMMARY:WIP presentations — Emory Decision-Making Megalab
-DESCRIPTION:Works in progress. Works-in-progress presentations from Micha
- el Treadway and Phil Kragel\, with time for discussion and feedback. Pre
- sentation titles to be announced. Presentations: Michael Treadway: Title
-  to be announced\; Phil Kragel: Title to be announced.  Lead: Michael Tr
- eadway and Phil Kragel. Location: PAIS 280.
+DESCRIPTION:Works in progress. Works-in-progress presentations from Michael
+  Treadway and Phil Kragel\, with time for discussion and feedback. Present
+ ation titles to be announced. Presentations: Michael Treadway: Title to be
+  announced\; Phil Kragel: Title to be announced.  Lead: Michael Treadway a
+ nd Phil Kragel. Location: PAIS 280.
 LOCATION:PAIS 280
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-06/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:2026-11-09-shari-hamm@edm-megalab.emory.edu
+DTSTAMP:20261029T120000Z
+DTSTART;TZID=America/New_York:20261109T130000
+DTEND;TZID=America/New_York:20261109T143000
+SUMMARY:EDM Zoom talk: Shari Hamm — Emory Decision-Making Megalab
+DESCRIPTION:External speaker. Shari Hamm from Yale (Shirley Wang’s lab) w
+ ill give a Zoom talk during a lab meeting on Monday\, 1–2:30 p.m. All ar
+ e welcome. Talk title and room details to be announced.  Speaker: Shari Ha
+ mm (Yale · Shirley Wang’s lab). Speaker profile: https://scholar.google
+ .com/citations?user=9uAyM9wAAAAJ&hl=en&oi=sra. Location: Lab meeting · ro
+ om to be announced.
+LOCATION:Lab meeting · room to be announced
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-09/
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:2026-11-20-wip-2@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
+DTSTART;TZID=America/New_York:20261113T120000
+DTEND;TZID=America/New_York:20261113T133000
+SUMMARY:Journal article presentation — Emory Decision-Making Megalab
+DESCRIPTION:Article discussion. Journal article presentation from the Tread
+ way lab\, moved from November 20 to accommodate an external speaker. Artic
+ le and presenter to be announced.  Lead: Treadway lab. Location: To be ann
+ ounced.
+LOCATION:To be announced
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-13/
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-11-20-amrita-lamba@edm-megalab.emory.edu
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20261120T120000
 DTEND;TZID=America/New_York:20261120T133000
-SUMMARY:Journal article presentation — Emory Decision-Making Megalab
-DESCRIPTION:Article discussion. Journal article presentation from the Tre
- adway lab. Article and presenter to be announced.  Lead: Treadway lab. L
- ocation: PAIS 230.
-LOCATION:PAIS 230
+SUMMARY:EDM Zoom talk: Amrita Lamba — Emory Decision-Making Megalab
+DESCRIPTION:External speaker. Amrita Lamba from MIT (Rebecca Saxe’s lab) 
+ will give an EDM Zoom talk. Watch together in PAIS 280. Talk title to be a
+ nnounced.  Speaker: Amrita Lamba (MIT · Rebecca Saxe’s lab). Speaker pr
+ ofile: https://scholar.google.com/citations?user=p1f_Ov8AAAAJ&hl=en&oi=ao.
+  Location: PAIS 280 · Zoom watch party.
+LOCATION:PAIS 280 · Zoom watch party
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-20/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2026-12-04-decision-neuroscience@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20261204T120000
 DTEND;TZID=America/New_York:20261204T133000
-SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
- e announced. Location: PAIS 280.
-LOCATION:PAIS 280
+SUMMARY:EDM in-person talk: Ashley Watts — Emory Decision-Making Megalab
+DESCRIPTION:External speaker. Ashley Watts from Vanderbilt\, an Emory alum\
+ , will give an in-person EDM talk. Talk title and room details to be annou
+ nced.  Speaker: Ashley Watts (Vanderbilt · Emory alum). Speaker profile: 
+ https://scholar.google.com/citations?user=60fbWVIAAAAJ&hl=en&oi=ao. Locati
+ on: In person · room to be announced.
+LOCATION:In person · room to be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-12-04/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-01-22-wip-3@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20270122T103000
 DTEND;TZID=America/New_York:20270122T120000
 SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
- e announced. Location to be announced.
+DESCRIPTION:To be announced. Session details to be announced.  Lead: To be 
+ announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-01-22/
 STATUS:TENTATIVE
@@ -167,25 +232,41 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-02-05-neural-inference@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20270205T103000
 DTEND;TZID=America/New_York:20270205T120000
 SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
- e announced. Location to be announced.
+DESCRIPTION:To be announced. Session details to be announced.  Lead: To be 
+ announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-02-05/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
+UID:2027-02-17-serife-tekin@edm-megalab.emory.edu
+DTSTAMP:20261029T120000Z
+DTSTART;VALUE=DATE:20270217
+DTEND;VALUE=DATE:20270218
+SUMMARY:Şerife Tekin — save the date — Emory Decision-Making Megalab
+DESCRIPTION:External speaker. A visit from Şerife Tekin\, cohosted by EDM 
+ and the Center for Mind\, Brain and Culture (CMBC). Time\, location\, and 
+ talk details to be announced.  Speaker: Şerife Tekin. Speaker profile: ht
+ tps://scholar.google.com/citations?user=QoDCEEgAAAAJ&hl=en&oi=ao. Location
+ : To be announced.
+LOCATION:To be announced
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-02-17/
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
 UID:2027-02-19-choice-variability@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20270219T103000
 DTEND;TZID=America/New_York:20270219T120000
 SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
- e announced. Location to be announced.
+DESCRIPTION:To be announced. Session details to be announced.  Lead: To be 
+ announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-02-19/
 STATUS:TENTATIVE
@@ -193,12 +274,12 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-03-05-wip-4@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20270305T103000
 DTEND;TZID=America/New_York:20270305T120000
 SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
- e announced. Location to be announced.
+DESCRIPTION:To be announced. Session details to be announced.  Lead: To be 
+ announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-03-05/
 STATUS:TENTATIVE
@@ -206,12 +287,12 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-03-19-state-representation@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20270319T103000
 DTEND;TZID=America/New_York:20270319T120000
 SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
- e announced. Location to be announced.
+DESCRIPTION:To be announced. Session details to be announced.  Lead: To be 
+ announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-03-19/
 STATUS:TENTATIVE
@@ -219,12 +300,12 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-04-02-foundation-models@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20270402T103000
 DTEND;TZID=America/New_York:20270402T120000
 SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
- e announced. Location to be announced.
+DESCRIPTION:To be announced. Session details to be announced.  Lead: To be 
+ announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-04-02/
 STATUS:TENTATIVE
@@ -232,12 +313,12 @@ TRANSP:TRANSPARENT
 END:VEVENT
 BEGIN:VEVENT
 UID:2027-04-16-wip-5-planning@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20270416T103000
 DTEND;TZID=America/New_York:20270416T120000
 SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To b
- e announced. Location to be announced.
+DESCRIPTION:To be announced. Session details to be announced.  Lead: To be 
+ announced. Location to be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-04-16/
 STATUS:TENTATIVE

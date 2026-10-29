@@ -1,12 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import {
-  formatDate,
-  formatTime,
-  getMeetingTimes,
-  schedule,
-  weekday,
-} from "../../lib/content";
+import { formatDate, sessionTimeLabel, schedule, weekday } from "../../lib/content";
 import siteData from "../../data/site.json";
 import type { SiteConfig } from "../../types";
 import type { Session } from "../../types";
@@ -35,11 +29,7 @@ const base = import.meta.env.BASE_URL.endsWith("/")
 if (Astro.props.redirect) return Astro.redirect(`${base}meetings/${session.date}/`, 301);
 const currentIndex = schedule.findIndex((item) => item.id === session.id);
 const site = siteData as SiteConfig;
-const { startTime, endTime } = getMeetingTimes(session.semester);
-const meetingTime =
-  startTime && endTime
-    ? `${formatTime(startTime)}–${formatTime(endTime)}`
-    : "To be announced";
+const meetingTime = sessionTimeLabel(session);
 const previousSession = currentIndex > 0 ? schedule[currentIndex - 1] : undefined;
 const nextSession =
   currentIndex < schedule.length - 1 ? schedule[currentIndex + 1] : undefined;
@@ -97,7 +87,7 @@ const resources = [
           </dd>
         </div>
         <div>
-          <dt>Time</dt>
+          <dt>Time (Eastern)</dt>
           <dd>{meetingTime}</dd>
         </div>
         <div>
@@ -105,8 +95,29 @@ const resources = [
           <dd>{session.location ?? site.location ?? "To be announced"}</dd>
         </div>
         <div>
-          <dt>{session.presentations?.length ? "Presenters" : "Lead"}</dt>
-          <dd>{session.presenter}</dd>
+          <dt>
+            {
+              session.type === "external-speaker"
+                ? "Speaker"
+                : session.presentations?.length
+                  ? "Presenters"
+                  : "Lead"
+            }
+          </dt>
+          <dd>
+            {
+              session.presenterUrl ? (
+                <a href={session.presenterUrl}>{session.presenter} ↗</a>
+              ) : (
+                session.presenter
+              )
+            }
+            {
+              session.presenterAffiliation && (
+                <small class="speaker-affiliation">{session.presenterAffiliation}</small>
+              )
+            }
+          </dd>
         </div>
       </dl>
     </div>
@@ -122,6 +133,18 @@ const resources = [
         Add to calendar
       </a>
     </section>
+
+    {
+      session.abstract && (
+        <section
+          class="meeting-abstract-section"
+          aria-labelledby="meeting-abstract-title"
+        >
+          <h2 id="meeting-abstract-title">Abstract</h2>
+          <p>{session.abstract}</p>
+        </section>
+      )
+    }
 
     {
       session.presentations?.length ? (

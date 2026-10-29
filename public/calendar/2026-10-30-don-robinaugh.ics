@@ -1,0 +1,41 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Advancing cognitive behavioral theories and therapies with com
+ putational models
+X-WR-TIMEZONE:America/New_York
+REFRESH-INTERVAL;VALUE=DURATION:PT6H
+X-PUBLISHED-TTL:PT6H
+BEGIN:VEVENT
+UID:2026-10-30-don-robinaugh@edm-megalab.emory.edu
+DTSTAMP:20261029T120000Z
+DTSTART;TZID=America/New_York:20261030T120000
+DTEND;TZID=America/New_York:20261030T133000
+SUMMARY:Advancing cognitive behavioral theories and therapies with computat
+ ional models — Emory Decision-Making Megalab
+DESCRIPTION:External speaker. Don Robinaugh from Northeastern will give an 
+ EDM Zoom talk. Watch together in PAIS 280. Abstract: Cognitive behavioral 
+ theories of mental disorders have received considerable empirical support.
+  However\, these theories rarely develop over time in a way that would ind
+ icate a substantial accumulation of knowledge. Perhaps not surprisingly\, 
+ then\, the efficacy of cognitive behavioral treatments for many disorders 
+ has not improved in decades. In this talk\, I will argue that formalizing 
+ cognitive behavioral theories as computational models is one means by whic
+ h we might better advance our theories and our treatments. I will illustra
+ te how computational models equip us to more accurately and precisely dedu
+ ce what our theories predict\, and how these advantages can be applied to 
+ advance our understanding of how treatments work\, why they sometimes fail
+ \, and how they might be improved. Finally\, I will discuss the challenges
+  facing this work and the importance of integrating formalized clinical th
+ eory with computational models from other areas of psychology and psychiat
+ ry.  Speaker: Don Robinaugh (Northeastern). Speaker profile: https://schol
+ ar.google.com/citations?user=Dp0_nY0AAAAJ&hl=en&oi=ao. Location: PAIS 280 
+ · Zoom watch party.
+LOCATION:PAIS 280 · Zoom watch party
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-10-30/
+STATUS:TENTATIVE
+TRANSP:TRANSPARENT
+END:VEVENT
+END:VCALENDAR

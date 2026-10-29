@@ -13,8 +13,9 @@
     "format": "prettier --write .",
     "test:topics:db": "python3 scripts/test-topics-db.py",
     "test:topics:browser": "python3 scripts/test-topics-browser.py",
-    "postbuild": "npm run test:meeting-urls",
-    "test:meeting-urls": "node scripts/test-meeting-urls.mjs"
+    "postbuild": "npm run test:meeting-urls && npm run test:schedule-events",
+    "test:meeting-urls": "node scripts/test-meeting-urls.mjs",
+    "test:schedule-events": "node scripts/test-schedule-events.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.3",

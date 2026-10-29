@@ -612,6 +612,36 @@ h1 em {
   background: var(--mint);
   color: var(--green);
 }
+.tag-external-speaker {
+  background: var(--mint);
+  color: var(--green);
+}
+.speaker-affiliation {
+  display: block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 400;
+}
+.meeting-abstract-section {
+  padding-bottom: 64px;
+}
+.meeting-abstract-section h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+}
+.meeting-abstract-section p {
+  max-width: 960px;
+  font-family: var(--serif);
+  font-size: clamp(19px, 2vw, 25px);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+.meeting-row time .meeting-row-time {
+  font-size: 12px;
+  line-height: 1.4;
+}
 
 .page-intro {
   padding-block: clamp(40px, 5vw, 64px) 40px;

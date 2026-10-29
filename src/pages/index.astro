@@ -1,13 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import CalendarSubscription from "../components/CalendarSubscription.astro";
-import {
-  formatDate,
-  formatTime,
-  getMeetingTimes,
-  schedule,
-  weekday,
-} from "../lib/content";
+import { formatDate, sessionTimeLabel, schedule, weekday } from "../lib/content";
 import siteData from "../data/site.json";
 import type { SiteConfig } from "../types";
 const base = import.meta.env.BASE_URL.endsWith("/")
@@ -24,10 +18,7 @@ const nextFeaturedReading =
     ? nextSession.readings.find((reading) => reading.title)
     : undefined;
 const [nextMonth, nextDay] = formatDate(nextSession.date).toUpperCase().split(" ");
-const { startTime, endTime } = getMeetingTimes(nextSession.semester);
-const timeLabel = startTime
-  ? `${formatTime(startTime)}–${endTime ? formatTime(endTime) : "TBA"}`
-  : "Time to be confirmed";
+const timeLabel = sessionTimeLabel(nextSession);
 const locationLabel = nextSession.location ?? site.location ?? "Location to be confirmed";
 ---
 
@@ -37,7 +28,8 @@ const locationLabel = nextSession.location ?? site.location ?? "Location to be c
       <h1>Emory Decision-Making<br /><em>Megalab.</em></h1>
       <p class="lede">
         A biweekly forum for colleagues across Emory to present works in progress, share
-        practical methods, connect ideas across labs, and discuss scientific articles.
+        practical methods, connect ideas across labs, and discuss scientific articles,
+        alongside talks from external speakers.
       </p>
       <div class="button-row">
         <a class="button button-primary" href={`${base}topics/`}>Suggest a topic</a>
@@ -118,6 +110,7 @@ const locationLabel = nextSession.location ?? site.location ?? "Location to be c
                 {isNextMeeting && <span class="next-meeting-label">Next meeting</span>}
                 <strong>{formatDate(session.date)}</strong>
                 <span>{weekday(session.date)}</span>
+                <span class="meeting-row-time">{sessionTimeLabel(session)}</span>
               </>
             </time>
             <span class={`tag tag-${session.type}`}>{session.typeLabel}</span>

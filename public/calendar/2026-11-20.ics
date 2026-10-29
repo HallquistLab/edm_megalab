@@ -3,20 +3,22 @@ VERSION:2.0
 PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Journal article presentation
+X-WR-CALNAME:EDM Zoom talk: Amrita Lamba
 X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
-UID:2026-11-20-wip-2@edm-megalab.emory.edu
-DTSTAMP:20261020T120000Z
+UID:2026-11-20-amrita-lamba@edm-megalab.emory.edu
+DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20261120T120000
 DTEND;TZID=America/New_York:20261120T133000
-SUMMARY:Journal article presentation — Emory Decision-Making Megalab
-DESCRIPTION:Article discussion. Journal article presentation from the Tre
- adway lab. Article and presenter to be announced.  Lead: Treadway lab. L
- ocation: PAIS 230.
-LOCATION:PAIS 230
+SUMMARY:EDM Zoom talk: Amrita Lamba — Emory Decision-Making Megalab
+DESCRIPTION:External speaker. Amrita Lamba from MIT (Rebecca Saxe’s lab) 
+ will give an EDM Zoom talk. Watch together in PAIS 280. Talk title to be a
+ nnounced.  Speaker: Amrita Lamba (MIT · Rebecca Saxe’s lab). Speaker pr
+ ofile: https://scholar.google.com/citations?user=p1f_Ov8AAAAJ&hl=en&oi=ao.
+  Location: PAIS 280 · Zoom watch party.
+LOCATION:PAIS 280 · Zoom watch party
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-20/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT

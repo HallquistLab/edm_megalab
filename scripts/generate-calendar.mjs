@@ -28,17 +28,27 @@ const compactTime = (time) => time.replace(":", "") + "00";
 
 const foldLine = (line) => {
   const chunks = [];
-  let remaining = line;
-  while (remaining.length > 73) {
-    chunks.push(remaining.slice(0, 73));
-    remaining = ` ${remaining.slice(73)}`;
+  let current = "";
+  let bytes = 0;
+  for (const character of line) {
+    const size = Buffer.byteLength(character, "utf8");
+    if (bytes + size > 75) {
+      chunks.push(current);
+      current = " ";
+      bytes = 1;
+    }
+    current += character;
+    bytes += size;
   }
-  chunks.push(remaining);
+  chunks.push(current);
   return chunks.join("\r\n");
 };
 
 const eventLines = (session) => {
-  const { startTime, endTime } = site.semesterTimes?.[session.semester] ?? site;
+  const { startTime, endTime } =
+    "startTime" in session || "endTime" in session
+      ? { startTime: session.startTime ?? null, endTime: session.endTime ?? null }
+      : (site.semesterTimes?.[session.semester] ?? site);
   const location = session.location ?? site.location;
   const logistics = location ? `Location: ${location}` : "Location to be announced";
   const featuredArticles = session.readings
@@ -54,7 +64,7 @@ const eventLines = (session) => {
         `${presentation.presenter}: ${presentation.title ?? "Title to be announced"}${presentation.description ? `. ${presentation.description}` : ""}`,
     )
     .join("; ");
-  const description = `${session.typeLabel}. ${session.description} ${presentations ? `Presentations: ${presentations}. ` : ""}${featuredArticles} Lead: ${session.presenter}. ${logistics}.`;
+  const description = `${session.typeLabel}. ${session.description} ${session.abstract ? `Abstract: ${session.abstract} ` : ""}${presentations ? `Presentations: ${presentations}. ` : ""}${featuredArticles} ${session.type === "external-speaker" ? "Speaker" : "Lead"}: ${session.presenter}${session.presenterAffiliation ? ` (${session.presenterAffiliation})` : ""}.${session.presenterUrl ? ` Speaker profile: ${session.presenterUrl}.` : ""} ${logistics}.`;
   const lines = [
     "BEGIN:VEVENT",
     `UID:${session.legacyIds?.[0] ?? session.id}@edm-megalab.emory.edu`,
