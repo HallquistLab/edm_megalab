@@ -112,7 +112,19 @@ assert.ok(
   "Preserve Unicode through calendar folding",
 );
 assert.ok(tekinCalendar.includes("DTEND;VALUE=DATE:20270218"));
-assert.equal(schedule.find((s) => s.id === "2026-11-20-wip-2")?.date, "2026-11-13");
+assert.equal(schedule.find((s) => s.id === "2026-11-20-wip-2")?.date, "2027-01-22");
+assert.ok(
+  !schedule.some((s) => s.date === "2026-11-13"),
+  "Do not retain the tentative November discussion",
+);
+assert.equal(
+  schedule.filter((s) => s.date === "2027-01-22").length,
+  1,
+  "Replace the unassigned January placeholder",
+);
+const springArticle = unfold(await read("public/calendar/2027-01-22.ics"));
+assert.ok(springArticle.includes("DTSTART;TZID=America/New_York:20270122T103000"));
+assert.ok(springArticle.includes("DTEND;TZID=America/New_York:20270122T120000"));
 assert.ok(
   unfold(await read("public/calendar/2026-11-13.ics")).includes(
     "UID:2026-11-20-wip-2@edm-megalab.emory.edu",

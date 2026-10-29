@@ -10,15 +10,14 @@ X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
 UID:2026-11-20-wip-2@edm-megalab.emory.edu
 DTSTAMP:20261029T120000Z
-DTSTART;TZID=America/New_York:20261113T120000
-DTEND;TZID=America/New_York:20261113T133000
+DTSTART;TZID=America/New_York:20270122T103000
+DTEND;TZID=America/New_York:20270122T120000
 SUMMARY:Journal article presentation — Emory Decision-Making Megalab
-DESCRIPTION:Article discussion. Journal article presentation from the Tread
- way lab\, moved from November 20 to accommodate an external speaker. Artic
- le and presenter to be announced.  Lead: Treadway lab. Location: To be ann
- ounced.
+DESCRIPTION:Article discussion. Journal article discussion led by the Tread
+ way lab. Article and presenter to be announced.  Lead: Treadway lab. Locat
+ ion: To be announced.
 LOCATION:To be announced
-URL:https://hallquistlab.github.io/edm_megalab/meetings/2026-11-13/
+URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-01-22/
 STATUS:TENTATIVE
 TRANSP:TRANSPARENT
 END:VEVENT

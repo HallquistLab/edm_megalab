@@ -169,18 +169,6 @@
     "presenterAffiliation": "Yale · Shirley Wang’s lab"
   },
   {
-    "id": "2026-11-20-wip-2",
-    "date": "2026-11-13",
-    "semester": "Fall 2026",
-    "type": "article",
-    "typeLabel": "Article discussion",
-    "title": "Journal article presentation",
-    "description": "Journal article presentation from the Treadway lab, moved from November 20 to accommodate an external speaker. Article and presenter to be announced.",
-    "presenter": "Treadway lab",
-    "location": "To be announced",
-    "readings": []
-  },
-  {
     "id": "2026-11-20-amrita-lamba",
     "date": "2026-11-20",
     "semester": "Fall 2026",
@@ -213,15 +201,17 @@
     "endTime": "13:30"
   },
   {
-    "id": "2027-01-22-wip-3",
+    "id": "2026-11-20-wip-2",
     "date": "2027-01-22",
     "semester": "Spring 2027",
-    "type": "tba",
-    "typeLabel": "To be announced",
-    "title": "To be announced",
-    "description": "Session details to be announced.",
-    "presenter": "To be announced",
-    "readings": []
+    "type": "article",
+    "typeLabel": "Article discussion",
+    "title": "Journal article presentation",
+    "description": "Journal article discussion led by the Treadway lab. Article and presenter to be announced.",
+    "presenter": "Treadway lab",
+    "location": "To be announced",
+    "readings": [],
+    "legacyIds": ["2026-11-20-wip-2", "2026-11-13", "2027-01-22-wip-3"]
   },
   {
     "id": "2027-02-05-neural-inference",

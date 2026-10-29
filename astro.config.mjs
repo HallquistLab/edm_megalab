@@ -1,8 +1,10 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import schedule from "./src/data/schedule.json" with { type: "json" };
 
 const repository = "edm_megalab";
 const isGitHubPages = process.env.GITHUB_ACTIONS === "true";
+const meetingDates = new Set(schedule.map((session) => session.date));
 
 export default defineConfig({
   site: "https://hallquistlab.github.io",
@@ -12,7 +14,7 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         const meeting = new URL(page).pathname.match(/\/meetings\/([^/]+)\/?$/)?.[1];
-        return !meeting || /^\d{4}-\d{2}-\d{2}$/.test(meeting);
+        return !meeting || meetingDates.has(meeting);
       },
     }),
   ],

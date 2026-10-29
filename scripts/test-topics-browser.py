@@ -136,7 +136,7 @@ with sync_playwright() as playwright:
     page.locator('[data-topic-filter]').select_option('pending')
     expect(page.locator('[data-topic-list]')).to_contain_text('Sign in')
     page.locator('[data-topic-filter]').select_option('scheduled')
-    expect(page.get_by_role('link', name='View meeting: November 13, 2026 →')).to_have_attribute('href', '/meetings/2026-11-13/')
+    expect(page.get_by_role('link', name='View meeting: January 22, 2027 →')).to_have_attribute('href', '/meetings/2027-01-22/')
     assert not errors, errors
     context.close()
 
@@ -257,7 +257,7 @@ with sync_playwright() as playwright:
     editor.locator('select[name="status"]').select_option('scheduled')
     expect(editor.locator('select[name="scheduled_meeting_id"]')).to_be_enabled()
     editor.locator('select[name="scheduled_meeting_id"]').select_option('2026-11-20-wip-2')
-    expect(editor.get_by_role('link', name='View published meeting →')).to_have_attribute('href', '/meetings/2026-11-13/')
+    expect(editor.get_by_role('link', name='View published meeting →')).to_have_attribute('href', '/meetings/2027-01-22/')
     editor.get_by_role('button', name='Save topic', exact=True).click()
     expect(editor.locator('.topic-status')).to_have_text('Scheduled')
     assert state['topics'][4]['scheduled_meeting_id'] == '2026-11-20-wip-2'
@@ -324,7 +324,7 @@ with sync_playwright() as playwright:
     # Deliberately include malformed private data in the mock to check the UI's public-status guard.
     state['topics'][4]['scheduled_meeting_id'] = meeting_id
     state['fail'] = True
-    page.goto(site_url + '/meetings/2026-11-13/')
+    page.goto(site_url + '/meetings/2027-01-22/')
     expect(page.locator('[data-meeting-topics-status]')).to_contain_text('could not be loaded')
     state['fail'] = False
     page.get_by_role('button', name='Retry loading topics').click()
@@ -362,7 +362,7 @@ with sync_playwright() as playwright:
     assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), 'speaker schedule mobile overflow'
     page.screenshot(path='/tmp/edm-external-speakers-mobile.png', full_page=True)
     page.get_by_role('button', name='Articles', exact=True).click()
-    expect(page.locator('[id="2026-11-20-wip-2"]')).to_contain_text('Nov 13')
+    expect(page.locator('[id="2026-11-20-wip-2"]')).to_contain_text('Jan 22')
     expect(page.locator('[id="2026-11-20-wip-2"]')).to_contain_text('Treadway lab')
     page.goto(site_url + '/meetings/2026-10-30/')
     expect(page.get_by_role('heading', level=1)).to_have_text('Advancing cognitive behavioral theories and therapies with computational models')

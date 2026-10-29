@@ -3,18 +3,19 @@ VERSION:2.0
 PRODID:-//Emory Decision-Making Megalab//Meeting Calendar//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:To be announced
+X-WR-CALNAME:Journal article presentation
 X-WR-TIMEZONE:America/New_York
 REFRESH-INTERVAL;VALUE=DURATION:PT6H
 X-PUBLISHED-TTL:PT6H
 BEGIN:VEVENT
-UID:2027-01-22-wip-3@edm-megalab.emory.edu
+UID:2026-11-20-wip-2@edm-megalab.emory.edu
 DTSTAMP:20261029T120000Z
 DTSTART;TZID=America/New_York:20270122T103000
 DTEND;TZID=America/New_York:20270122T120000
-SUMMARY:To be announced — Emory Decision-Making Megalab
-DESCRIPTION:To be announced. Session details to be announced.  Lead: To be 
- announced. Location to be announced.
+SUMMARY:Journal article presentation — Emory Decision-Making Megalab
+DESCRIPTION:Article discussion. Journal article discussion led by the Tread
+ way lab. Article and presenter to be announced.  Lead: Treadway lab. Locat
+ ion: To be announced.
 LOCATION:To be announced
 URL:https://hallquistlab.github.io/edm_megalab/meetings/2027-01-22/
 STATUS:TENTATIVE
